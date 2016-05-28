@@ -1,0 +1,14 @@
+<div class="container">
+	<% if(notice) %>
+		<div class="card-panel">
+		      <span class="blue-text text-darken-2"><%= notice %> </span>
+		</div>
+	<% end %>
+	<p>
+	  <strong> Nombre: </strong>
+	  <%= @measurement_unit.name %>
+	</p>
+
+	<%= link_to 'Editar', edit_measurement_unit_path(@measurement_unit), :class => "waves-effect waves-light btn category-text" %> 
+	<%= link_to 'Regresar', measurement_units_path,:class => " waves-effect waves-light btn red category-text" %>
+</div>

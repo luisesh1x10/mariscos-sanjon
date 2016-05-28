@@ -1,0 +1,29 @@
+
+<div class="row"> 
+    <div class="col s12">
+        <%= form_for(@measurement_unit) do |f| %>
+          <% if @measurement_unit.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@measurement_unit.errors.count, "error") %>  el elemento de medida no puede ser guardado </h2>
+              <ul class="collection">
+                <% @measurement_unit.errors.each do |attr,msg|  %>
+                   <li class="collection-item">  <%=msg%> </li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+          <div class="row ">
+             <div class="input-field col s6">
+                <div class="field">
+                   <i class="material-icons prefix">account_circle</i>
+                   <%= f.text_field :name  ,class: "validate", id: "icon_prefix" %>
+                   <label for="icon_prefix">Nombre</label>
+                </div>
+             </div>
+          </div>
+          <div class="actions">
+                <%= f.submit "Guardar", :class => "btn waves-effect waves-light category-text"  %> 
+          </div>
+        <% end %>
+    </div>
+</div>

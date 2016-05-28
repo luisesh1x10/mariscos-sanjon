@@ -1,0 +1,24 @@
+<% if(notice) %>
+  <div class="card-panel">
+        <span class="blue-text text-darken-2"><%= notice %> </span>
+  </div>
+<% end %>
+<div class="container">
+	<p>
+	  <strong>Name:</strong>
+	  <%= @ingredient.name %>
+	</p>
+
+	<p>
+	  <strong>Stock:</strong>
+	  <%= @ingredient.stock %>
+	</p>
+
+	<p>
+	  <strong>Measurement unit:</strong>
+	  <%= @ingredient.measurement_unit.name %>
+	</p>
+
+	<%= link_to 'Editar', edit_ingredient_path(@ingredient), :class => "waves-effect waves-light btn category-text" %> 
+	<%= link_to 'Regresar', ingredients_path,:class => " waves-effect waves-light btn red category-text" %>
+</div>

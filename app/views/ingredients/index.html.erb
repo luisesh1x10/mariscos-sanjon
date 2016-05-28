@@ -1,0 +1,35 @@
+<% if(notice) %>
+  <div class="card-panel">
+        <span class="blue-text text-darken-2"><%= notice %> </span>
+  </div>
+<% end %>
+<div class="container">
+    <h5>Ingredientes</h5>
+
+    <table width="60%">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Existencia</th>
+          <th>Unidad de Medida </th>
+          <th colspan="2"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @ingredients.each do |ingredient| %>
+          <tr>
+            <td><%= ingredient.name %></td>
+            <td><%= ingredient.stock %></td>
+            <td><%= ingredient.measurement_unit.name %></td>
+            <td><%= link_to 'Editar', edit_ingredient_path(ingredient), :class  => "waves-effect waves-light btn category-text blue" %></td>
+            <td><%= link_to 'Eliminar', ingredient, method: :delete, data: { confirm: 'Seguro que deseas Eliminar?' }, :class => "waves-effect waves-light btn category-text red" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <br>
+
+    <%= link_to 'Agregar Ingrediente', new_ingredient_path, :class => "waves-effect waves-light btn category-text" %>
+</div>

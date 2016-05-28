@@ -1,0 +1,46 @@
+ <%= form_for(@ingredient) do |f| %>
+        <% if @ingredient.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@ingredient.errors.count, "error") %> prohibited this ingredient from being saved:</h2>
+
+           <ul class="collection">
+                <% @ingredient.errors.each do |attr,msg|  %>
+                   <li class="collection-item">  <%=msg%> </li>
+                <% end %>
+              </ul>
+          </div>
+        <% end %>
+         <div class="row ">
+              <div class="input-field col s6">
+                  <div class="field">
+                        <i class="material-icons prefix">account_circle</i>
+                        <%= f.text_field :name, class: "validate", id: "icon_prefix" %>
+                        <label for="icon_prefix">Nombre</label>
+                  </div>
+              </div>
+              <div class="input-field col s6">
+                  <div class="field">
+            
+                    <i class="material-icons prefix">note_add</i>
+                    <%= f.number_field :stock, class: "validate", id: "icon_prefix"  %>
+                    <label for="icon_prefix"> Existencia </label>
+                  </div>
+              </div>
+          </div>
+     
+        <div  style="font-size: 20px;">
+               Unidad:
+        </div>
+        <br>
+        <div class="row">
+            <div class="input-field col s6">
+              <div class="field">
+                <%= f.select :measurement_unit_id, options_for_select(measurement_for_select) %>
+              </div>
+            </div>
+        </div>
+         <div class="actions">
+              <%= f.submit "Guardar", :class => "btn waves-effect waves-light category-text"  %>
+         </div>
+<% end %>
+

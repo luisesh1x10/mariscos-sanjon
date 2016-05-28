@@ -1,0 +1,17 @@
+<div class="container">
+	<% if(notice) %>
+		<div class="card-panel">
+	      <span class="blue-text text-darken-2"><%= notice %> </span>
+		</div>
+	<% end  %>
+
+	<h4> Detalles Categoría </h4>
+	<strong> Categoría: </strong>
+	<%= @category.name %>
+	<br>
+	<br>
+	
+
+	<%= link_to 'Editar', edit_category_path(@category), :class => "waves-effect waves-light btn category-text" %> 
+	<%= link_to 'Regresar', categories_path,:class => " waves-effect waves-light btn red category-text" %>
+</div>

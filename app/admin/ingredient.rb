@@ -1,4 +1,4 @@
-ActiveAdmin.register Category do
+ActiveAdmin.register Ingredient do
 
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
@@ -12,6 +12,19 @@ ActiveAdmin.register Category do
 #   permitted << :other if params[:action] == 'create' && current_user.admin?
 #   permitted
 # end
- permit_params :name
-
+index do
+  column :name
+  column :stock
+  column :measurement_unit
+  actions
+end
+ permit_params :name,:stock, :measurement_unit
+ form do |f|
+    f.inputs do
+      input :name
+      input :stock
+      f.input :measurement_unit, :collection => MeasurementUnit.all.map{ |car| [car.name, car.id] }
+    end
+    actions
+  end
 end

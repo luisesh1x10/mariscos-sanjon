@@ -1,4 +1,4 @@
-ActiveAdmin.register Platillo do
+ActiveAdmin.register Table do
 
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
@@ -12,6 +12,6 @@ ActiveAdmin.register Platillo do
 #   permitted << :other if params[:action] == 'create' && current_user.admin?
 #   permitted
 # end
-permit_params :name,:price,:category_id
 
+permit_params :ldescription, :name
 end

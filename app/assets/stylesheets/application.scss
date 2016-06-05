@@ -13,6 +13,7 @@
  *= require_tree .
  *= require_self
  *= stub active_admin
+ *= stub scaffolds
  */
 @import "materialize";
 @import "materialize/extras/nouislider";

@@ -1,6 +1,6 @@
 class Order < ActiveRecord::Base
-  belongs_to :tables
-  has_many :saucer_orders
-  has_many :platillos, through: :saucer_orders
+  belongs_to :table
+  has_many :saucerOrders
+  has_many :platillos, through: :saucerOrder
   validates :tables_id, presence:true
 end

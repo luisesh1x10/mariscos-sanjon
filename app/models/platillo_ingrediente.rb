@@ -1,4 +1,4 @@
 class PlatilloIngrediente < ActiveRecord::Base
-  belongs_to :platillo
-  belongs_to :ingredient
+	 belongs_to :platillo, dependent: :destroy
+  	 belongs_to :ingredient, dependent: :destroy
 end

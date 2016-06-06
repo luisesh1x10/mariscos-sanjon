@@ -28,9 +28,9 @@ class PlatilloController < ApplicationController
   def create
     @platillo = Platillo.new(platillo_params)
     @ingredients = platillo_params[:ingredients_attributes]
-    debug @ingredients
-
-    @platilloIngrendiente = Ingredient.new(@ingredients)
+    
+    @ingredients[0].platillo_id =  @platillo.id
+    @platilloIngrendiente = Platillo_Ingredient.new(@ingredients[0])
     @platilloIngrendiente.save
     respond_to do |format|
       if @platillo.save
@@ -75,6 +75,6 @@ class PlatilloController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def platillo_params
-      params.require(:platillo).permit(:name,:ingredients_attributes,:price,:category_id)
+      params.require(:platillo).permit(:name,:price,:category_id,ingredients_attributes: [:name, :stock])
     end
 end

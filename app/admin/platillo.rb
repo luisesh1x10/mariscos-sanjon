@@ -12,7 +12,7 @@ ActiveAdmin.register Platillo do
 #   permitted << :other if params[:action] == 'create' && current_user.admin?
 #   permitted
 # end
-permit_params :name, :ingredients_attributes, :price, :category_id
+permit_params :name, :price, :category_id, ingredients_attributes: [:name,:stock]
 
 index do
   column :name

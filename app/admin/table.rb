@@ -13,5 +13,5 @@ ActiveAdmin.register Table do
 #   permitted
 # end
 
-permit_params :ldescription, :name
+permit_params :description, :name
 end

@@ -1,11 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  orders_id: 
-  patillos_id: 
-  annotations: MyString
+  platillo_id: 
+  order_id: 
 
 two:
-  orders_id: 
-  patillos_id: 
-  annotations: MyString
+  platillo_id: 
+  order_id: 

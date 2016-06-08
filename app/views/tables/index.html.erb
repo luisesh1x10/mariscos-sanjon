@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+Lista de mesas
+    <%cont=0%>
+    <% @tables.each do |table| %>
+      <%if cont%2==0 %>
+        <div class="row">
+      <%end%>
+        <div class="col s12 m6">
+          <div class="card blue-grey darken-1">
+            <div class="card-content white-text">
+              <span class="card-title"><%=table.name%></span>
+              <p><%=table.description%></p>
+            </div>
+            <div class="card-action">
+              <%=link_to 'Ordenes de la mesa',table%>
+            </div>
+          </div>
+        </div>
+      <%if cont%2!=0 %>
+        </div>
+      <%end%>
+      <%cont+=1%>
+    <% end %>
+    </div>
+
+

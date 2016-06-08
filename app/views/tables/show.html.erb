@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+    <h1><%@table.name%></h1>
+    <h3><%="cantidad de ordenes:#{@table.orders.count}"%> </h3>
+    <%=render 'orders/form'%>
+     <%cont=0%>
+    <% @table.orders.each do |order| %>
+      <%if cont%2==0 %>
+        <div class="row">
+      <%end%>
+        <div class="col s12 m6">
+          <div class="card blue-grey darken-1">
+            <div class="card-content white-text">
+              <span class="card-title"><%=order.id%></span>
+              <ul>
+              <%order.platillos.each do |platillo|%>
+                  <li><%=platillo.name%></li>
+              <%end%>
+              </ul>
+            </div>
+            <div class="card-action">
+              <%=link_to 'Ordenes de la mesa',[@table,order]%>
+            </div>
+          </div>
+        </div>
+      <%if cont%2!=0 %>
+        </div>
+      <%end%>
+      <%cont+=1%>
+    <% end %>
+

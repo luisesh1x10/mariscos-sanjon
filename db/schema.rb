@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160531173501) do
+ActiveRecord::Schema.define(version: 20160606055616) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -69,12 +69,12 @@ ActiveRecord::Schema.define(version: 20160531173501) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.integer  "tables_id"
+    t.integer  "table_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_index "orders", ["tables_id"], name: "index_orders_on_tables_id"
+  add_index "orders", ["table_id"], name: "index_orders_on_table_id"
 
   create_table "platillo_ingredientes", force: :cascade do |t|
     t.integer  "platillo_id"
@@ -97,15 +97,15 @@ ActiveRecord::Schema.define(version: 20160531173501) do
   add_index "platillos", ["category_id"], name: "index_platillos_on_category_id"
 
   create_table "saucer_orders", force: :cascade do |t|
-    t.integer  "orders_id"
-    t.integer  "platillos_id"
-    t.string   "annotations"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.integer  "platillo_id"
+    t.integer  "order_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "notes"
   end
 
-  add_index "saucer_orders", ["orders_id"], name: "index_saucer_orders_on_orders_id"
-  add_index "saucer_orders", ["platillos_id"], name: "index_saucer_orders_on_platillos_id"
+  add_index "saucer_orders", ["order_id"], name: "index_saucer_orders_on_order_id"
+  add_index "saucer_orders", ["platillo_id"], name: "index_saucer_orders_on_platillo_id"
 
   create_table "tables", force: :cascade do |t|
     t.string   "description"

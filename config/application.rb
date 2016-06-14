@@ -21,6 +21,6 @@ module MariscosSanJon
     # config.i18n.default_locale = :de
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
-    config.active_record.raise_in_transactional_callbacks = true
-  end
+    Paperclip.options[:content_type_mappings] = {nil => "image/png"}
+end
 end

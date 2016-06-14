@@ -75,6 +75,6 @@ class PlatilloController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def platillo_params
-      params.require(:platillo).permit(:name,:price,:category_id,ingredients_attributes: [:name, :stock])
+      params.require(:platillo).permit(:name,:price,:category_id, :map ,:map_file_name,ingredients_attributes: [:name, :stock])
     end
 end

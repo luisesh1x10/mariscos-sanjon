@@ -1,5 +1,6 @@
 ActiveAdmin.register Platillo do
 
+config.filters = false
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
@@ -12,11 +13,10 @@ ActiveAdmin.register Platillo do
 #   permitted << :other if params[:action] == 'create' && current_user.admin?
 #   permitted
 # end
-permit_params :name, :price, :category_id, ingredients_attributes: [:name,:stock]
+permit_params :name, :price, :category_id,:map,:map_file_name ,ingredients_attributes: [:name,:stock]
 
 index do
   column :name
-  column :ingredients
   column :price 
   column :category
   actions
@@ -33,6 +33,7 @@ form do |f|
           s.input :stock 
       end
     end
+    f.input :map, :as => :file
     f.input :price
     f.input :category, :collection => Category.all.map{ |car| [car.name, car.id] }
     f.actions

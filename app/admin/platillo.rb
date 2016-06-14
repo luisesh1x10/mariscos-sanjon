@@ -13,6 +13,7 @@ config.filters = false
 #   permitted << :other if params[:action] == 'create' && current_user.admin?
 #   permitted
 # end
+
 permit_params :name, :price, :category_id,:map,:map_file_name ,ingredients_attributes: [:name,:stock]
 
 index do

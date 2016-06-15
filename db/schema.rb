@@ -11,8 +11,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
 ActiveRecord::Schema.define(version: 20160614173951) do
+
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
     t.text     "body"
@@ -58,9 +58,11 @@ ActiveRecord::Schema.define(version: 20160614173951) do
     t.integer  "measurement_unit_id"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
+    t.integer  "platillo_id"
   end
 
   add_index "ingredients", ["measurement_unit_id"], name: "index_ingredients_on_measurement_unit_id"
+  add_index "ingredients", ["platillo_id"], name: "index_ingredients_on_platillo_id"
 
   create_table "measurement_units", force: :cascade do |t|
     t.string   "name"

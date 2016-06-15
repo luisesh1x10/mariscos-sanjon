@@ -20,7 +20,9 @@ index do
   column :name
   column :price 
   column :category
+  column :map
   actions
+
 end
 
 form do |f|

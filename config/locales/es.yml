@@ -1,4 +1,7 @@
 es:
+  time: 
+       formats: 
+          long: "%Y-%M-%d %H:%M:%S"
   active_admin:
     dashboard: Inicio
     dashboard_welcome:

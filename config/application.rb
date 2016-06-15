@@ -21,6 +21,8 @@ module MariscosSanJon
     # config.i18n.default_locale = :de
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
-    Paperclip.options[:content_type_mappings] = {nil => "image/png"}
+    config.i18n.default_locale = :es
+    I18n.locale = config.i18n.locale = config.i18n.default_locale
+    I18n.reload!
 end
 end

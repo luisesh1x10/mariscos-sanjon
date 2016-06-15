@@ -15,7 +15,7 @@ gem 'coffee-rails', '~> 4.1.0'
 #Materialize Sass to views 
 gem 'materialize-sass'
 # See https://github.com/rails/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
+ gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -29,6 +29,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise' 
 gem 'activeadmin',github: 'activeadmin'
 gem 'responsive_active_admin'
+
+gem 'coffee-script-source','1.8.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

@@ -17,10 +17,9 @@ config.filters = false
 permit_params :name, :price, :category_id,:map,:map_file_name ,ingredients_attributes: [:name,:stock]
 
 index do
-  column :name
+  column :name, label: "Nombre"
   column :price 
   column :category
-  column :map
   actions
 
 end
@@ -32,7 +31,7 @@ form do |f|
     end
     f.inputs "Ingredientes" do
       f.has_many :ingredients do |s|
-          s.input :name, :collection => Ingredient.all.map{ |car| [car.name, car.id] }
+          s.input :name, :collection => Ingrediente.all.map{ |car| [car.nombre, car.id] }
           s.input :stock 
       end
     end

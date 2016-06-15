@@ -56,3 +56,5 @@ gem 'paperclip', '~> 4.2'
 gem 'formtastic', github: 'justinfrench/formtastic'
 gem 'ransack', github: 'activerecord-hackery/ransack'
 gem 'polyamorous', github: 'activerecord-hackery/polyamorous'
+
+gem 'cocaine', '0.5.5'

@@ -1,5 +1,6 @@
 ActiveAdmin.register Category do
-
+ 
+ menu label: "Categorias"
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
@@ -13,5 +14,11 @@ ActiveAdmin.register Category do
 #   permitted
 # end
  permit_params :name
+
+ index do
+  column :name
+  actions
+
+end
 
 end

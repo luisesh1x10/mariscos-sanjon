@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
- 
+  
+  get 'cocina/show'
+  get 'cocina/barra_fria' , to:'cocina#barra_fria',as:'barra_fria'
+  get 'cocina/barra_caliente',to:'cocina#barra_caliente',as:'barra_caliente'
+  resources 'cocina'
   get 'welcome/index'
 
   devise_for :users,:skip => :registrations
@@ -9,13 +13,18 @@ Rails.application.routes.draw do
   resources :measurement_units
   resources :categories
   resources :tables do
-    resources :orders
+    resources :orders, shallow: true do 
+      resources :saucer_orders 
+    end
   end
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
+  authenticated :user do
+    root 'tables#index', as: :authenticated_root
+  end
    root 'welcome#index'
 
   # Example of regular route:

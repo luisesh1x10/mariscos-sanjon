@@ -1,0 +1,33 @@
+<div id="ListaPedidos">
+  <%=form_tag @direccion, {:method => :get,remote:true,id:"pedidos_barra"} do %>
+      numero de pedidos activos: <%=@pedidos.count%>
+      <table class="responsive-table striped">
+          <thead>
+            <tr>
+                <th data-field="id">Platillo</th>
+                <th data-field="name">Personalizado</th>
+                <th data-field="price">Estado</th>
+                <th data-field="price">Mesa</th>
+            </tr>
+           </thead>
+           <tbody>
+      <%@pedidos.each do |p| %>
+        <tr>
+          <td><%=p.platillo.name%></td>
+          <td><%=p.notes%></td>
+          <%estados=[]
+          estados.push("Pendiente")
+          estados.push("En Proceso")
+          %>
+          <td><%=estados[p.status-1]%></td>
+          <td><%=p.order.table.name%></td>
+          <%text="Iniciar platillo"
+            text="Ternimar platillo" if p.status==2
+          %>
+          <td><%=link_to  text, saucer_order_path(p,:saucer_order=>{status:p.status+1}), :method=> :put,:remote => true %></td>
+        </tr>
+      <%end%>
+          </tbody>
+        </table>
+  <%end%>
+</div>

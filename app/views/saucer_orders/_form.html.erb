@@ -1,0 +1,65 @@
+
+  <div class = "row">
+  <%Category.all.each do |category|%>
+      <div class="card col s12">
+        <h3 class="center-align"><%=category.name%></h3>
+      </div>
+    <%category.platillos.each do |platillo|%>
+        <div class = "card col s3 platillo">
+          <a class="modal-trigger waves-effect col s12" href="#modal1">
+            <div>
+              nombre: <%=platillo.name%></br>
+              Precio: <%=platillo.price%>
+              <%=number_field_tag 'platillo',nil,value:platillo.id,hidden:true%>
+            </div>
+          </a>
+          <div>
+            <%=link_to 'Informacion',nil,class:"btn"%>
+          </div>
+        </div>
+    <%end%>
+  <%end%>
+  </div>
+  <div id="modal1" class="modal modal-fixed-footer">
+    <div class="modal-content">
+      <h4>Ordenar platillo</h4>
+      <%= form_for([@order,@saucer_order],remote:true,:html=>{id:"formulario_ordenar","data-type":"json"}) do |f| %>
+        <% if @saucer_order.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@saucer_order.errors.count, "error") %> prohibited this saucer_order from being saved:</h2>
+            <ul>
+            <% @saucer_order.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+        <div class="field">
+          <%=f.label :platillo_id%>
+          <%=f.number_field :platillo_id %>
+        </div>
+        <div class="field">
+          <%=f.label :notes%>
+          <%=f.text_field :notes%>
+        </div>
+      
+      </div>
+      <div class="modal-footer actions">
+          <%= f.submit "Aceptar",class:"modal-action modal-close waves-effect waves-green btn-flat",id:"submitButton"%>
+      </div>
+    </div>
+      <% end %>
+  <script>
+    $(document).ready(function(){
+    $('.modal-trigger').leanModal();
+  });
+  // $('#saucr_order_notes').val("");
+  $('#submitButton').click(function(){
+    $('#formulario_ordenar').submit();
+    $('#saucer_order_notes').val("");
+  });
+  $('.platillo').click(function(){
+     var val = $(this).find('a div #platillo').val();
+     $('#saucer_order_platillo_id').val(val);
+  });
+  </script>

@@ -1,8 +1,10 @@
 <p id="notice"><%= notice %></p>
     <h1><%@order.table%></h1>
-    <%@order.saucerOrders.each do |s|%>
-        <ul>
+    
+    <%=render "saucer_orders/form"%>
+    <ul id="lista_de_ordenes">
+        <%@order.saucerOrders.each do |s|%>
             <li><%="Platillo: #{s.platillo.name} anotacion: #{s.notes}"%></li>
-        </ul>
-    <%end%>
-
+        <%end%>
+    </ul>
+    

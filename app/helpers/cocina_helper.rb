@@ -1,0 +1,2 @@
+module CocinaHelper
+end

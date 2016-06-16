@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
-  before_action :set_table
+  before_action :set_table, only: [:create]
 
   # GET /orders
   # GET /orders.json
@@ -11,6 +11,7 @@ class OrdersController < ApplicationController
   # GET /orders/1
   # GET /orders/1.json
   def show
+    @saucer_order = SaucerOrder.new
   end
 
   # GET /orders/new
@@ -67,6 +68,7 @@ class OrdersController < ApplicationController
     def set_order
       @order = Order.find(params[:id])
     end
+    
     def set_table
       @table = Table.find(params[:table_id])
     end

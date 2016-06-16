@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Saucer Orders</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @saucer_orders.each do |saucer_order| %>
+      <tr>
+        <td><%=saucer_order.notes%></td>
+        <td><%=saucer_order.order_id%></td>
+        <td><%=saucer_order.platillo_id%></td>
+        <td><%= link_to 'Show', saucer_order %></td>
+        <td><%= link_to 'Edit', edit_saucer_order_path(saucer_order) %></td>
+        <td><%= link_to 'Destroy', saucer_order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to 'New Order',  new_order_saucer_order_path %>
+<br>
+
+

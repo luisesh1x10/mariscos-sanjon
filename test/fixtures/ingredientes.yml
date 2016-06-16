@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nombre: MyString
+  MeasurementUnit_id: 
+  stock: 1.5
+
+two:
+  nombre: MyString
+  MeasurementUnit_id: 
+  stock: 1.5

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160609020602) do
+ActiveRecord::Schema.define(version: 20160615044348) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -52,15 +52,27 @@ ActiveRecord::Schema.define(version: 20160609020602) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "ingredientes", force: :cascade do |t|
+    t.string   "nombre"
+    t.integer  "MeasurementUnit_id"
+    t.float    "stock"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_index "ingredientes", ["MeasurementUnit_id"], name: "index_ingredientes_on_MeasurementUnit_id"
+
   create_table "ingredients", force: :cascade do |t|
     t.string   "name"
     t.integer  "stock"
     t.integer  "measurement_unit_id"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
+    t.integer  "platillo_id"
   end
 
   add_index "ingredients", ["measurement_unit_id"], name: "index_ingredients_on_measurement_unit_id"
+  add_index "ingredients", ["platillo_id"], name: "index_ingredients_on_platillo_id"
 
   create_table "measurement_units", force: :cascade do |t|
     t.string   "name"
@@ -86,15 +98,19 @@ ActiveRecord::Schema.define(version: 20160609020602) do
   add_index "platillo_ingredientes", ["ingredient_id"], name: "index_platillo_ingredientes_on_ingredient_id"
   add_index "platillo_ingredientes", ["platillo_id"], name: "index_platillo_ingredientes_on_platillo_id"
 
-  create_table "platillos", force: :cascade do |t|
-    t.string   "name"
-    t.float    "price"
-    t.integer  "category_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+  create_table "platillo_ingredients", force: :cascade do |t|
+    t.integer  "platillo_id"
+    t.integer  "ingredient_id"
+    t.float    "cantidad"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
-  add_index "platillos", ["category_id"], name: "index_platillos_on_category_id"
+  add_index "platillo_ingredients", ["ingredient_id"], name: "index_platillo_ingredients_on_ingredient_id"
+  add_index "platillo_ingredients", ["platillo_id"], name: "index_platillo_ingredients_on_platillo_id"
+
+# Could not dump table "platillos" because of following NoMethodError
+#   undefined method `[]' for nil:NilClass
 
   create_table "saucer_orders", force: :cascade do |t|
     t.integer  "platillo_id"

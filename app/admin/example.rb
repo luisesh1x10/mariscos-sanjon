@@ -1,5 +1,6 @@
 ActiveAdmin.register Example do
 
+  menu false
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
@@ -14,16 +15,4 @@ ActiveAdmin.register Example do
 # end
 permit_params :nombre_platillo, ingrediente_nombre: [],ingrediente_cantidad: []
 
-
-controller do
-    def create
-      # Good
-      @post = Post.new(permitted_params[:example])
-      
-
-      if @post.save
-        	return	true
-      end
-    end
-  end
 end

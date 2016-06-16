@@ -4,6 +4,8 @@ ActiveAdmin.setup do |config|
   # Set the title that is displayed on the main layout
   # for each of the active admin pages.
   #
+  require 'activeadmin'
+  
   config.site_title = "Mariscos SanJon"
   config.skip_before_filter :authenticate_user!
   # Set the link url for the title. For example, to take
@@ -269,4 +271,7 @@ ActiveAdmin.setup do |config|
   # of those filters by default here.
   #
   # config.include_default_association_filters = true
+
+
+
 end

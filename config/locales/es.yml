@@ -1,4 +1,17 @@
-es-MX:
+es:
+  attributes:
+     name: Nombre
+  activerecord:
+    attributes:
+      platillo: 
+        price: Precio
+        category: Categoria
+      ingrediente:
+        stock: Cantidad
+        MeasurementUnit: Unidad de Medida
+  time: 
+       formats: 
+          long: "%Y-%M-%d %H:%M:%S"
   active_admin:
     dashboard: Inicio
     dashboard_welcome:
@@ -87,6 +100,24 @@ es-MX:
         sign_in: "Registrarse"
         forgot_your_password: "¿Olvidó su contraseña?"
         sign_in_with_omniauth_provider: "Conéctate con %{provider}"
+      failure: 
+        unauthenticated: 'Necesitas loguearte para continuar.Por favor inicia sesion.' 
+        unconfirmed: 'Necesitas confirmar tu cuenta para continuar.' 
+        locked: 'Tu cuenta está bloqueada.' 
+        invalid: 'Correo o contraseña invalidos' 
+        invalid_token: 'Token invañido' 
+        timeout: 'Tu sesion ha expirado, por favor logueate de nuevo para continuar.' 
+        inactive: 'Tu cuenta no fue activada todavia' 
+        admin_user: 
+           unauthenticated: "No estas logeado aun"
+      sessions: 
+          signed_in: "Logeado" 
+          signed_out: "Deslogeado"
+          admin_user: 
+            signed_in: "Logeado"
+      admin_registrations:
+        admin:
+          signed_up: 'Welcome! You have signed up successfully.'
     index_list:
       table: "Tabla"
       block: "Lista"

@@ -1,6 +1,6 @@
-ActiveAdmin.register MeasurementUnit do
+ActiveAdmin.register Ingrediente do
 
-  menu label: "Unidades de Medida"
+  menu priority: 2
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
@@ -13,10 +13,13 @@ ActiveAdmin.register MeasurementUnit do
 #   permitted << :other if params[:action] == 'create' && current_user.admin?
 #   permitted
 # end
- permit_params :name
 
- index do
-  column :name
-  actions
- end
+	permit_params :nombre,:stock, :MeasurementUnit_id
+	index do
+	  column :nombre
+	  column :stock
+	  column :MeasurementUnit
+	  actions
+
+end
 end

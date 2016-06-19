@@ -24,7 +24,7 @@
           <%text="Iniciar platillo"
             text="Ternimar platillo" if p.status==2
           %>
-          <td><%=link_to  text, saucer_order_path(p,:saucer_order=>{status:p.status+1}), :method=> :put,:remote => true %></td>
+          <td><%=link_to  text, saucer_order_path(p,:saucer_order=>{status:p.status+1}), :method=> :put,:remote => true,class:"waves-effect waves-light btn" %></td>
         </tr>
       <%end%>
           </tbody>

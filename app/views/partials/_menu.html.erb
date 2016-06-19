@@ -8,12 +8,16 @@
 
 <%end%>
 <%unless current_user.nil?%>
+    <%if current_user.tipo==3%>
+        <li><%= link_to 'Cobrar',tables_path%></li>
+    <%end%>
     <%if current_user.tipo==2%>
         <li><%= link_to 'Levantar ordenes',tables_path%></li>
+        <li><%= link_to 'Platillos terminados',tables_path%></li>
     <%end%>
     <%if current_user.tipo==1%>
         <li><%= link_to 'Barra caliente',barra_caliente_path%></li>
-        <li><%= link_to 'Barra caliente',barra_fria_path%></li>
+        <li><%= link_to 'Barra fria',barra_fria_path%></li>
     <%end%>
     <li><%= link_to "Cerrar Sesión", destroy_user_session_path, :method => :delete %></li> 
 <%end%>

@@ -1,4 +1,3 @@
-
   <div class = "row">
   <%Category.all.each do |category|%>
       <div class="card col s12">
@@ -8,8 +7,8 @@
         <div class = "card col s3 platillo">
           <a class="modal-trigger waves-effect col s12" href="#modal1">
             <div>
-              nombre: <%=platillo.name%></br>
-              Precio: <%=platillo.price%>
+              nombre: <strong id="nombre"><%=platillo.name%></br></strong>
+              Precio: <strong><%=platillo.price%></strong>
               <%=number_field_tag 'platillo',nil,value:platillo.id,hidden:true%>
             </div>
           </a>
@@ -35,12 +34,14 @@
           </div>
         <% end %>
         <div class="field">
-          <%=f.label :platillo_id%>
-          <%=f.number_field :platillo_id %>
+          <%=f.number_field :platillo_id,hidden:true %>
+        </div>
+        <div class="field">
+          <h5 id="nombre_platillo" class="center-align">hola</h5>
         </div>
         <div class="field">
           <%=f.label :notes%>
-          <%=f.text_field :notes%>
+          <%=f.text_area :notes%>
         </div>
       
       </div>
@@ -53,7 +54,6 @@
     $(document).ready(function(){
     $('.modal-trigger').leanModal();
   });
-  // $('#saucr_order_notes').val("");
   $('#submitButton').click(function(){
     $('#formulario_ordenar').submit();
     $('#saucer_order_notes').val("");
@@ -61,5 +61,7 @@
   $('.platillo').click(function(){
      var val = $(this).find('a div #platillo').val();
      $('#saucer_order_platillo_id').val(val);
+     var val = $(this).find('a div #nombre').text();
+     $('#nombre_platillo').html(val);
   });
   </script>

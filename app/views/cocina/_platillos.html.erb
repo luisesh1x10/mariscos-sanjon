@@ -1,26 +1,25 @@
 <div id="ListaPedidos">
+  <h4>Pedidos activos:<strong> <%=@pedidos.count%></strong></h4>
   <%=form_tag @direccion, {:method => :get,remote:true,id:"pedidos_barra"} do %>
-      numero de pedidos activos: <%=@pedidos.count%>
-      <table class="responsive-table striped">
+      <table class="responsive-table centered striped">
           <thead>
             <tr>
                 <th data-field="id">Platillo</th>
                 <th data-field="name">Personalizado</th>
-                <th data-field="price">Estado</th>
-                <th data-field="price">Mesa</th>
+                <th data-field="status">Estado</th>
+                <th></th>
             </tr>
            </thead>
            <tbody>
       <%@pedidos.each do |p| %>
         <tr>
-          <td><%=p.platillo.name%></td>
-          <td><%=p.notes%></td>
+          <td><h3><%=p.platillo.name%></h3></td>
+          <td><h3><%=p.notes%></h3></td>
           <%estados=[]
           estados.push("Pendiente")
           estados.push("En Proceso")
           %>
-          <td><%=estados[p.status-1]%></td>
-          <td><%=p.order.table.name%></td>
+          <td><h3><%=estados[p.status-1]%></h3></td>
           <%text="Iniciar platillo"
             text="Ternimar platillo" if p.status==2
           %>

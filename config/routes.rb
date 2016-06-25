@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  devise_for :admin_users, ActiveAdmin::Devise.config
   get 'cocina/show'
   get 'cocina/barra_fria' , to:'cocina#barra_fria',as:'barra_fria'
   get 'cocina/barra_caliente',to:'cocina#barra_caliente',as:'barra_caliente'
@@ -7,7 +8,6 @@ Rails.application.routes.draw do
   get 'welcome/index'
 
   devise_for :users,:skip => :registrations
-  devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   resources :ingredients
   resources :measurement_units
@@ -17,6 +17,8 @@ Rails.application.routes.draw do
       resources :saucer_orders 
     end
   end
+  get 'pay/:id', :to => "orders#pay",as:'pay'
+ # post 'pay/:id', :to => "orders#paynow",as:'pay'
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

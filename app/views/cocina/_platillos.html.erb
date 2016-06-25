@@ -14,7 +14,7 @@
       <%@pedidos.each do |p| %>
         <tr>
           <td><h3><%=p.platillo.name%></h3></td>
-          <td><h3><%=p.notes%></h3></td>
+          <td><h3><%=p.notes%><%=p.id%></h3></td>
           <%estados=[]
           estados.push("Pendiente")
           estados.push("En Proceso")
@@ -23,7 +23,7 @@
           <%text="Iniciar platillo"
             text="Ternimar platillo" if p.status==2
           %>
-          <td><%=link_to  text, saucer_order_path(p,:saucer_order=>{status:p.status+1}), :method=> :put,:remote => true,class:"waves-effect waves-light btn" %></td>
+          <td><%=link_to  text, saucer_order_path(p,:saucer_order=>{status:p.status+1}), :method=> :put,:remote => true,class:"waves-effect waves-light btn-large" %></td>
         </tr>
       <%end%>
           </tbody>

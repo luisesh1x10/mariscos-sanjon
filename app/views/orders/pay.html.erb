@@ -1,0 +1,37 @@
+<div class="container">
+    <div class="card">
+        <h1 class="center-align">Reporte de orden</h1>
+        <h4 class="center-align">Total: <%=@order.platillos.sum(:price)%></h4>
+        <div class="container">
+            <div class="row">
+                <div class ="col s12 m6 l3">
+                    <a class="waves-effect waves-light btn">Imprimir ticket</a>
+                </div>
+                <div class="col s12 m6 l3 offset-l6">
+                    <a class="waves-effect waves-light btn">Finalizar</a>
+                </div>
+            </div>
+        </div>
+        </br>
+    </div>
+    
+    <table class="responsive-table">
+    <thead>
+      <tr>
+          <th data-field="id">Platillo</th>
+          <th data-field="name">Precio</th>
+          <th data-field="name"></th>
+      </tr>
+    </thead>
+    <tbody>
+        <%@order.platillos.each do |platillo|%>    
+          <tr>
+            <td><%=platillo.name%></td>
+            <td><%="$#{platillo.price}"%></td>
+            <td><a class="waves-effect red darken-1 btn">Cancelar</a></td>
+          </tr>
+        <%end%>
+    </tbody>
+  </table>
+  
+</div>

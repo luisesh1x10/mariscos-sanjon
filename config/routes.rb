@@ -18,7 +18,7 @@ Rails.application.routes.draw do
     end
   end
   get 'pay/:id', :to => "orders#pay",as:'pay'
- # post 'pay/:id', :to => "orders#paynow",as:'pay'
+  post 'pay/:id', :to => "orders#paynow",as:'paynow'
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

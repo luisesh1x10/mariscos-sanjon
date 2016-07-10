@@ -1,9 +1,9 @@
 <p id="notice"><%= notice %></p>
     <h1><%@table.name%></h1>
-    <h3><%="cantidad de ordenes:#{@table.orders.count}"%> </h3>
+    <h3><%="cantidad de ordenes:#{@orders.count}"%> </h3>
     <%=render 'orders/form'%>
      <%cont=0%>
-    <% @table.orders.each do |order| %>
+    <% @orders.each do |order| %>
       <%if cont%2==0 %>
         <div class="row">
       <%end%>
@@ -18,7 +18,11 @@
               </ul>
             </div>
             <div class="card-action">
-              <%=link_to 'Ordenes de la mesa',[order]%>
+              <%if current_user.tipo==3%>
+                <%=link_to 'Cerrar orden',pay_path(order)%>
+              <%elsif  current_user.tipo==2%>
+                <%=link_to 'Hacer perdidos',order%>
+              <%end%>
             </div>
           </div>
         </div>

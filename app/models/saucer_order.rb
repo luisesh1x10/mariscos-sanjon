@@ -7,8 +7,7 @@ class SaucerOrder < ActiveRecord::Base
   validates :platillo_id,
   :order_id,
   presence:true
-  validates :status, :inclusion => {:in => [nil,1,2,3]}
-  
+  validates :status, :inclusion => {:in => [nil,1,2,3,4]}
   before_save :default_values
   def default_values
     self.status ||= 1
@@ -21,5 +20,6 @@ end
     1-->por hacer
     2-->en processo
     3--> terminado
+    4--> entregado
   }
 =end

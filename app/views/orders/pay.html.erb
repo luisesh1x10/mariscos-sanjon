@@ -8,13 +8,13 @@
                     <a class="waves-effect waves-light btn">Imprimir ticket</a>
                 </div>
                 <div class="col s12 m6 l3 offset-l6">
-                    <a class="waves-effect waves-light btn">Finalizar</a>
+                    <%=link_to "Finalizar",paynow_path,method: :post,class:"waves-effect waves-light btn"%>
                 </div>
             </div>
         </div>
         </br>
     </div>
-    
+    <%=@order.status%>
     <table class="responsive-table">
     <thead>
       <tr>
@@ -24,12 +24,12 @@
       </tr>
     </thead>
     <tbody>
-        <%@order.platillos.each do |platillo|%>    
+        <%@order.saucerOrders.each do |saucerOrder|%>    
           <tr>
-            <td><%=platillo.name%></td>
-            <td><%="$#{platillo.price}"%></td>
-            <td><a class="waves-effect red darken-1 btn">Cancelar</a></td>
-          </tr>
+            <td><%=saucerOrder.platillo.name%></td>
+            <td><%="$#{saucerOrder.platillo.price}"%></td>
+            <td><%= link_to 'Cancelar', saucerOrder, method: :delete, data: { confirm: 'Are you sure?' },class:"waves-effect red darken-1 btn" %></td>
+            </tr>
         <%end%>
     </tbody>
   </table>

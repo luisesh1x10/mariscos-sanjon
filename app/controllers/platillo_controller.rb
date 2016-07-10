@@ -60,11 +60,7 @@ class PlatilloController < ApplicationController
   # DELETE /platillos/1
   # DELETE /platillos/1.json
   def destroy
-    @platillo.destroy
-    respond_to do |format|
-      format.html { redirect_to platillos_url, notice: 'Unidad de medida eliminada correctamente' }
-      format.json { head :no_content }
-    end
+
   end
 
   private

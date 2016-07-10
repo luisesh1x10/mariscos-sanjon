@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :set_order, only: [:show, :edit, :update, :destroy,:pay]
+  before_action :set_order, only: [:show, :edit, :update, :destroy,:pay,:paynow]
   before_action :set_table, only: [:create]
 
   # GET /orders
@@ -26,6 +26,11 @@ class OrdersController < ApplicationController
   def pay
     
   end
+  
+  def paynow
+    @order.update(status:2)
+    redirect_to tables_path
+  end
 
   # POST /orders
   # POST /orders.json
@@ -48,7 +53,7 @@ class OrdersController < ApplicationController
   def update
     respond_to do |format|
       if @order.update()
-        format.html { redirect_to @table, notice: 'Order was successfully updated.' }
+        format.html { redirect_to @order, notice: 'Order was successfully updated.' }
         format.json { render :show, status: :ok, location: @order }
       else
         format.html { render :edit }

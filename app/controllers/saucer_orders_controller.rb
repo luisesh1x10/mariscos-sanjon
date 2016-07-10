@@ -56,10 +56,16 @@ class SaucerOrdersController < ApplicationController
   # DELETE /saucer_orders/1
   # DELETE /saucer_orders/1.json
   def destroy
-    @saucer_order.destroy
-    respond_to do |format|
-      format.html { redirect_to order_saucer_orders_path, notice: 'Saucer order was successfully destroyed.' }
-      format.json { head :no_content }
+    
+    order=@saucer_order.order
+    if order.status==2
+      redirect_to pay_path(order)
+    else  
+      @saucer_order.destroy
+      respond_to do |format|
+        format.html { redirect_to pay_path(order), notice: 'Saucer order was successfully destroyed.' }
+        format.json { head :no_content }
+      end
     end
   end
 

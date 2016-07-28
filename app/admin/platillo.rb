@@ -14,7 +14,7 @@ config.filters = false
 #   permitted
 # end
 
-permit_params :name, :price, :category_id,:map,:map_file_name ,ingredients_attributes: [:name,:stock]
+permit_params :name, :price, :category_id,:map,:map_file_name,:group_id ,ingredients_attributes: [:name,:stock]
 
 index do
   column :name, label: "Nombre"
@@ -28,6 +28,8 @@ form do |f|
     f.semantic_errors *f.object.errors.keys
     f.inputs "Platillo" do
       f.input :name
+      f.input :price
+      f.input :map, :as => :file
     end
     f.inputs "Ingredientes" do
       f.has_many :ingredients do |s|
@@ -35,9 +37,12 @@ form do |f|
           s.input :stock 
       end
     end
-    f.input :map, :as => :file
-    f.input :price
-    f.input :category, :collection => Category.all.map{ |car| [car.name, car.id] }
+    f.inputs "group" do
+      f.input :group , :collection => Group.all.map{ |car| [car.name, car.id] }
+    end
+    f.inputs "Categoria" do
+      f.input :category, :collection => Category.all.map{ |car| [car.name, car.id] }
+    end
     f.actions
 end
 end

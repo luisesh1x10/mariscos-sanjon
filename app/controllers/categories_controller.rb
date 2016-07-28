@@ -10,57 +10,17 @@ class CategoriesController < ApplicationController
   # GET /categories/1
   # GET /categories/1.json
   def show
+     @direccion = 
+      getPedidos(@category.id)
   end
-
-  # GET /categories/new
-  def new
-    @category = Category.new
-  end
-
-  # GET /categories/1/edit
-  def edit
-  end
-
-  # POST /categories
-  # POST /categories.json
-  def create
-    @category = Category.new(category_params)
-
+  def getPedidos(id)
+     @pedidos= SaucerOrder.joins(:platillo=>:category).where("categories.id = ? and status is not ?",id,3)
     respond_to do |format|
-      if @category.save
-        format.html { redirect_to @category, notice: 'Categoría creada exitosamente.' }
-        format.json { render :show, status: :created, location: @category }
-      else
-        format.html { render :new }
-        format.json { render json: @category.errors, status: :unprocessable_entity }
-      end
+          format.html {}
+          format.json { render :json=> @pedidos  }
+          format.js {render :show}
     end
   end
-
-  # PATCH/PUT /categories/1
-  # PATCH/PUT /categories/1.json
-  def update
-    respond_to do |format|
-      if @category.update(category_params)
-        format.html { redirect_to @category, notice: 'Categoría actualizada exitosamente' }
-        format.json { render :show, status: :ok, location: @category }
-      else
-        format.html { render :edit }
-        format.json { render json: @category.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /categories/1
-  # DELETE /categories/1.json
-  def destroy
-    @category.destroy
-    respond_to do |format|
-      format.html { redirect_to categories_url, notice: 'Category eliminada exitosamente' }
-      format.json { head :no_content }
-    end
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_category

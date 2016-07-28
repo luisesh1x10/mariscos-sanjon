@@ -1,0 +1,32 @@
+<div id="ListaPedidos">
+  <h4>Pedidos activos:<strong> <%=@pedidos.count%></strong></h4>
+  <%=form_tag @category, {:method => :get,remote:true,id:"pedidos_barra"} do %>
+      <table class="responsive-table centered striped">
+          <thead>
+            <tr>
+                <th data-field="id">Platillo</th>
+                <th data-field="name">Personalizado</th>
+                <th data-field="status">Estado</th>
+                <th></th>
+            </tr>
+           </thead>
+           <tbody>
+      <%@pedidos.each do |p| %>
+        <tr>
+          <td><h3><%=p.platillo.name%></h3></td>
+          <td><h3><%=p.notes%><%=p.id%></h3></td>
+          <%estados=[]
+          estados.push("Pendiente")
+          estados.push("En Proceso")
+          %>
+          <td><h3><%=estados[p.status-1]%></h3></td>
+          <%text="Iniciar platillo"
+            text="Ternimar platillo" if p.status==2
+          %>
+          <td><%=link_to  text, saucer_order_path(p,:saucer_order=>{status:p.status+1}), :method=> :put,:remote => true,class:"waves-effect waves-light btn-large" %></td>
+        </tr>
+      <%end%>
+          </tbody>
+        </table>
+  <%end%>
+</div>

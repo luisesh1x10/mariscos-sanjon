@@ -16,8 +16,9 @@
         <li><%= link_to 'Platillos terminados',tables_path%></li>
     <%end%>
     <%if current_user.tipo==1%>
-        <li><%= link_to 'Barra caliente',barra_caliente_path%></li>
-        <li><%= link_to 'Barra fria',barra_fria_path%></li>
+        <%Category.all.each do |category|%>       
+        <li><%= link_to category.name,category%></li>
+        <%end%>
     <%end%>
     <li><%= link_to "Cerrar Sesión", destroy_user_session_path, :method => :delete %></li> 
 <%end%>

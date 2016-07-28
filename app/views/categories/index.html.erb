@@ -17,8 +17,7 @@
       <% @categories.each do |category| %>
         <tr>
           <td><%= category.name %></td>
-          <td><%= link_to 'Editar', edit_category_path(category), :class  => "waves-effect waves-light btn category-text blue" %></td>
-          <td><%= link_to 'Eliminar', category, method: :delete, data: { confirm: 'Seguro que deseas eliminar?' }, :class => "waves-effect waves-light btn category-text red" %></td>
+          <td><%= link_to 'ver',category , :class  => "waves-effect waves-light btn category-text blue" %></td>
         </tr>
       <% end %>
     </tbody>

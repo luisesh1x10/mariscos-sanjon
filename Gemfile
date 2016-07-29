@@ -27,7 +27,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'jquery-turbolinks'
 gem 'devise' 
-gem 'activeadmin',github: 'activeadmin'
+gem 'activeadmin', '~> 1.0.0.pre4'
 gem 'responsive_active_admin'
 gem 'coffee-script-source','1.8.0'
 # Use ActiveModel has_secure_password

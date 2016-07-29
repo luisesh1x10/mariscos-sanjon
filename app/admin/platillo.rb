@@ -14,7 +14,7 @@ config.filters = false
 #   permitted
 # end
 
-permit_params :name, :price, :category_id,:map,:map_file_name,:group_id ,ingredients_attributes: [:name,:stock]
+permit_params :name, :price, :category_id,:map,:map_file_name,:group_id,:is_child ,ingredients_attributes: [:name,:stock]
 
 index do
   column :name, label: "Nombre"
@@ -30,6 +30,7 @@ form do |f|
       f.input :name
       f.input :price
       f.input :map, :as => :file
+      f.input :is_child ,label:"Para niño"
     end
     f.inputs "Ingredientes" do
       f.has_many :ingredients do |s|

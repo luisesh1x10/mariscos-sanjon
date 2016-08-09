@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
     <h1><%@table.name%></h1>
-    <h3><%="cantidad de ordenes:#{@orders.count}"%> </h3>
+    <h3 class="center-align"><%="cantidad de ordenes:#{@orders.count}"%> </h3>
     <%=render 'orders/form'%>
      <%cont=0%>
     <% @orders.each do |order| %>

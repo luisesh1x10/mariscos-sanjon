@@ -4,6 +4,8 @@
       <table class="responsive-table centered striped">
           <thead>
             <tr>
+                <th data-field="id">Mesa</th>
+                <th data-field="id">Cantidad</th>
                 <th data-field="id">Platillo</th>
                 <th data-field="name">Personalizado</th>
                 <th data-field="status">Estado</th>
@@ -13,17 +15,13 @@
            <tbody>
       <%@pedidos.each do |p| %>
         <tr>
-          <td><h3><%=p.platillo.name%></h3></td>
-          <td><h3><%=p.notes%><%=p.id%></h3></td>
-          <%estados=[]
-          estados.push("Pendiente")
-          estados.push("En Proceso")
-          %>
-          <td><h3><%=estados[p.status-1]%></h3></td>
-          <%text="Iniciar platillo"
-            text="Ternimar platillo" if p.status==2
-          %>
-          <td><%=link_to  text, saucer_order_path(p,:saucer_order=>{status:p.status+1}), :method=> :put,:remote => true,class:"waves-effect waves-light btn-large" %></td>
+          <td><p><%=p.order.table.name%></p></td>
+          <td><p><%=p.quantity%></p></td>
+          <td><p><%=p.platillo.name%></p></td>
+          <td><p><%=p.notes%></p></td>
+          <td><p><%="listo"%></p></td>
+          <%text="Platillo entregado"%>
+          <td><%=link_to  text, saucer_order_path(p,:saucer_order=>{status:p.status+1}), :method=> :put,:remote => true,class:"waves-effect waves-light btn" %></td>
         </tr>
       <%end%>
           </tbody>

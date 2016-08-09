@@ -1,0 +1,37 @@
+<div class="row container">
+  <p id="notice"><%= notice %></p>
+  
+  <p>
+    <strong>Nombre:</strong>
+    <%= @customer.nombre %>
+  </p>
+  
+  <p>
+    <strong>Telefono:</strong>
+    <%= @customer.telefono %>
+  </p>
+  
+  <p>
+    <strong>Calle:</strong>
+    <%= @customer.calle %>
+  </p>
+  
+  <p>
+    <strong>Colonia:</strong>
+    <%= @customer.colonia %>
+  </p>
+  
+  <p>
+    <strong>Numero interior:</strong>
+    <%= @customer.numero_interior %>
+  </p>
+  
+  <p>
+    <strong>Numero exterior:</strong>
+    <%= @customer.numero_exterior %>
+  </p>
+    <%= link_to 'Editar', edit_customer_path(@customer) %> |
+  <%= link_to 'Atras', customers_path %>
+
+  </div>
+  

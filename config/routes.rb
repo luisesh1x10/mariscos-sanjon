@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   
+  resources :customers
   devise_for :admin_users, ActiveAdmin::Devise.config
   get 'cocina/show'
+  get 'cocina/terminados' , to:'cocina#terminados',as:'terminados'
   get 'cocina/barra_fria' , to:'cocina#barra_fria',as:'barra_fria'
   get 'cocina/barra_caliente',to:'cocina#barra_caliente',as:'barra_caliente'
   resources 'cocina'
@@ -11,6 +13,7 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   resources :ingredients
   resources :measurement_units
+  resources :groups
   resources :categories
   resources :tables do
     resources :orders, shallow: true do 
@@ -24,6 +27,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
+ 
   authenticated :user do
     root 'tables#index', as: :authenticated_root
   end

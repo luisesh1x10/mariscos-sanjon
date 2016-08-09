@@ -1,10 +1,118 @@
 <p id="notice"><%= notice %></p>
-    <h1><%@order.table%></h1>
-    
-    <%=render "saucer_orders/form"%>
-    <ul id="lista_de_ordenes">
-        <%@order.saucerOrders.each do |s|%>
-            <li><%="Platillo: #{s.platillo.name} anotacion: #{s.notes}"%></li>
-        <%end%>
-    </ul>
-    
+    <h3 class="center-align"><%="#{@order.table.name},  orden #{@order.id}"%></h3>
+    <%=link_to "Atras",@order.table ,id:"atrasButton", class:"waves-effect waves-light btn center-align"%>
+    <div ng-controller="pedidos">
+        <div class="row">
+            <div  class="col s12 m8 l8">
+                <ul class="collapsible popout" data-collapsible="accordion">
+                    <li ng-repeat="category in categories">
+                      <div class="collapsible-header"><i class="material-icons">filter_drama</i>{{category.name}}</div>
+                      <div class="collapsible-body">
+                        <div class="row"  ng-repeat="group in category.groups">
+                            <div class="col s12 m6 l6" ng-model="group" ng-click="cargarGrupo(group)">
+                                  {{group.name}}
+                            </div>
+                        </div>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+            <div  class="col s12 m4 l4">
+                <div class="row">
+                    <table class="striped">
+                        <thead>
+                          <tr>
+                              <th data-field="id">Platillo</th>
+                              <th data-field="name">Cantidad</th>
+                              <th data-field="price">Precio</th>
+                          </tr>
+                        </thead>
+                
+                        <tbody ng-repeat="pedido in pedidos">
+                          <tr >
+                            <td>{{pedido.name}}</td>
+                            <td>{{pedido.quantity}}</td>
+                            <td>${{pedido.price}}</td>
+                            <td><a class="waves-effect waves-light btn" ng-click="removePedido($index)">Borrar</a></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  <a class="waves-effect waves-light btn" ng-click="postPedidos()">Enviar</a>
+            </div>
+        </div>
+       <div id="modalAdd" class="modal">
+        <div class="modal-content">
+          <h4>{{group.name}}</h4>
+          <p>
+            <div class="row">
+                <div class="browser-default col s12 m6 l6"> <!-- Orden -->
+                    <label>Platillos</label>
+                    <select class="browser-default" ng-model="platillo">
+                        <option value="" disabled selected>Seleccione una opción</option>
+                        <option ng-repeat="platillo in group.platillos" value={{platillo.id}}>{{platillo.name}}-->${{platillo.price}}</option>
+                    </select>
+                </div> 
+                <div>
+                    <div class="browser-default col s12 m6 l6"> <!-- Orden -->
+                        <label>Numero</label>
+                        <select class="browser-default" ng-model="numero">
+                            <option value=1 selected="selected">1</option>
+                            <option value=2>2</option>
+                            <option value=3>3</option>
+                            <option value=4>4</option>
+                            <option value=5>5</option>
+                        </select>
+                    </div> 
+                </div>
+                <div class="row input-field col s12">
+                  <textarea id="anotaciones" class="materialize-textarea" ng-model="anotaciones"></textarea>
+                  <label for="anotaciones">Anotaciones</label>
+                </div>
+            </div>  
+            
+          </p>
+        </div>
+        <div class="modal-footer">
+          <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat" ng-click="add()">Aceptar</a>
+        </div>
+      </div>
+      <div id="modalUpdate" class="modal">
+        <div class="modal-content">
+          <h4>{{group.name}}</h4>
+          <p>
+            <div class="row">
+                <div class="browser-default col s12 m6 l6"> <!-- Orden -->
+                    <label>Platillos</label>
+                    <select class="browser-default" ng-model="platillo">
+                        <option value="" disabled selected>Seleccione una opción</option>
+                        <option ng-repeat="platillo in group.platillos" value={{platillo.id}}>{{platillo.name}}-->${{platillo.price}}</option>
+                    </select>
+                </div> 
+                <div>
+                    <div class="browser-default col s12 m6 l6"> <!-- Orden -->
+                        <label>Numero</label>
+                        <select class="browser-default" ng-model="numero">
+                            <option value=1 selected="selected">1</option>
+                            <option value=2>2</option>
+                            <option value=3>3</option>
+                            <option value=4>4</option>
+                            <option value=5>5</option>
+                        </select>
+                    </div> 
+                </div>
+                <div class="row input-field col s12">
+                  <textarea id="anotaciones" class="materialize-textarea" ng-model="anotaciones"></textarea>
+                  <label for="anotaciones">Anotaciones</label>
+                </div>
+            </div>  
+            
+          </p>
+        </div>
+        <div class="modal-footer">
+          <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat" ng-click="add()">Aceptar</a>
+        </div>
+      </div>
+  </div>
+  
+  

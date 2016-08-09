@@ -11,7 +11,15 @@ class OrdersController < ApplicationController
   # GET /orders/1
   # GET /orders/1.json
   def show
-    @saucer_order = SaucerOrder.new
+    @categories=Category.all
+    @saucer_order=SaucerOrder.new
+     respond_to do |format|
+      format.html
+      format.pdf do
+         pdf = ReportPdf.new(@order)
+        send_data pdf.render, filename: 'report.pdf', type: 'application/pdf'
+      end
+    end
   end
 
   # GET /orders/new

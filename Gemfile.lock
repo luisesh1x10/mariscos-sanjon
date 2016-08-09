@@ -159,8 +159,13 @@ GEM
       cocaine (~> 0.5.5)
       mime-types
       mimemagic (= 0.3.0)
+    pdf-core (0.6.1)
     pg (0.18.4)
     pkg-config (1.1.7)
+    prawn (2.1.0)
+      pdf-core (~> 0.6.1)
+      ttfunk (~> 1.4.0)
+    prawn-table (0.1.2)
     rack (1.6.4)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -220,6 +225,7 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (2.0.5)
+    ttfunk (1.4.0)
     turbolinks (5.0.0)
       turbolinks-source (~> 5)
     turbolinks-source (5.0.0)
@@ -253,6 +259,8 @@ DEPENDENCIES
   paperclip (~> 4.2)
   pg
   polyamorous!
+  prawn
+  prawn-table (~> 0.1.0)
   rails (= 4.2.6)
   ransack!
   responsive_active_admin

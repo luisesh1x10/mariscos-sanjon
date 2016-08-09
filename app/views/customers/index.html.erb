@@ -1,0 +1,39 @@
+<div class= "row container">
+  <p id="notice"><%= notice %></p>
+  
+  <h1>Clientes</h1>
+  
+  <table>
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Telefono</th>
+        <th>Calle</th>
+        <th>Colonia</th>
+        <th>Numero interior</th>
+        <th>Numero exterior</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+  
+    <tbody>
+      <% @customers.each do |customer| %>
+        <tr>
+          <td><%= customer.nombre %></td>
+          <td><%= customer.telefono %></td>
+          <td><%= customer.calle %></td>
+          <td><%= customer.colonia %></td>
+          <td><%= customer.numero_interior %></td>
+          <td><%= customer.numero_exterior %></td>
+          <td><%= link_to 'Mostrar', customer %></td>
+          <td><%= link_to 'Editar', edit_customer_path(customer) %></td>
+          <td><%= link_to 'Eliminar', customer, method: :delete, data: { confirm: 'estas Seguro?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  
+  <br>
+  
+  <%= link_to 'Crear cliente', new_customer_path %>
+</div>  

@@ -1,6 +1,6 @@
 class SaucerOrdersController < ApplicationController
   before_action :set_saucer_order, only: [:show, :edit, :update, :destroy]
-  before_action :set_order, only: [:create]
+  before_action :set_order, only: [:create,:new]
 
   # GET /saucer_orders
   # GET /saucer_orders.json
@@ -26,8 +26,8 @@ class SaucerOrdersController < ApplicationController
   # POST /saucer_orders.json
   def create
     @saucer_order = SaucerOrder.new(saucer_order_params)
-    @saucer_order.order = @order
-
+    @saucer_order.price = @saucer_order.platillo.price.to_f
+    @saucer_order.order_id = @order.id
     respond_to do |format|
       if @saucer_order.save
         format.html { redirect_to @saucer_order, notice: 'Saucer order was successfully created.' }
@@ -79,6 +79,6 @@ class SaucerOrdersController < ApplicationController
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def saucer_order_params
-      params.require(:saucer_order).permit(:platillo_id,:notes,:status)
+      params.require(:saucer_order).permit(:platillo_id,:notes,:status,:quantity)
     end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160729070513) do
+ActiveRecord::Schema.define(version: 20160809152508) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -50,6 +50,18 @@ ActiveRecord::Schema.define(version: 20160729070513) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean  "is_instant"
+  end
+
+  create_table "customers", force: :cascade do |t|
+    t.string   "nombre"
+    t.integer  "telefono"
+    t.string   "calle"
+    t.string   "colonia"
+    t.integer  "numero_interior"
+    t.integer  "numero_exterior"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   create_table "groups", force: :cascade do |t|
@@ -126,6 +138,9 @@ ActiveRecord::Schema.define(version: 20160729070513) do
     t.datetime "updated_at",  null: false
     t.string   "notes"
     t.integer  "status"
+    t.float    "price"
+    t.integer  "quantity"
+    t.boolean  "takeaway"
   end
 
   add_index "saucer_orders", ["order_id"], name: "index_saucer_orders_on_order_id"

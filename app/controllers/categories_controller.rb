@@ -10,11 +10,10 @@ class CategoriesController < ApplicationController
   # GET /categories/1
   # GET /categories/1.json
   def show
-     @direccion = 
       getPedidos(@category.id)
   end
   def getPedidos(id)
-     @pedidos= SaucerOrder.joins(:platillo=>:category).where("categories.id = ? and status is not ?",id,3)
+     @pedidos= SaucerOrder.joins(:platillo=>:category).where("categories.id = ? and status is not ? and status is not ?",id,3,4).order(:created_at)
     respond_to do |format|
           format.html {}
           format.json { render :json=> @pedidos  }

@@ -1,4 +1,5 @@
 ActiveAdmin.register User do
+    menu label: "Usuarios"
     index do
         column :email
         column :tipo

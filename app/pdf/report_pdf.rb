@@ -16,19 +16,17 @@ class ReportPdf < Prawn::Document
     y_position = cursor - 50
 
     # The bounding_box takes the x and y coordinates for positioning its content and some options to style it
-    bounding_box([0, y_position], :width => 270) do
+    
       text "Mariscos Hmnos Sanjon", size: 15, style: :bold
       text "Calidad, Sabor y Servicio que ¡Nos distinguen! No seremos los mejores del mundo pero... ¡Si los Mejores del rumbo! Direccion: Boulevard Madero #1089 col. Las Vegas, 80090 Culiacán. "
-      table_content
-    end
-
+  
   end
 
   def table_content
     table product_rows do
       row(0).font_style = :bold
       self.header = true
-      self.column_widths = [150, 40,80 ]
+      self.column_widths = [300, 80,160 ]
     end
      text "Total a pagar #{@order.saucerOrders.sum('price*quantity')}", size: 15, style: :bold
   end

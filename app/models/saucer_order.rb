@@ -18,7 +18,7 @@ class SaucerOrder < ActiveRecord::Base
     self.status ||= 1
   end
    validates :takeaway,
-    :inclusion => { :in => [true, false] }
+    :inclusion => { :in => [nil,true, false] }
   validates :takeaway,
     :presence => { :if => 'takeaway.nil?' }
 end

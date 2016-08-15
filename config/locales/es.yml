@@ -1,4 +1,15 @@
 es:
+  devise:
+    failure: 
+      user:
+        not_found_in_database: 'El usuario o la contraseña son  incorrectos'
+        invalid: 'El usuario o la contraseña son  incorrectos'
+    sessions: 
+      user:
+        signed_in: "Logeado" 
+        signed_out: "Deslogeado"
+        admin_user: 
+          signed_in: "Logeado"
   attributes:
      name: Nombre
   activerecord:
@@ -101,6 +112,8 @@ es:
         forgot_your_password: "¿Olvidó su contraseña?"
         sign_in_with_omniauth_provider: "Conéctate con %{provider}"
       failure: 
+        user:
+          not_found_in_database: 'El usuario o la contraseña son  incorrectos'
         unauthenticated: 'Necesitas loguearte para continuar.Por favor inicia sesion.' 
         unconfirmed: 'Necesitas confirmar tu cuenta para continuar.' 
         locked: 'Tu cuenta está bloqueada.' 
@@ -110,11 +123,7 @@ es:
         inactive: 'Tu cuenta no fue activada todavia' 
         admin_user: 
            unauthenticated: "No estas logeado aun"
-      sessions: 
-          signed_in: "Logeado" 
-          signed_out: "Deslogeado"
-          admin_user: 
-            signed_in: "Logeado"
+     
       admin_registrations:
         admin:
           signed_up: 'Welcome! You have signed up successfully.'

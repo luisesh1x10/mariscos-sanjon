@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160809152508) do
+ActiveRecord::Schema.define(version: 20160812092927) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 20160809152508) do
 
   create_table "customers", force: :cascade do |t|
     t.string   "nombre"
-    t.integer  "telefono"
+    t.string   "telefono"
     t.string   "calle"
     t.string   "colonia"
     t.integer  "numero_interior"
@@ -100,11 +100,14 @@ ActiveRecord::Schema.define(version: 20160809152508) do
 
   create_table "orders", force: :cascade do |t|
     t.integer  "table_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.integer  "status"
+    t.boolean  "takeaway",    default: false
+    t.integer  "customer_id"
   end
 
+  add_index "orders", ["customer_id"], name: "index_orders_on_customer_id"
   add_index "orders", ["table_id"], name: "index_orders_on_table_id"
 
   create_table "platillo_ingredientes", force: :cascade do |t|
@@ -134,13 +137,13 @@ ActiveRecord::Schema.define(version: 20160809152508) do
   create_table "saucer_orders", force: :cascade do |t|
     t.integer  "platillo_id"
     t.integer  "order_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.string   "notes"
     t.integer  "status"
     t.float    "price"
     t.integer  "quantity"
-    t.boolean  "takeaway"
+    t.boolean  "takeaway",    default: false
   end
 
   add_index "saucer_orders", ["order_id"], name: "index_saucer_orders_on_order_id"

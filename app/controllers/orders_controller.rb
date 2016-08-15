@@ -7,7 +7,10 @@ class OrdersController < ApplicationController
   def index
     @orders = Order.all
   end
-
+  def domicilio
+    @orders = Order.where("takeaway = ? and status is not ?",true,2)
+  
+  end
   # GET /orders/1
   # GET /orders/1.json
   def show
@@ -19,6 +22,7 @@ class OrdersController < ApplicationController
          pdf = ReportPdf.new(@order)
         send_data pdf.render, filename: 'report.pdf', type: 'application/pdf'
       end
+      format.json { render :show}
     end
   end
 
@@ -89,5 +93,7 @@ class OrdersController < ApplicationController
     def set_table
       @table = Table.find(params[:table_id])
     end
-    # Never trust parameters from the scary internet, only allow the white list through.
+     def customer_params
+       params.require(:order).permit(:takeaway,:customer_id)
+    end
 end

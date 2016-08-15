@@ -1,6 +1,11 @@
 <p id="notice"><%= notice %></p>
-    <h3 class="center-align"><%="#{@order.table.name},  orden #{@order.id}"%></h3>
-    <%=link_to "Atras",@order.table ,id:"atrasButton", class:"waves-effect waves-light btn center-align"%>
+    <%if @order.takeaway%>   
+        <h3 class="center-align"><%="#{@order.customer.nombre},  orden #{@order.id}"%></h3>
+        <%=link_to "Atras",customers_url ,id:"atrasButton", class:"waves-effect waves-light btn center-align"%>
+    <%else%>
+        <h3 class="center-align"><%="#{@order.table.name},  orden #{@order.id}"%></h3>
+        <%=link_to "Atras",@order.table ,id:"atrasButton", class:"waves-effect waves-light btn center-align"%>
+    <%end%>
     <div ng-controller="pedidos">
         <div class="row">
             <div  class="col s12 m8 l8">
@@ -38,7 +43,9 @@
                         </tbody>
                       </table>
                     </div>
-                  <a class="waves-effect waves-light btn" ng-click="postPedidos()">Enviar</a>
+                <div id="divEnviar">
+                  <a class="waves-effect waves-light btn" ng-click="postPedidos()" id="enviar">Enviar</a>
+                </div>    
             </div>
         </div>
        <div id="modalAdd" class="modal">

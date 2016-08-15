@@ -27,7 +27,9 @@
     </div>
   </nav>
   <%unless notice.nil?%>
-    <p class="notice"><%= notice %></p>
+    <div class="card">
+      <p class="notice"><%= notice %></p>
+    </div>
   <%end%>
   <%unless alert.nil?%>
     <p class="alert"><%= alert %></p>

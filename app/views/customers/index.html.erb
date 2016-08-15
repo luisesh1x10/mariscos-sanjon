@@ -1,8 +1,8 @@
-<div class= "row container">
-  <p id="notice"><%= notice %></p>
-  
-  <h1>Clientes</h1>
-  
+<div class= "row container" ng-controller ="domicilio">
+  <H1>Clientes</H1>
+  <h3>buscar por telefono:</h3>
+  <input type="number" ng-model="tel_query" ng-change ="actualizar()"> 
+</h3>
   <table>
     <thead>
       <tr>
@@ -16,20 +16,19 @@
       </tr>
     </thead>
   
-    <tbody>
-      <% @customers.each do |customer| %>
-        <tr>
-          <td><%= customer.nombre %></td>
-          <td><%= customer.telefono %></td>
-          <td><%= customer.calle %></td>
-          <td><%= customer.colonia %></td>
-          <td><%= customer.numero_interior %></td>
-          <td><%= customer.numero_exterior %></td>
-          <td><%= link_to 'Mostrar', customer %></td>
-          <td><%= link_to 'Editar', edit_customer_path(customer) %></td>
-          <td><%= link_to 'Eliminar', customer, method: :delete, data: { confirm: 'estas Seguro?' } %></td>
-        </tr>
-      <% end %>
+    <tbody ng-repeat="cliente in clientes">
+      <td>{{cliente.nombre}}</td>
+      <td>{{cliente.telefono}}</td>
+      <td>{{cliente.calle}}</td>
+      <td>{{cliente.colonia}}</td>
+      <td>{{cliente.numero_interior}}</td>
+      <td>{{cliente.numero_exterior}}</td>
+      <td><a href="{{cliente.show}}">Mostrar</a></td>
+      <td><a href="{{cliente.edit}}">Editar</a></td>
+      <td><a href="" ng-click="ordenar(cliente.id)">Ordenar</a></td>
+      <td></td>
+      
+     
     </tbody>
   </table>
   

@@ -8,6 +8,7 @@
                 <th data-field="id">Platillo</th>
                 <th data-field="name">Personalizado</th>
                 <th data-field="status">Estado</th>
+                <th data-field="status">A domicilio</th>
                 <th></th>
             </tr>
            </thead>
@@ -28,6 +29,11 @@
           text.push("Ternimar platillo")
           text.push("Entregar")
           %>
+           <%if p.order.takeaway%>          
+            <td><h3>Si</h3></td>
+          <%else%>
+            <td><h3>No</h3></td> 
+          <%end%>
           <%if p.platillo.category.is_instant%>          
             <td><%=link_to  text[2], saucer_order_path(p,:saucer_order=>{status:4}), :method=> :put,:remote => true,class:"waves-effect waves-light btn-large"%></td>
           <%else%>

@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+    <h1>A domicilio</h1>
+    <h3 class="center-align"><%="cantidad de ordenes:#{@orders.count}"%> </h3>
+     <%cont=0%>
+    <% @orders.each do |order| %>
+      <%if cont%2==0 %>
+        <div class="row">
+      <%end%>
+        <div class="col s12 m6">
+          <div class="card blue-grey darken-1">
+            <div class="card-content white-text">
+              <span class="card-title"><%=order.customer.nombre%></span>
+              <ul>
+              <%order.platillos.each do |platillo|%>
+                  <li><%=platillo.name%></li>
+              <%end%>
+              </ul>
+            </div>
+            <div class="card-action">
+              <%if current_user.tipo==3%>
+                <%=link_to 'Cerrar orden',pay_path(order)%><%=link_to 'Hacer perdidos',order%>
+              <%elsif  current_user.tipo==2%>
+                <%=link_to 'Hacer perdidos',order%>
+              <%end%>
+            </div>
+          </div>
+        </div>
+      <%if cont%2!=0 %>
+        </div>
+      <%end%>
+      <%cont+=1%>
+    <% end %>
+

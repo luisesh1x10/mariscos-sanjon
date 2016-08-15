@@ -19,8 +19,9 @@ controller('pedidos',['$scope','$http', function($scope,$http){
                 $("#atrasButton")[0].click();
          },
           error: function(data){
-            console.log(data);   
+            console.log(data);
             
+             $("#divEnviar").append('<a class="waves-effect waves-light btn" ng-click="postPedidos()" id="enviar">Enviar</a>');
             Materialize.toast('Un pedido no pudo ser enviado', 4000);
             return true;
           }
@@ -76,6 +77,7 @@ controller('pedidos',['$scope','$http', function($scope,$http){
       console.log( $scope.pedidos);
     };
     $scope.postPedidos = function(){
+        $("#enviar").remove();
         for (var x=0;x<$scope.pedidos.length;x++)
             postPedido($scope.pedidos[x],x)
     }

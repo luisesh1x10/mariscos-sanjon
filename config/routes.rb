@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  
+  get 'orders/domicilio', :to => "orders#domicilio",as:'domicilio'
   resources :customers
+  post 'customers/create_order' ,to:'customers#create_order'
   devise_for :admin_users, ActiveAdmin::Devise.config
   get 'cocina/show'
   get 'cocina/terminados' , to:'cocina#terminados',as:'terminados'
@@ -8,7 +9,7 @@ Rails.application.routes.draw do
   get 'cocina/barra_caliente',to:'cocina#barra_caliente',as:'barra_caliente'
   resources 'cocina'
   get 'welcome/index'
-
+  
   devise_for :users,:skip => :registrations
   ActiveAdmin.routes(self)
   resources :ingredients
@@ -20,6 +21,7 @@ Rails.application.routes.draw do
       resources :saucer_orders 
     end
   end
+  
   get 'pay/:id', :to => "orders#pay",as:'pay'
   post 'pay/:id', :to => "orders#paynow",as:'paynow'
   

@@ -1,3 +1,3 @@
 class Ingrediente < ActiveRecord::Base
-  belongs_to :MeasurementUnit
+  belongs_to :measurement_unit
 end

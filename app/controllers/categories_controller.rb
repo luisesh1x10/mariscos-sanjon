@@ -13,7 +13,8 @@ class CategoriesController < ApplicationController
       getPedidos(@category.id)
   end
   def getPedidos(id)
-     @pedidos= SaucerOrder.joins(:platillo=>:category).where("categories.id = ? and status is not ? and status is not ?",id,3,4).order(:created_at)
+     @pedidos= SaucerOrder.joins(:platillo=>:category).where("categories.id = ?",id).where.not(:status=>3.to_s).where.not(:status=>4.to_s).order(:created_at)
+     #@pedidos= SaucerOrder.joins(:platillo=>:category).where("categories.id = ? and status is not ? and status is not ?",id,3,4).order(:created_at)
     respond_to do |format|
           format.html {}
           format.json { render :json=> @pedidos  }

@@ -1,5 +1,4 @@
 ActiveAdmin.register Ingrediente do
-
   menu priority: 2
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
@@ -14,12 +13,21 @@ ActiveAdmin.register Ingrediente do
 #   permitted
 # end
 
-	permit_params :nombre,:stock, :MeasurementUnit_id
+	permit_params :nombre,:stock, :measurement_unit_id
 	index do
 	  column :nombre
 	  column :stock
-	  column :MeasurementUnit
+	  column :measurement_unit
 	  actions
 
-end
+	end
+	form do |f|
+    f.semantic_errors *f.object.errors.keys
+	    f.inputs "Unidad de medida" do
+	      f.input :nombre
+	      f.input :stock
+	      f.input :measurement_unit_id,:as => :select, :collection => MeasurementUnit.all.map{ |car| [car.name, car.id] }
+	    end
+	    actions
+    end
 end

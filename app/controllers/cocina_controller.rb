@@ -4,7 +4,7 @@ class CocinaController < ApplicationController
   end
   def terminados
     @direccion = terminados_path
-     @pedidos = SaucerOrder.all
+     @pedidos = SaucerOrder.all.where('status = ?',3)
      respond_to do |format|
           format.html {}
           format.json { render :json=> @pedidos  }

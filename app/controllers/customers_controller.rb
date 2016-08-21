@@ -7,7 +7,7 @@ class CustomersController < ApplicationController
   def index
     @customers = Customer.all
     tel =params[:telefono].to_i
-    @customers =@customers.where("telefono LIKE '#{tel}%'") unless params[:telefono].nil? or params[:telefono]==""
+    @customers =@customers.where("telefono like '#{tel}%'") unless params[:telefono].nil? or params[:telefono]==""
     
   end
   

@@ -8,7 +8,7 @@ class OrdersController < ApplicationController
     @orders = Order.all
   end
   def domicilio
-    @orders = Order.where("takeaway = ? and status is not ?",true,2)
+    @orders = Order.where("takeaway = ?",true).where.not(:status=>2)
   
   end
   # GET /orders/1

@@ -22,6 +22,11 @@ ActiveAdmin.register_page "Dashboard" do
            para "Total vendido bruto #{SaucerOrder.all.sum('price*quantity')}"
          end
        end
+       column do
+         panel "Ganancias de hoy" do
+           para "Total vendido bruto #{SaucerOrder.where(:created_at => Date.today.beginning_of_day..Date.today.end_of_day).sum('price*quantity')}"
+         end
+       end
      end
   end # content
 end

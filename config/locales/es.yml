@@ -4,12 +4,18 @@ es:
       user:
         not_found_in_database: 'El usuario o la contraseña son  incorrectos'
         invalid: 'El usuario o la contraseña son  incorrectos'
+      admin_user:
+        unauthenticated: "Sesion terminada"
+        not_found_in_database: "El usuario o contraseña son incorrectos"
+        invalid: "El usuario o contraseña son incorrectos"
     sessions: 
       user:
         signed_in: "Logeado" 
         signed_out: "Deslogeado"
         admin_user: 
           signed_in: "Logeado"
+      admin_user:
+        signed_in: "Se ha iniciado sesión"
   attributes:
      name: Nombre
   activerecord:
@@ -122,7 +128,7 @@ es:
         timeout: 'Tu sesion ha expirado, por favor logueate de nuevo para continuar.' 
         inactive: 'Tu cuenta no fue activada todavia' 
         admin_user: 
-           unauthenticated: "No estas logeado aun"
+          unauthenticated: "No estas logeado aun"
      
       admin_registrations:
         admin:

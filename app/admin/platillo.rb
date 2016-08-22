@@ -21,6 +21,7 @@ index do
   column :name, label: "Nombre"
   column :price 
   column :category
+  column :group
   actions
 
 end

@@ -1,5 +1,6 @@
 <div class= "row container" ng-controller ="domicilio">
-  <H1>Clientes</H1>
+  <div class="card">
+  <H1 class="center-align">Clientes</H1>
   <h3>buscar por telefono:</h3>
   <input type="number" ng-model="tel_query" ng-change ="actualizar()"> 
 </h3>
@@ -34,5 +35,6 @@
   
   <br>
   
-  <%= link_to 'Crear cliente', new_customer_path %>
+  <%= link_to 'Crear cliente', new_customer_path,class:"waves-effect amber darken-4 btn"%>
+</div>  
 </div>  

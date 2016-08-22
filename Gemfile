@@ -27,6 +27,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'jquery-turbolinks'
 gem 'devise' 
+gem 'paperclip'
 gem 'activeadmin', '~> 1.0.0.pre4'
 gem 'responsive_active_admin'
 gem 'coffee-script-source','1.8.0'
@@ -57,7 +58,7 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-gem 'paperclip', '~> 4.2'
+
 gem 'formtastic', github: 'justinfrench/formtastic'
 gem 'ransack', github: 'activerecord-hackery/ransack'
 gem 'polyamorous', github: 'activerecord-hackery/polyamorous'

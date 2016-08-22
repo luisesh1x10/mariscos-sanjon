@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160812092927) do
+ActiveRecord::Schema.define(version: 20160821212108) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -135,8 +135,8 @@ ActiveRecord::Schema.define(version: 20160812092927) do
     t.string   "name"
     t.float    "price"
     t.integer  "category_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
     t.string   "file_name"
     t.string   "map_file_name"
     t.string   "map_content_type"
@@ -144,6 +144,10 @@ ActiveRecord::Schema.define(version: 20160812092927) do
     t.datetime "map_updated_at"
     t.integer  "group_id"
     t.boolean  "is_child"
+    t.string   "cover_file_name"
+    t.string   "cover_content_type"
+    t.integer  "cover_file_size"
+    t.datetime "cover_updated_at"
   end
 
   add_index "platillos", ["category_id"], name: "index_platillos_on_category_id"

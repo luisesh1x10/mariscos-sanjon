@@ -1,14 +1,16 @@
 <p id="notice"><%= notice %></p>
-    <h1>A domicilio</h1>
-    <h3 class="center-align"><%="cantidad de ordenes:#{@orders.count}"%> </h3>
+    <div class="card">
+      <h1 class="center-align">A domicilio</h1>
+      <h3 class="center-align"><%="cantidad de ordenes:#{@orders.count}"%> </h3>
+    </div>
      <%cont=0%>
     <% @orders.each do |order| %>
       <%if cont%2==0 %>
         <div class="row">
       <%end%>
         <div class="col s12 m6">
-          <div class="card blue-grey darken-1">
-            <div class="card-content white-text">
+          <div class="card  z-depth-4">
+            <div class="card-content">
               <span class="card-title"><%=order.customer.nombre%></span>
               <ul>
               <%order.platillos.each do |platillo|%>
@@ -18,9 +20,9 @@
             </div>
             <div class="card-action">
               <%if current_user.tipo==3%>
-                <%=link_to 'Cerrar orden',pay_path(order)%><%=link_to 'Hacer perdidos',order%>
+                <%=link_to 'Cerrar orden',pay_path(order),class:"amber-text text-darken-4"%><%=link_to 'Hacer perdidos',order,class:"amber-text text-darken-4"%>
               <%elsif  current_user.tipo==2%>
-                <%=link_to 'Hacer perdidos',order%>
+                <%=link_to 'Hacer perdidos',order,class:"amber-text text-darken-4"%>
               <%end%>
             </div>
           </div>

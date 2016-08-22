@@ -21,7 +21,7 @@ controller('pedidos',['$scope','$http', function($scope,$http){
           error: function(data){
             console.log(data);
             
-             $("#divEnviar").append('<a class="waves-effect waves-light btn" ng-click="postPedidos()" id="enviar">Enviar</a>');
+             $("#divEnviar").append('<a class="waves-effect amber darken-4 btn" ng-click="postPedidos()" id="enviar">Enviar</a>');
             Materialize.toast('Un pedido no pudo ser enviado', 4000);
             return true;
           }

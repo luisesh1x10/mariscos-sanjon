@@ -1,4 +1,5 @@
-<div class="row container">  
+<div class="row container"> 
+<div class="card">
 <%= form_for(@customer) do |f| %>
     <% if @customer.errors.any? %>
       <div id="error_explanation">
@@ -37,7 +38,8 @@
       <%= f.number_field :numero_exterior %>
     </div>
     <div class="actions">
-      <%= f.submit %>
+      <%= f.submit "Guardar",class:"waves-effect amber darken-4 btn"%>
     </div>
   <% end %>
+</div>
 </div>

@@ -1,5 +1,5 @@
 class Platillo < ActiveRecord::Base
-  has_attached_file :cover , styles:{mediano:"1280x720",tumb:"800x600"}
+  has_attached_file :cover , styles:{:mediano=>"1280x720",:tumb=>"800x600"}
   validates_attachment_content_type :cover, content_type: /\Aimage\/.*\Z/
   has_attached_file :map, :styles => { :medium => "238x238>", 
                                    :thumb => "100x100>"

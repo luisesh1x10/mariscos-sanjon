@@ -31,7 +31,6 @@ form do |f|
     f.inputs "Platillo" do
       f.input :name
       f.input :price
-      f.input :cover, :as => :file
       f.input :is_child ,label:"Para niño"
     end
     f.inputs "Ingredientes" do

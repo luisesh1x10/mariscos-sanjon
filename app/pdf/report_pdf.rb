@@ -17,14 +17,15 @@ class ReportPdf < Prawn::Document
 
     # The bounding_box takes the x and y coordinates for positioning its content and some options to style it
     bounding_box([0, y_position], :width => 100) do
-      text "Mariscos Hmnos Sanjon", size: 9, style: :bold
-      text "Calidad, Sabor y Servicio que ¡Nos distinguen! No seremos los mejores del mundo pero... ¡Si los Mejores del rumbo! Direccion: Boulevard Madero #1089 col. Las Vegas, 80090 Culiacán. "
+      image open("https://scontent.fgdl1-2.fna.fbcdn.net/v/t1.0-9/14079485_1789009648034913_4129887155978922352_n.jpg?oh=2ae6c24f146dc7fb1ff01e4cec80274c&oe=585D5A5C"), position: :center,:width=>90
+      text "Direccion: Boulevard Madero #1089 col. Las Vegas, 80090 Culiacán. ", size: 9,:align => :center
       table_content
       if @order.takeaway
         text "Direccion:"
         text @order.customer.direccion
+        text "Anotaciones:#{@order.customer.anotaciones}"
       end
-      text "Gracias por su compra"
+      text "Gracias por su preferencia"
     end
 
   end

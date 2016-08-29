@@ -21,7 +21,7 @@
             <div class="card-action">
               <%if current_user.tipo==3%>
                 <%=link_to 'Ver',pay_path(order),class:"amber-text text-darken-4"%><%=link_to 'Hacer perdidos',order,class:"amber-text text-darken-4"%>
-                <%=link_to 'Imprimir',order_path(order,:format => :pdf),class:"amber-text text-darken-4"%>            
+                <%=link_to 'Imprimir',order_path(order,:format => :pdf),class:"amber-text text-darken-4",:target => '_blank'%>            
               <%elsif  current_user.tipo==2%>
                 <%=link_to 'Hacer perdidos',order,class:"amber-text text-darken-4"%>
               <%end%>

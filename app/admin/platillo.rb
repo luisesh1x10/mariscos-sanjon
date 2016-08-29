@@ -1,6 +1,5 @@
 ActiveAdmin.register Platillo do
 
-config.filters = false
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
@@ -16,6 +15,13 @@ config.filters = false
 
 permit_params :name,:cover,:price, :category_id,:map,:map_file_name,:group_id,:is_child ,
 ingredients_attributes: [:id,:platillo_id,:name,:stock,:_destroy, :_create, :_update]
+
+filter :name
+filter :price
+filter :category
+filter :group
+
+
 
 index do
   column :name, label: "Nombre"

@@ -10,6 +10,7 @@ class ReportPdf < Prawn::Document
     #This inserts an image in the pdf file and sets the size of the image
    
   end
+  
 
   def text_content
     # The cursor for inserting content starts on the top left of the page. Here we move it down a little to create more space between the text and the image inserted above

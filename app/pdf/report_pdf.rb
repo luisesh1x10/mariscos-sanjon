@@ -29,6 +29,7 @@ class ReportPdf < Prawn::Document
       text "Gracias por su preferencia"
     end
 
+
   end
 
   def table_content

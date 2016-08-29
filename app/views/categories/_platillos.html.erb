@@ -4,11 +4,12 @@
       <table class="responsive-table centered striped">
           <thead>
             <tr>
-                <th data-field="id">Cantidad</th>
-                <th data-field="id">Platillo</th>
-                <th data-field="name">Personalizado</th>
+                <th data-field="cantidad">Cantidad</th>
+                <th data-field="platillo">Platillo</th>
+                <th data-field="anotaciones">Anotaciones</th>
                 <th data-field="status">Estado</th>
-                <th data-field="status">A domicilio</th>
+                <th data-field="cantidad">Mesa</th>
+                <th data-field="customer">A domicilio</th>
                 <th></th>
             </tr>
            </thead>
@@ -24,16 +25,19 @@
           estados.push("Terminado")
           %>
           <td><h3><%=estados[p.status-1]%></h3></td>
-          <%text=[]
-          text.push("Iniciar platillo")
-          text.push("Ternimar platillo")
-          text.push("Entregar")
-          %>
-           <%if p.order.takeaway%>          
+          
+           <%if p.order.takeaway%> 
+             <td><h3></h3></td>
             <td><h3>Si</h3></td>
           <%else%>
+            <td><h3><%=p.order.table.name%></h3></td>
             <td><h3>No</h3></td> 
           <%end%>
+          <%text=[]
+          text.push("Iniciar platillo")
+          text.push("Terminar platillo")
+          text.push("Entregar")
+          %>
           <%if p.platillo.category.is_instant%>          
             <td><%=link_to  text[2], saucer_order_path(p,:saucer_order=>{status:4}), :method=> :put,:remote => true,class:"waves-effect waves-light btn-large"%></td>
           <%else%>

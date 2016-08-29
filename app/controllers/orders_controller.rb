@@ -20,7 +20,7 @@ class OrdersController < ApplicationController
       format.html
       format.pdf do
          pdf = ReportPdf.new(@order)
-        send_data pdf.render, filename: 'report.pdf', type: 'application/pdf'
+        send_data pdf.render, filename: 'report.pdf', type: 'application/pdf', disposition: "inline"
       end
       format.json { render :show}
     end

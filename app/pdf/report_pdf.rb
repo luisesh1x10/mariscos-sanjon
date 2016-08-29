@@ -23,10 +23,10 @@ class ReportPdf < Prawn::Document
       text "Hora: #{Time.now.strftime("%I:%M")}", size: 9,:align => :center
       table_content
       if @order.takeaway
-        text "Direccion:"
-        text @order.customer.direccion
-        text "Anotaciones: #{@order.customer.anotaciones}"
-        text "Telefono: #{@order.customer.telefono}"
+        text "Direccion:",size:9
+        text @order.customer.direccion,size:9
+        text "Anotaciones: #{@order.customer.anotaciones}",size:9
+        text "Telefono: #{@order.customer.telefono}",size:9
       end
       text "Gracias por su preferencia"
     end

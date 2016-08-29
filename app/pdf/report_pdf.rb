@@ -23,7 +23,6 @@ class ReportPdf < Prawn::Document
       if @order.takeaway
         text "Direccion:"
         text @order.customer.direccion
-        text "Anotaciones:#{@order.customer.anotaciones}"
       end
       text "Gracias por su preferencia"
     end

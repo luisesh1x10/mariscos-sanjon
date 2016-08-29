@@ -62,7 +62,6 @@ ActiveRecord::Schema.define(version: 20160826154836) do
     t.integer  "numero_exterior"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
-    t.text     "anotaciones"
   end
 
   create_table "groups", force: :cascade do |t|
@@ -145,10 +144,6 @@ ActiveRecord::Schema.define(version: 20160826154836) do
     t.datetime "map_updated_at"
     t.integer  "group_id"
     t.boolean  "is_child"
-    t.string   "cover_file_name"
-    t.string   "cover_content_type"
-    t.integer  "cover_file_size"
-    t.datetime "cover_updated_at"
   end
 
   add_index "platillos", ["category_id"], name: "index_platillos_on_category_id"

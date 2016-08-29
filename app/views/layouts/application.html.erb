@@ -28,11 +28,15 @@
   </nav>
   <%unless notice.nil?%>
     <div class="card">
-      <p class="notice"><%= notice %></p>
+      <script>
+        Materialize.toast('<%= notice %>', 4000);
+      </script>
     </div>
   <%end%>
   <%unless alert.nil?%>
-    <p class="alert"><%= alert %></p>
+      <script>
+        Materialize.toast('<%= alert %>', 4000);
+      </script>
   <%end%>
 <%= yield %>
 

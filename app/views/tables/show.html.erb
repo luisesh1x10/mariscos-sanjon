@@ -15,13 +15,15 @@
               <span class="card-title">Folio:<%=order.id%></span>
               <ul>
               <%order.platillos.each do |platillo|%>
-                  <li><%=platillo.name%></li>
+                  <li><%="#{platillo.name}: #{platillo.price}"%></li>
               <%end%>
               </ul>
             </div>
             <div class="card-action">
               <%if current_user.tipo==3%>
-                <%=link_to 'Cerrar orden',pay_path(order),class:"amber-text text-darken-4"%>
+                <%=link_to 'Ver',pay_path(order),class:"amber-text text-darken-4"%>
+                <%=link_to 'Hacer perdidos',order,class:"amber-text text-darken-4"%>
+                <%=link_to 'Imprimir',order_path(order,:format => :pdf),class:"amber-text text-darken-4"%>
               <%elsif  current_user.tipo==2%>
                 <%=link_to 'Hacer perdidos',order,class:"amber-text text-darken-4"%>
               <%end%>

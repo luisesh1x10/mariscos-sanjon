@@ -25,6 +25,7 @@ class ReportPdf < Prawn::Document
         text "Direccion:"
         text @order.customer.direccion
         text "Anotaciones:#{@order.customer.anotaciones}"
+        #a ver que ped
       end
       text "Gracias por su preferencia"
     end

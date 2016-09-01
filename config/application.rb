@@ -22,6 +22,7 @@ module MariscosSanJon
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.i18n.default_locale = :es
+    config.active_record.default_timezone = :local
     I18n.locale = config.i18n.locale = config.i18n.default_locale
     I18n.reload!
 end

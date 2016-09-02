@@ -8,6 +8,8 @@ Bundler.require(*Rails.groups)
 
 module MariscosSanJon
   class Application < Rails::Application
+    
+    
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -22,8 +24,9 @@ module MariscosSanJon
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.i18n.default_locale = :es
-    config.active_record.default_timezone = :local
     I18n.locale = config.i18n.locale = config.i18n.default_locale
     I18n.reload!
+    config.time_zone = 'Mazatlan'
+    config.active_record.default_timezone = :local
 end
 end

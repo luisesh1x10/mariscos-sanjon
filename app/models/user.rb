@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-         
+  validates :tipo, inclusion: [1,2,3]
   #'Cocina'--->1
   #'mesero'--->2
   #'Caja'----->3

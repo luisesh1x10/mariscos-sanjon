@@ -1,11 +1,12 @@
 class SaucerOrder < ActiveRecord::Base
   belongs_to :platillo
   belongs_to :order
-  
+  belongs_to :bag
   validates_presence_of :platillo
   validates_presence_of :order
   validates :platillo_id,
   :order_id,
+  #:bag_id,
   presence:true
   validates :status, :inclusion => {:in => [nil,1,2,3,4]}
   validates :quantity, :inclusion => {:in => [nil,1,2,3,4,5]}

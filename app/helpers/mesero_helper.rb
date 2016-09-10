@@ -1,0 +1,2 @@
+module MeseroHelper
+end

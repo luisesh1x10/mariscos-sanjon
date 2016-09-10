@@ -1,7 +1,7 @@
 class TablesController < ApplicationController
     before_action :set_table, only: [:show]
     def index
-        @tables = Table.all
+        @tables = Table.all.order(:name)
     end
     def show
         @order = Order.new

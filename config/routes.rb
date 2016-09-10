@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :bags
+  get 'pedido',to:'mesero#pedido',as:'pedido'
+
   get 'orders/domicilio', :to => "orders#domicilio",as:'domicilio'
   resources :customers
   post 'customers/create_order' ,to:'customers#create_order'

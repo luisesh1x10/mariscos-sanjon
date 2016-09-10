@@ -4,5 +4,6 @@ json.array!(@categories) do |category|
   json.groups(Group.all.joins(:platillos=>:category).where("categories.id=?",category.id).uniq) do |group|
     json.id group.id
     json.name group.name
+    
   end
 end

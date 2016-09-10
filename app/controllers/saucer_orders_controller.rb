@@ -27,8 +27,10 @@ class SaucerOrdersController < ApplicationController
   def create
     @saucer_order = SaucerOrder.new(saucer_order_params)
     @saucer_order.price = @saucer_order.platillo.price.to_f
-    @saucer_order.order_id = @order.id
-    respond_to do |format|
+    unless  @order.nil?
+      @saucer_order.order_id = @order.id
+    end
+      respond_to do |format|
       if @saucer_order.save
         format.html { redirect_to @saucer_order, notice: 'Saucer order was successfully created.' }
         format.json { render :show, status: :created, location: @saucer_order }
@@ -79,6 +81,6 @@ class SaucerOrdersController < ApplicationController
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def saucer_order_params
-      params.require(:saucer_order).permit(:platillo_id,:notes,:status,:quantity)
+      params.require(:saucer_order).permit(:bag_id,:order_id,:platillo_id,:notes,:status,:quantity)
     end
 end

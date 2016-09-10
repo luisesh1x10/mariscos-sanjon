@@ -1,0 +1,86 @@
+<div class = "row card">
+    <h1 class="center-align">Pedidos</h1>
+</div>
+<div ng-controller="pedidos_mesero">
+    <div class="row" >
+        <div id="contenido">
+            <div ng-repeat = "mesa in mesas" class="col s4 m3 l2" id="r{{mesa.id}}" >
+                <button class="col s12 card" ng-click="siguiente(mesa.id)" >
+                    <p class="flow-text">{{mesa.name}}</p>
+                    <p>{{mesa.description}}</p>
+                </button>
+            </div>
+            <div ng-repeat = "orden in ordenes" class="col s4 m3 l2" id="r{{orden.id}}" >
+                <button class="col s12 card" ng-click="siguiente(orden.id)" >
+                    <p class="flow-text">Folio: {{orden.id}}</p>
+                    <p>{{orden.description}}</p>
+                </button>
+            </div>
+            <div ng-repeat =  "categoria in categorias" class="col s4 m3 l2" id="r{{categoria.id}}" >
+                <button class="col s12 card" ng-click="siguiente(categoria)" >
+                    <p class="flow-text">{{categoria.name}}</p>
+                    <p>{{categoria.description}}</p>
+                </button>
+            </div>
+            <div ng-repeat =  "grupo in grupos" class="col s4 m3 l2" id="r{{grupo.id}}" >
+                <button class="col s12 card" ng-click="siguiente(grupo.id)" >
+                    <p class="flow-text">{{grupo.name}}</p>
+                    <p>{{grupo.description}}</p>
+                </button>
+            </div>
+            <div ng-repeat =  "platillo in platillos" class="col s4 m3 l2" id="r{{platillo.id}}" >
+                <button class="col s12 card" ng-click="siguiente(platillo)" >
+                    <p class="flow-text">{{platillo.name}}</p>
+                    <p>{{platillo.description}}</p>
+                </button>
+            </div>
+            <div ng-repeat =  "numero in cantidad" class="col s4 m3 l2" id="r{{numero.id}}" >
+                <button class="col s12 card" ng-click="siguiente(numero.id)" >
+                    <p class="flow-text">{{numero.name}}</p>
+                    <p>{{numero.description}}</p>
+                </button>
+            </div>
+        </div>  
+    </div>
+    <div>
+        <div class="waves-effect amber darken-4 btn" ng-click="createOrden(pedido_actual.table_id)" id="abrir_orden">Abrir Orden</div>
+    </div>
+    <div style="display: none;" ng-click="" id="recargar">Recargar</div>
+    <div class="waves-effect amber darken-4 btn" ng-click="createBag()" id="atras">atras</div>
+    <div class="row">
+        <div id="tabla_pedidos">
+              <div  class="col s12 m12 l6">
+                    <div class="row card">
+                        <table class="striped">
+                            <thead>
+                              <tr>
+                                  <th data-field="id">Platillo</th>
+                                  <th data-field="name">Cantidad</th>
+                                  <th data-field="price">Precio</th>
+                                  <th data-field="price">Nota</th>
+                                  
+                              </tr>
+                            </thead>
+                    
+                            <tbody ng-repeat="pedido in pedidos">
+                              <tr>
+                                <td>{{pedido.name}}</td>
+                                <td>{{pedido.quantity}}</td>
+                                <td>${{pedido.price}}</td>
+                                <td><input ng-model="pedido.notes"></td>
+                                <td><a class="waves-effect waves-light btn" ng-click="removePedido($index)">Borrar</a></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                        <a class="waves-effect amber darken-4 btn" ng-click="postPedidos()" id="enviar">Enviar</a>
+                    <div id="divCancelar">
+                      <%=link_to 'Cancelar',pedido_path,class:"waves-effect amber darken-4 btn" %>
+                    </div>    
+                    
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>

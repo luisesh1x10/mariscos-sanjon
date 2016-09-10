@@ -16,7 +16,7 @@
         <li><%=link_to 'Clientes a domicilio',customers_path%></li>
     <%end%>
     <%if current_user.tipo==2%>
-        <li><%= link_to 'Levantar ordenes',tables_path%></li>
+        <li><%= link_to 'Levantar ordenes',pedido_path%></li>
         <li><%= link_to 'Platillos terminados',terminados_path%></li>
     <%end%>
     <%if current_user.tipo==1%>

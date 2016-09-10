@@ -15,4 +15,4 @@ $(document).on("ajax:error","form#pedidos_barra",function(ev,data){
     
 });
 
-setInterval(function(){$("#pedidos_barra").submit();}, 2000)
+setInterval(function(){$("#pedidos_barra").submit();}, 1000)

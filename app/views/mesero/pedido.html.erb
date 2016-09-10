@@ -73,11 +73,14 @@
                             </tbody>
                           </table>
                         </div>
-                        <a class="waves-effect amber darken-4 btn" ng-click="postPedidos()" id="enviar">Enviar</a>
-                    <div id="divCancelar">
-                      <%=link_to 'Cancelar',pedido_path,class:"waves-effect amber darken-4 btn" %>
-                    </div>    
-                    
+                        <div class="row card">
+                            <div class="col l4 m5 s6 waves-effect amber darken-4 btn"  ng-click="postPedidos()" id="enviar">
+                                Enviar    
+                            </div>
+                            <div class="col l4 m5 s6 offset-m2 offset-l4 waves-effect red darken-4 btn">
+                                <%=link_to 'Cancelar',pedido_path,style:"font-color:white;"%>
+                            </div>
+                        </div>
                 </div>
             </div>
         </div>

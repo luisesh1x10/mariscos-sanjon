@@ -1,8 +1,17 @@
 <div class= "row container" ng-controller ="domicilio">
   <div class="card">
   <H1 class="center-align">Clientes</H1>
-  <h3>buscar por telefono:</h3>
-  <input type="number" ng-model="tel_query" ng-change ="actualizar()"> 
+  <div class="row">
+    <div class="col s12 m6 l6">
+      <h3>buscar por telefono:</h3>
+      <input type="number" ng-model="tel_query" ng-change ="actualizar()"> 
+    </div>
+    <div class="col s12 m6 l6">
+      <h3>buscar por nombre:</h3>
+      <input type="text" ng-model="nom_query" ng-change ="actualizar()"> 
+    </div>
+  </div>
+  
 </h3>
   <table>
     <thead>

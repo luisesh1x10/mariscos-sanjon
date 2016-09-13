@@ -34,7 +34,7 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
  
   authenticated :user do
-    root 'tables#index', as: :authenticated_root
+    root 'mesero#pedido', as: :authenticated_root
   end
    root 'welcome#index'
 

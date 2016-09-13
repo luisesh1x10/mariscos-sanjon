@@ -9,6 +9,7 @@
 <%end%>
 <%unless current_user.nil?%>
     <%if current_user.tipo==3%>
+        <li><%= link_to 'Levantar pedido',pedido_path%></li>
         <li><%= link_to 'Cobrar',tables_path%></li>
         <%Category.where('is_instant =?',true).each do |c|%>
             <li><%= link_to c.name,c%></li>

@@ -19,10 +19,12 @@ $(document).ready(function(){
          console.log(data);
      })
      $scope.actualizar = function(){
+      query="?"
       if ($scope.tel_query!=null)
-       query="?telefono="+$scope.tel_query;
-      else 
-       query="";
+      query= query+"telefono="+$scope.tel_query;
+      if($scope.nom_query!=null)
+      query= query+"&nombre="+$scope.nom_query;
+      
         $http.get("/customers.json"+query)
         .success(function(data){
           $scope.clientes=data;

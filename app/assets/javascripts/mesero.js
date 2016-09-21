@@ -9,10 +9,66 @@
     $scope.pedidos=[];
     $scope.pedido_actual=[];
     $scope.estado=0;
+    function limpiar(){
+        $scope.mesas=[];
+        $scope.ordenes=[];
+        $scope.categorias=[];
+        $scope.grupos=[];
+        $scope.platillos=[];
+        $scope.cantidad=[];
+    }
     $('#abrir_orden').hide();
     $scope.test=function(v){
         alert(v);
-    }
+    };
+    $scope.atras= function(){
+        if ($scope.estado<1){
+            Materialize.toast('No se puede retroceder mas', 4000);  
+            return;
+        }
+        
+        limpiar();
+        $scope.estado=$scope.estado-2;
+        ///Materialize.toast($scope.estado+"", 4000);  
+        switch ($scope.estado) {
+            case -1:
+                $scope.getMesas();
+                $scope.estado=$scope.estado+1;
+            break;
+            case 0:
+                $scope.siguiente($scope.pedido_actual.table_id);
+            break;
+            case 1:
+                $scope.siguiente($scope.pedido_actual.order_id);
+            break;
+            case 2:
+                $scope.siguiente($scope.pedido_actual.category_actual);
+            break;
+            case 3:
+                $scope.siguiente($scope.pedido_actual.group_id);
+            break;
+            case 4:
+                $scope.siguiente($scope.pedido_actual.platillo_actual);
+            break;
+            default:
+                // code
+        }
+        
+    };
+    $scope.createBag=function(){
+         $.ajax({
+          type:'POST',
+          url: '/bags',
+          dataType: 'json',
+          data: { bag: {}},
+          success: function(data){
+            $scope.bag_id=data.id;
+         },
+          error: function(data){
+           console.log("no se pudo crear bolsa");
+          }
+         });
+    };
     $scope.siguiente = function(val){
         $scope.estado++;
         switch($scope.estado){
@@ -30,6 +86,7 @@
             break;
             case 3:
                 $scope.pedido_actual.category_id=val.id;
+                $scope.pedido_actual.category_actual=val;
                 $scope.categorias=[];
                 $scope.grupos=val.groups;
             break;
@@ -40,6 +97,7 @@
             break;
             case 5:
                 $scope.pedido_actual.platillo_id=val.id;
+                $scope.pedido_actual.platillo_actual=val;
                 $scope.pedido_actual.nombre=val.name;
                 $scope.pedido_actual.precio=val.price;
                 $scope.platillos=[];
@@ -108,7 +166,8 @@
           table_id:$scope.pedido_actual.mesa_id,
           name:$scope.pedido_actual.nombre,
           price:$scope.pedido_actual.precio,
-          notes:$scope.pedido_actual.anotaciones
+          notes:$scope.pedido_actual.anotaciones,
+          select:false
           });
     };
     $scope.createOrden=function(mesa_id){
@@ -162,21 +221,7 @@
          );
         
     };
-    $scope.createBag=function(callback){
-         $.ajax({
-          type:'POST',
-          url: '/bags',
-          dataType: 'json',
-          data: { bag: {}},
-          success: function(data){
-            $scope.bag_id=data.id;
-         },
-          error: function(data){
-           console.log("no se pudo crear bolsa");
-          }
-         });
-    };
-     $scope.removePedido=function(val){
+    $scope.removePedido=function(val){
         $scope.pedidos.pop(val);
     };
      $scope.getPlatilloByid=function (val){

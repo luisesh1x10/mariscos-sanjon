@@ -46,8 +46,21 @@
     <div>
         <div class="waves-effect amber darken-4 btn" ng-click="createOrden(pedido_actual.table_id)" id="abrir_orden">Abrir Orden</div>
     </div>
-    <div style="display: none;" ng-click="" id="recargar">Recargar</div>
-    <div class="waves-effect amber darken-4 btn" ng-click="createBag()" id="atras">atras</div>
+    <div style="display: none;" ng-click="" id="recargar">Recargar</div><!--Sirve para recargar cuado se genera una oreden automatica por que por alguna razon no serefresca solo -->
+    <div class="row">
+        <div class="col s12 card">
+        </div>
+    </div>
+    <div class="row">
+        <div class="center-align">
+            <div class="center-align waves-effect amber darken-4 btn" ng-click="atras()" id="atras">atras</div>
+        </div>
+        
+    </div>
+    <div class="row">
+        <div class="col s12 card">
+        </div>
+    </div>
     <div class="row">
         <div id="tabla_pedidos">
               <div  class="col s12 m12 l6">
@@ -55,6 +68,7 @@
                         <table class="striped">
                             <thead>
                               <tr>
+                                  <th data-field="id"></th>
                                   <th data-field="id">Platillo</th>
                                   <th data-field="name">Cantidad</th>
                                   <th data-field="price">Precio</th>
@@ -62,9 +76,14 @@
                                   
                               </tr>
                             </thead>
-                    
                             <tbody ng-repeat="pedido in pedidos">
                               <tr>
+                                <td>
+                                    <p>
+                                      <input type="checkbox" id="check{{$index}}" ng-model="pedido.select"/>
+                                      <label for="check{{$index}}"></label>
+                                    </p>
+                                </td>
                                 <td>{{pedido.name}}</td>
                                 <td>{{pedido.quantity}}</td>
                                 <td>${{pedido.price}}</td>
@@ -73,6 +92,10 @@
                               </tr>
                             </tbody>
                           </table>
+                        </div>
+                        <div class="row">
+                            <div class="col s12 card">
+                            </div>
                         </div>
                         <div class="row card">
                             <div class="col l4 m5 s6 waves-effect amber darken-4 btn"  ng-click="postPedidos()" id="enviar">

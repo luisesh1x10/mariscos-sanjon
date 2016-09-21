@@ -35,7 +35,7 @@ class ReportPdf < Prawn::Document
   end
 
   def table_content
-    table  product_rows,:cell_style => { size: 6,border_width:0} do
+    table  product_rows,:cell_style => { size: 5,border_width:0} do
       row(0).font_style = :bold
       self.header = true
     end

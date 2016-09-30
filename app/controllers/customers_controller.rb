@@ -9,7 +9,7 @@ class CustomersController < ApplicationController
     tel =params[:telefono].to_i
     nom = params[:nombre]
     @customers =@customers.where("telefono like '#{tel}%'") unless params[:telefono].nil? or params[:telefono]==""
-    @customers =@customers.where("nombre like '#{nom}%'") unless  params[:nombre].nil? or  params[:nombre]==""
+    @customers =@customers.where("lower(nombre) like '#{nom.downcase}%'") unless  params[:nombre].nil? or  params[:nombre]==""
   end
   
   def create_order

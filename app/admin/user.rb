@@ -5,9 +5,10 @@ ActiveAdmin.register User do
         column :tipo
         actions
     end
-permit_params :email, :password,:tipo
+permit_params :email, :password,:tipo,:name
  form do |f|
     inputs 'Details' do
+      input :name, label:"Nombre del empleado"
       input :email
       input :password, label: "Contraseña"
       f.input :tipo, :label => 'Tipo', :as => :select, :collection => [['Cocina',1],['mesero',2],['Caja',3]]

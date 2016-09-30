@@ -27,6 +27,7 @@ class SaucerOrdersController < ApplicationController
   def create
     @saucer_order = SaucerOrder.new(saucer_order_params)
     @saucer_order.price = @saucer_order.platillo.price.to_f
+    @saucer_order.user=current_user
     unless  @order.nil?
       @saucer_order.order_id = @order.id
     end

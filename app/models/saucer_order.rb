@@ -2,6 +2,7 @@ class SaucerOrder < ActiveRecord::Base
   belongs_to :platillo
   belongs_to :order
   belongs_to :bag
+  belongs_to :user
   validates_presence_of :platillo
   validates_presence_of :order
   validates :platillo_id,

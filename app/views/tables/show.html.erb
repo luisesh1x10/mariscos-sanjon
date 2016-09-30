@@ -1,37 +1,44 @@
-<div class="container">
+<div class="container" ng-controller="pagos">
 <p id="notice"><%= notice %></p>
-    <h1><%=@table.name%></h1>
+    <h1 class="center-align card"><%=@table.name%></h1>
     <h3 class="center-align card"><%="cantidad de ordenes:#{@orders.count}"%> </h3>
     <div class="center-align"><%=render 'orders/form'%></div>
      <br>
-     <%cont=0%>
-    <% @orders.each do |order| %>
-      <%if cont%2==0 %>
-        <div class="row">
-      <%end%>
+     <div class="row">
         <div class="col s12 m6">
-          <div class="card z-depth-4">
+          <div class="card z-depth-4" ng-repeat="orden in izquierda">
             <div class="card-content">
-              <span class="card-title">Folio:<%=order.id%></span>
+              <span class="card-title">Folio:{{orden.id}}</span>
               <ul>
-              <%order.platillos.each do |platillo|%>
-                  <li><%="#{platillo.name}: #{platillo.price}"%></li>
-              <%end%>
+                <li ng-repeat="platillo in orden.platillos">{{platillo.name}}:{{platillo.price}}</li>
               </ul>
+              Total: {{orden.total}}</br>
+              pago con: <input id="payment" type="number" ng-model="orden.payment" ng-change="actulizarPago(orden.id,orden.payment)"></br>
+              Cambio: <lable >{{orden.payment-orden.total}}</lable>
             </div>
             <div class="card-action">
-              <%if current_user.tipo==3%>
-                <%=link_to 'Ver',pay_path(order),class:"amber-text text-darken-4"%>
-                <%=link_to 'Imprimir',order_path(order,:format => :pdf),class:"amber-text text-darken-4",:target => '_blank'%>
-              <%elsif  current_user.tipo==2%>
-                <%=link_to 'Hacer perdidos',order,class:"amber-text text-darken-4"%>
-              <%end%>
+                <a href="{{orden.ver}}" class="amber-text text-darken-4"> Ver</a>
+                <a href="{{orden.imprimir}}" class="amber-text text-darken-4" target = '_blank'>Imprimir</a>
             </div>
           </div>
         </div>
-      <%if cont%2!=0 %>
+        
+        <div class="col s12 m6">
+          <div class="card z-depth-4" ng-repeat="orden in derecha">
+            <div class="card-content">
+              <span class="card-title">Folio:{{orden.id}}</span>
+              <ul>
+                <li ng-repeat="platillo in orden.platillos">{{platillo.name}}:{{platillo.price}}</li>
+              </ul>
+              Total: {{orden.total}}</br>
+              pago con: <input id="payment" type="number" ng-model="orden.payment" ng-change="actulizarPago(orden.id,orden.payment)"></br></br>
+              Cambio: <lable >{{orden.payment-orden.total}}</lable>
+            </div>
+            <div class="card-action">
+                <a href="{{orden.ver}}" class="amber-text text-darken-4"> Ver</a>
+                <a href="{{orden.imprimir}}" class="amber-text text-darken-4" target = '_blank'>Imprimir</a>
+            </div>
+          </div>
         </div>
-      <%end%>
-      <%cont+=1%>
-    <% end %>
+    </div>
 <div>

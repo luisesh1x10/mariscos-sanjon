@@ -4,8 +4,14 @@ class OrdersController < ApplicationController
 
   # GET /orders
   # GET /orders.json
+  def query
+     @orders = Order.all.where.not(status:2)
+    @orders= @orders.where(table_id:params[:table_id]) unless params[:table_id].nil?|| params[:table_id]==""
+  end
+ 
   def index
-    @orders = Order.all
+    @orders = Order.all.where.not(status:2)
+    
   end
   def domicilio
     @orders = Order.where("takeaway = ?",true).where.not(:status=>2)
@@ -64,7 +70,7 @@ class OrdersController < ApplicationController
   # PATCH/PUT /orders/1.json
   def update
     respond_to do |format|
-      if @order.update()
+      if @order.update(customer_params)
         format.html { redirect_to @order, notice: 'Order was successfully updated.' }
         format.json { render :show, status: :ok, location: @order }
       else
@@ -94,6 +100,6 @@ class OrdersController < ApplicationController
       @table = Table.find(params[:table_id])
     end
      def customer_params
-       params.require(:order).permit(:takeaway,:customer_id)
+       params.require(:order).permit(:takeaway,:customer_id,:payment)
     end
 end

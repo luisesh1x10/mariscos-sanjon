@@ -21,6 +21,8 @@ class ReportPdf < Prawn::Document
       text "Direccion: Boulevard Madero #1089 col. Las Vegas, 80090 Culiacán. ", size: 9,:align => :center
       text "Fecha: #{Time.now.strftime("%m/%d/%Y")}", size: 9,:align => :center
       text "Hora: #{Time.now.strftime("%I:%M")}", size: 9,:align => :center
+      text "Folio: #{@order.id}",size:9,:align => :center
+      text "Mesero: #{@order.mesero}",size:9,:align => :center
       table_content
       if @order.takeaway
         text "Direccion:",size:9
@@ -40,6 +42,10 @@ class ReportPdf < Prawn::Document
       self.header = true
     end
      text "Total a pagar #{@order.saucerOrders.sum('price*quantity')}", size: 15, style: :bold
+     unless @order.payment.nil?
+      text "Pago con: #{@order.payment}", size: 12, style: :bold
+      text "Cambio: #{@order.payment-@order.saucerOrders.sum('price*quantity')}", size: 15, style: :bold
+     end
   end
 
   def product_rows

@@ -9,6 +9,18 @@ class Order < ActiveRecord::Base
   def default_values
     self.status ||= 1
   end
-
+  
+  attr_accessor :total,:pedidos
+  
+  def total
+    self.saucerOrders.sum('price*quantity')
+  end
+  def pedidos
+    self.saucerOrders.count
+  end
+  def mesero 
+    return "desconocido" if  self.saucerOrders.count==0
+    self.saucerOrders.first.user.name
+  end
  
 end

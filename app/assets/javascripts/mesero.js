@@ -119,16 +119,20 @@
       $http.get("/tables.json")
       .success(function(data){
           $scope.mesas=data;
-          console.log(data);
       })
       .error(function(data){
           Materialize.toast('Error al cargar datos', 4000);
       });
     };
     $scope.getOrdenes = function(val){
-         $http.get("/tables/"+val+".json")
+         $http.get("/orders/query.json?table_id="+val)
       .success(function(data){
-          $scope.ordenes=data.ordenes;
+          $scope.ordenes=data;
+          for (var x=0; x<$scope.ordenes.length;x++){
+              if ($scope.ordenes[x].pedidos>0)
+                $scope.ordenes[x].color="amber darken-2";
+          }
+          console.log($scope.ordenes);
         if ($scope.ordenes.length==0){
             $scope.createOrden(val);
         }
@@ -158,7 +162,7 @@
       });
     };
     function add(){
-      $scope.pedidos.push({
+      $scope.pedidos.push([{
           platillo_id:$scope.pedido_actual.platillo_id,
           quantity:$scope.pedido_actual.quantity,
           order_id:$scope.pedido_actual.order_id,
@@ -168,7 +172,7 @@
           price:$scope.pedido_actual.precio,
           notes:$scope.pedido_actual.anotaciones,
           select:false
-          });
+          }]);
     };
     $scope.createOrden=function(mesa_id){
          $.ajax({
@@ -191,7 +195,8 @@
     $scope.postPedidos = function(){
         $("#enviar").hide();
         for (var x=0;x<$scope.pedidos.length;x++)
-            postPedido($scope.pedidos[x],x)
+            for(var y=0;y<$scope.pedidos[x].length;y++)
+            postPedido($scope.pedidos[x][y],x)
     }
      function postPedido(datos,index){
         $.when($scope.createBag()).then(function(){

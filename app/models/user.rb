@@ -7,4 +7,5 @@ class User < ActiveRecord::Base
   #'Cocina'--->1
   #'mesero'--->2
   #'Caja'----->3
+  has_many :saucer_orders
 end

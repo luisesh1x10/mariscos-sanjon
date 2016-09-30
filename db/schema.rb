@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160910111256) do
+ActiveRecord::Schema.define(version: 20160928100950) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(version: 20160910111256) do
     t.integer  "numero_exterior"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.text     "anotaciones"
   end
 
   create_table "groups", force: :cascade do |t|
@@ -110,6 +111,7 @@ ActiveRecord::Schema.define(version: 20160910111256) do
     t.integer  "status"
     t.boolean  "takeaway",    default: false
     t.integer  "customer_id"
+    t.float    "payment"
   end
 
   add_index "orders", ["customer_id"], name: "index_orders_on_customer_id"
@@ -149,6 +151,10 @@ ActiveRecord::Schema.define(version: 20160910111256) do
     t.datetime "map_updated_at"
     t.integer  "group_id"
     t.boolean  "is_child"
+    t.string   "cover_file_name"
+    t.string   "cover_content_type"
+    t.integer  "cover_file_size"
+    t.datetime "cover_updated_at"
   end
 
   add_index "platillos", ["category_id"], name: "index_platillos_on_category_id"
@@ -165,11 +171,13 @@ ActiveRecord::Schema.define(version: 20160910111256) do
     t.integer  "quantity"
     t.boolean  "takeaway",    default: false
     t.integer  "bag_id"
+    t.integer  "user_id"
   end
 
   add_index "saucer_orders", ["bag_id"], name: "index_saucer_orders_on_bag_id"
   add_index "saucer_orders", ["order_id"], name: "index_saucer_orders_on_order_id"
   add_index "saucer_orders", ["platillo_id"], name: "index_saucer_orders_on_platillo_id"
+  add_index "saucer_orders", ["user_id"], name: "index_saucer_orders_on_user_id"
 
   create_table "tables", force: :cascade do |t|
     t.string   "description"
@@ -192,6 +200,7 @@ ActiveRecord::Schema.define(version: 20160910111256) do
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.integer  "tipo"
+    t.string   "name"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

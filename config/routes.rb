@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get 'pedido',to:'mesero#pedido',as:'pedido'
   get 'orders/query', :to => "orders#query",as:'order_query'
   get 'orders/domicilio', :to => "orders#domicilio",as:'domicilio'
+  post 'create_bag', :to=> 'saucer_orders#create_bag', :as=>'create_bag'
   resources :customers
   post 'customers/create_order' ,to:'customers#create_order'
   devise_for :admin_users, ActiveAdmin::Devise.config

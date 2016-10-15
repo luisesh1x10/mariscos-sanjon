@@ -24,10 +24,34 @@ class SaucerOrdersController < ApplicationController
 
   # POST /saucer_orders
   # POST /saucer_orders.json
+  def create_bag
+    exito=true
+    parametros = JSON.parse(params[:datos])
+    parametros.each do |aux|
+      bag= Bag.create
+      aux.each do |record|
+        row = SaucerOrder.new(order_id:record["order_id"],platillo_id:record["platillo_id"],quantity:record["quantity"])
+        row.price = row.platillo.price.to_f
+        row.user=current_user
+        row.bag=bag
+        exito =false unless  row.save
+      end
+    end
+    respond_to do |format|
+      if exito
+        format.json { render json:parametros, status: :created }
+      else
+        format.json { render json: {error:"fallo"}, status: :unprocessable_entity }
+      end
+    end
+  end
+  
   def create
+    bag=Bag.create
     @saucer_order = SaucerOrder.new(saucer_order_params)
     @saucer_order.price = @saucer_order.platillo.price.to_f
     @saucer_order.user=current_user
+    @saucer_order.bag=bag
     unless  @order.nil?
       @saucer_order.order_id = @order.id
     end
@@ -71,7 +95,7 @@ class SaucerOrdersController < ApplicationController
       end
     end
   end
-
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_saucer_order
@@ -82,6 +106,9 @@ class SaucerOrdersController < ApplicationController
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def saucer_order_params
-      params.require(:saucer_order).permit(:bag_id,:order_id,:platillo_id,:notes,:status,:quantity)
+      params.require(:saucer_order).permit(:bag_id,:order_id,:platillo_id,:notes,:quantity)
+    end
+    def datos_bag(record)
+        record.require(:datos).permit(:bag_id,:order_id,:platillo_id,:notes,:status,:quantity )
     end
 end

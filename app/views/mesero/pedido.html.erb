@@ -68,49 +68,79 @@
                         <table class="striped">
                             <thead>
                               <tr>
-                                  <th data-field="id"></th>
+                                  <th data-field="select">Seleccion</th>
                                   <th data-field="id">Platillo</th>
                                   <th data-field="name">Cantidad</th>
                                   <th data-field="price">Precio</th>
                                   <th data-field="price">Nota</th>
-                                  
                               </tr>
                             </thead>
                             <tbody ng-repeat="pedido in pedidos">
-                              <tr ng-repeat="elementos in pedido">
+                              <tr>
                                 <td>
                                     <p>
-                                      <input type="checkbox" id="check{{$index}}" ng-model="pedido.select"/>
-                                      <label for="check{{$index}}"></label>
+                                      <input type="checkbox" id="casilla_solo{{$index}}" ng-model="pedido.select"/>
+                                      <label for="casilla_solo{{$index}}"></label>
                                     </p>
                                 </td>
-                                <td>{{elementos.name}}</td>
-                                <td>{{elementos.quantity}}</td>
-                                <td>${{elementos.price}}</td>
-                                <td><input ng-model="elementos.notes"></td>
+                                <td>{{pedido.name}}</td>
+                                <td>{{pedido.quantity}}</td>
+                                <td>${{pedido.price}}</td>
+                                <td><input ng-model="pedido.notes"></td>
                                 <td><a class="waves-effect waves-light btn" ng-click="removePedido($index)">Borrar</a></td>
                               </tr>
                             </tbody>
                           </table>
                         </div>
-                        <div class="row">
-                            <div class="col s12 card">
-                                <div class="col s12 waves-effect amber darken-4 btn center-align"  ng-click="agrupar()" id="agrupar">
-                                    Agrupar    
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row card">
-                            <div class="col l4 m5 s6 waves-effect amber darken-4 btn"  ng-click="postPedidos()" id="enviar">
-                                Enviar    
-                            </div>
-                            <div class="col l4 m5 s6 offset-m2 offset-l4 waves-effect red darken-4 btn">
-                                <%=link_to 'Cancelar',pedido_path,style:"font-color:white;"%>
-                            </div>
-                        </div>
+                </div>
+            </div>
+            <div id="tabla_pedidos">
+              <div class="col s12 m12 l6">
+                  <div class="row card">
+                    <table class="striped">
+                        <tbody ng-repeat="bolsa in bolsas">
+                          <tr>
+                            <td>
+                                <span ng-repeat="pedido in bolsa" ng-click="desagrupar()">{{pedido.name}}</br></span>
+                                </td>
+                            <td>
+                                <span ng-repeat="pedido in bolsa">{{pedido.quantity}}</br>
+                                </span>
+                                </td>
+                            <td>
+                                <span ng-repeat="pedido in bolsa">${{pedido.price}}</br>
+                                </span>
+                                </td>
+                            <td>
+                                <span ng-repeat="pedido in bolsa"><input ng-model="pedido.notes">
+                                </span>
+                            </td>
+                            <td>
+                                <a class="waves-effect waves-light btn" ng-click="desagrupar($index)">Separar</a>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        <div class="row">
+            <div class="col s12 m12 l6 card">
+                <div class="col s12 waves-effect amber darken-4 btn center-align"  ng-click="agrupar()" id="agrupar">
+                    Agrupar    
                 </div>
             </div>
         </div>
-        
+        <div class="row">
+            <div class="col s12 m12 l6 card">
+                <div class="col l4 m5 s6 waves-effect amber darken-4 btn"  ng-click="postPedidos()" id="enviar">
+                    Enviar    
+                </div>
+                <div class="col l4 m5 s6 offset-m2 offset-l4 waves-effect red darken-4 btn">
+                    <%=link_to 'Cancelar',pedido_path,style:"font-color:white;"%>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

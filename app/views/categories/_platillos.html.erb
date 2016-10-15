@@ -14,38 +14,65 @@
             </tr>
            </thead>
            <tbody>
-      <%@pedidos.each do |p| %>
-        <tr>
-          <td><h3><%=p.quantity%></h3></td>
-          <td><h3><%=p.platillo.name%></h3></td>
-          <td><h3><%=p.notes%></h3></td>
-          <%estados=[]
-          estados.push("Pendiente")
-          estados.push("En Proceso")
-          estados.push("Terminado")
-          %>
-          <td><h3><%=estados[p.status-1]%></h3></td>
-          
-           <%if p.order.takeaway%> 
-             <td><h3></h3></td>
-            <td><h3>Si</h3></td>
-          <%else%>
-            <td><h3><%=p.order.table.name%></h3></td>
-            <td><h3>No</h3></td> 
-          <%end%>
-          <%text=[]
-          text.push("Iniciar platillo")
-          text.push("Terminar platillo")
-          text.push("Entregar")
-          %>
-          <%if p.platillo.category.is_instant%>          
-            <td><%=link_to  text[2], saucer_order_path(p,:saucer_order=>{status:4}), :method=> :put,:remote => true,class:"waves-effect waves-light btn-large"%></td>
-          <%else%>
-            <td><%=link_to  text[p.status-1], saucer_order_path(p,:saucer_order=>{status:p.status+1}), :method=> :put,:remote => true,class:"waves-effect waves-light btn-large"%></td> 
-          <%end%>
-          
-        </tr>
-      <%end%>
+            <%@bags.each do |bag|%>  
+              <%pedidos= bag.saucer_orders%>
+                <tr>
+                  <td>
+                    <%pedidos.each do |p| %>
+                      <h3><%=p.quantity%></h3>
+                    <%end%> 
+                  </td>
+                  <td>
+                    <%pedidos.each do |p| %>
+                      <h3><%=p.platillo.name%></h3>
+                    <%end%>
+                  </td>
+                  <td>
+                    <%pedidos.each do |p| %>
+                      <h3><%=p.notes%></h3>
+                    <%end%>
+                  </td>
+                  <%estados=[]
+                  estados.push("Pendiente")
+                  estados.push("En Proceso")
+                  estados.push("Terminado")
+                  %>
+                  <td>
+                    <h3><%=estados[bag.status-1]%></h3>
+                  </td>
+                  <td>
+                  <%pedidos.each do |p| %>
+                    <%if p.order.takeaway%> 
+                      <h3></h3>
+                    <%else%>
+                      <h3><%=p.order.table.name%></h3>
+                    <%end%>
+                  <%end%>
+                  </td>
+                  <td>
+                  <%pedidos.each do |p| %>
+                    <%if p.order.takeaway%> 
+                      <h3>Si</h3>
+                    <%else%>
+                      <h3>No</h3> 
+                    <%end%>
+                  <%end%>
+                  </td>
+                  <%text=[]
+                  text.push("Iniciar platillo")
+                  text.push("Terminar platillo")
+                  text.push("Entregar")
+                  %>
+                  <td>
+                    <%if bag.saucer_orders[0].platillo.category.is_instant%>          
+                      <%=link_to  text[2], bag_path(bag,:bag=>{status:4}), :method=> :put,:remote => true,class:"waves-effect waves-light btn-large"%>
+                    <%else%>
+                      <%=link_to  text[bag.status-1], bag_path(bag,:bag=>{status:bag.status+1}), :method=> :put,:remote => true,class:"waves-effect waves-light btn-large"%> 
+                    <%end%>
+                  </td>
+                </tr>
+              
+            <%end%>
           </tbody>
         </table>
   <%end%>

@@ -7,9 +7,8 @@ class SaucerOrder < ActiveRecord::Base
   validates_presence_of :order
   validates :platillo_id,
   :order_id,
-  #:bag_id,
+  :bag_id,
   presence:true
-  validates :status, :inclusion => {:in => [nil,1,2,3,4]}
   validates :quantity, :inclusion => {:in => [nil,1,2,3,4,5]}
   
   before_save :default_values
@@ -17,7 +16,6 @@ class SaucerOrder < ActiveRecord::Base
     if self.quantity.nil?
       self.quantity||=1
     end
-    self.status ||= 1
   end
    validates :takeaway,
     :inclusion => { :in => [nil,true, false] }

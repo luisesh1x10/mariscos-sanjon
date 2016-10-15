@@ -6,6 +6,7 @@ json.array!(@orders) do |order|
   json.platillos order.platillos
   json.user_type current_user.tipo
   json.ver pay_path(order)
+  json.finalizar paynow_path(order)
   json.imprimir order_path(order,:format => :pdf)
   
 end

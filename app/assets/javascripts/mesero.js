@@ -8,6 +8,7 @@
     $scope.cantidad=[];
     $scope.pedidos=[];
     $scope.pedido_actual=[];
+    $scope.bolsas=[];
     $scope.estado=0;
     function limpiar(){
         $scope.mesas=[];
@@ -162,7 +163,7 @@
       });
     };
     function add(){
-      $scope.pedidos.push([{
+      $scope.pedidos.push({
           platillo_id:$scope.pedido_actual.platillo_id,
           quantity:$scope.pedido_actual.quantity,
           order_id:$scope.pedido_actual.order_id,
@@ -172,7 +173,7 @@
           price:$scope.pedido_actual.precio,
           notes:$scope.pedido_actual.anotaciones,
           select:false
-          }]);
+          });
     };
     $scope.createOrden=function(mesa_id){
          $.ajax({
@@ -194,23 +195,45 @@
     }
     $scope.postPedidos = function(){
         $("#enviar").hide();
+        postBolsas();
         for (var x=0;x<$scope.pedidos.length;x++)
-            for(var y=0;y<$scope.pedidos[x].length;y++)
-            postPedido($scope.pedidos[x][y],x)
+            postPedido($scope.pedidos,x);
     }
-     function postPedido(datos,index){
-        $.when($scope.createBag()).then(function(){
-            datos.bag_id=$scope.bag_id;
-           console.log(datos);
-           $.ajax({
+    function postBolsas(){
+        
+        $.ajax({
           type:'POST',
-          url: '/orders/'+datos.order_id+'/saucer_orders',
+          url: '/create_bag' ,
           dataType: 'json',
-          data: { saucer_order: datos},
+          data: { datos:JSON.stringify($scope.bolsas)},
+          success: function(data){
+            console.log("prueba bolsa retorno");
+            console.log(data);
+            $scope.bolsas=[];
+            if ($scope.pedidos.length==0&&$scope.bolsas.length==0){
+               window.location.replace("/pedido");
+               Materialize.toast('Platillos enviados con EXITO!!', 4000);
+        }
+         },
+          error: function(data){
+            console.log(data);
+            $("#enviar").show();
+            Materialize.toast('Un grupo de pedidos no pudo ser enviado', 4000);
+            return true;
+          }
+         });
+        
+    };
+    function postPedido(datos,index){
+          $.ajax({
+          type:'POST',
+          url: '/orders/'+datos[index].order_id+'/saucer_orders',
+          dataType: 'json',
+          data: { saucer_order: datos[index]},
           success: function(data){
             console.log(data);
-            $scope.pedidos.pop(index);
-            if ($scope.pedidos.length==0){
+            datos.pop(index);
+            if ($scope.pedidos.length==0&&$scope.bolsas.length==0){
                window.location.replace("/pedido");
                Materialize.toast('Platillos enviados con EXITO!!', 4000);
             }
@@ -221,13 +244,9 @@
             return true;
           }
          });
-            
-        }
-         );
-        
     };
     $scope.removePedido=function(val){
-        $scope.pedidos.pop(val);
+        $scope.pedidos.splice(val,1);
     };
      $scope.getPlatilloByid=function (val){
         for (var x=0;x<$scope.group.platillos.length;x++){
@@ -236,6 +255,24 @@
             }
         }
     };
-    
+    $scope.agrupar = function (){
+        var aux= new Array();
+        for (var i=0;i<$scope.pedidos.length;i++){
+            if ($scope.pedidos[i].select==true){
+                aux.push($scope.pedidos[i]);
+                $scope.pedidos.splice(i, 1);
+                i=i-1;
+            }
+        }
+        console.log("hola");
+        console.log(aux);
+        if (aux.length==0)
+            return
+        $scope.bolsas.push(aux);
+    };
+    $scope.desagrupar=function(i){
+        $scope.pedidos=$scope.pedidos.concat($scope.bolsas[i]);
+        $scope.bolsas.splice(i, 1);
+    };
     $scope.getMesas();
  }]);

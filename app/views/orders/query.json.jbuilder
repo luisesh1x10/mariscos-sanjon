@@ -1,6 +1,6 @@
 json.array!(@orders) do |order|
   json.extract! order, :id,:payment, :table_id
-  json.url order_url(order, format: :json)
+  json.url order_url(order)
   json.pedidos order.pedidos
   json.total order.total
   json.platillos order.platillos

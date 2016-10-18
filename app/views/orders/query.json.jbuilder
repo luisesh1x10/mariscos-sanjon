@@ -8,5 +8,8 @@ json.array!(@orders) do |order|
   json.ver pay_path(order)
   json.finalizar paynow_path(order)
   json.imprimir order_path(order,:format => :pdf)
-  
+  json.mesero order.mesero
+  json.fecha (Order.last.created_at+6.hours).strftime("%d/%m/%Y")
+  json.hora (Order.last.created_at+6.hours).strftime("%H:%M")
+  json.cliente order.customer.nombre if order.takeaway
 end

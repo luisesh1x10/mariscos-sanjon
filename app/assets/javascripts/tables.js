@@ -5,7 +5,11 @@ angular.module('sanjon')
     $scope.izquierda =[];
     $scope.tipo;
   table_id=$location.absUrl().split('?')[0].split('/')[4];
-  $http.get("/orders/query.json?table_id="+table_id)
+  if (Number(table_id))
+    cat ="/orders/query.json?table_id="+table_id;
+  else
+    cat= "/orders/query.json?takeaway_v=true";
+  $http.get(cat)
   .success(function (data){
       $scope.ordenes=data;
       for (var x=0;x<data.length;x++){
@@ -28,8 +32,7 @@ angular.module('sanjon')
           dataType: 'json',
           data: { order: {payment:payment}},
           success: function(data){
-            
-         },
+                     },
           error: function(data){
             console.log(data);
           }

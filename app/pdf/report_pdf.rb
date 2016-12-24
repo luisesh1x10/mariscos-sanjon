@@ -17,7 +17,8 @@ class ReportPdf < Prawn::Document
 
     # The bounding_box takes the x and y coordinates for positioning its content and some options to style it
     bounding_box([0, y_position], :width => 100) do
-      image open("https://scontent.fgdl1-2.fna.fbcdn.net/v/t1.0-9/14079485_1789009648034913_4129887155978922352_n.jpg?oh=2ae6c24f146dc7fb1ff01e4cec80274c&oe=585D5A5C"), position: :center,:width=>90
+      
+      image "#{Rails.root}/app/assets/images/sanjonLogo.jpg", position: :center,:width=>90
       text "Direccion: Boulevard Madero #1089 col. Las Vegas, 80090 Culiacán. ", size: 9,:align => :center
       text "Fecha: #{Time.now.strftime("%m/%d/%Y")}", size: 9,:align => :center
       text "Hora: #{Time.now.strftime("%I:%M")}", size: 9,:align => :center
@@ -50,7 +51,7 @@ class ReportPdf < Prawn::Document
 
   def product_rows
     [['Platillo', 'Cantidad', 'Precio']] +
-      @order.saucerOrders.map do |so|
+    @order.saucerOrders.map do |so|
       [so.platillo.name,so.quantity,so.price]
     end
   end

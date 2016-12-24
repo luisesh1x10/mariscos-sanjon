@@ -2,7 +2,7 @@ class Platillo < ActiveRecord::Base
   
   belongs_to :category
   belongs_to :group
-  has_many :saucerOrders
+  has_many :saucer_orders
   has_many :orders, through: :saucerOrders
   
   validates_presence_of :category

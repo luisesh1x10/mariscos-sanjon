@@ -8,14 +8,19 @@
         <div class="col s12 m6">
           <div class="card z-depth-4" ng-repeat="orden in izquierda">
             <div class="card-content">
-              <span class="card-title">Folio:{{orden.id}}</span>   <a href="{{orden.finalizar}}" class="amber-text text-darken-4 btn" data-method="post">Finalizar</a></br>
-              <span> Mesero: {{orden.mesero}}, Fecha:{{orden.fecha}}, Hora:{{orden.hora}}</span>
+              <div class="right-align"><a href="{{orden.finalizar}}" class=" white-text text-darken-4 red darken-1 btn" data-method="post">Finalizar</a></br><br></div>
+              <div class="card-title center-align"><span>Folio:{{orden.id}}</span></div> <br>
+               <div class ="row">
+                  <div class="col s12 m6 l4 center-align">Mesero: {{orden.mesero}}</div> 
+                  <div class="col s12 m6 l4 center-align">Fecha:{{orden.fecha}}</div>
+                  <div class="col s12 m6 l4 center-align">Hora:{{orden.hora}}</div>
+               </div>
               <ul>
-                <li ng-repeat="platillo in orden.platillos">{{platillo.name}}:{{platillo.price}}</li>
+                <li ng-repeat="platillo in orden.platillos">{{platillo.name}}: ${{platillo.price}}</li>
               </ul>
-              Total: {{orden.total}}</br>
-              pago con: <input id="payment" type="number" ng-model="orden.payment" ng-change="actulizarPago(orden.id,orden.payment)"></br>
-              Cambio: <lable >{{orden.payment-orden.total}}</lable>
+              Total: ${{orden.total}}</br>
+              pago con: $<input id="payment" type="number" ng-model="orden.payment" ng-change="actulizarPago(orden.id,orden.payment)"></br>
+              Cambio: $<lable >{{orden.payment-orden.total}}</lable>
             </div>
             <div class="card-action">
                 <a href="{{orden.ver}}" class="amber-text text-darken-4"> Ver</a>

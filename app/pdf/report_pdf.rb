@@ -30,6 +30,8 @@ class ReportPdf < Prawn::Document
         text @order.customer.direccion,size:9
         text "Anotaciones: #{@order.customer.anotaciones}",size:9
         text "Telefono: #{@order.customer.telefono}",size:9
+      else
+        text "#{@order.table.name}"
       end
       text "Gracias por su preferencia"
     end

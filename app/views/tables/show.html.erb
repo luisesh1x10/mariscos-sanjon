@@ -8,7 +8,7 @@
         <div class="col s12 m6">
           <div class="card z-depth-4" ng-repeat="orden in izquierda">
             <div class="card-content">
-              <span class="card-title">Folio:{{orden.id}}</span> </br>
+              <span class="card-title">Folio:{{orden.id}}</span>   <a href="{{orden.finalizar}}" class="amber-text text-darken-4 btn" data-method="post">Finalizar</a></br>
               <span> Mesero: {{orden.mesero}}, Fecha:{{orden.fecha}}, Hora:{{orden.hora}}</span>
               <ul>
                 <li ng-repeat="platillo in orden.platillos">{{platillo.name}}:{{platillo.price}}</li>
@@ -20,7 +20,7 @@
             <div class="card-action">
                 <a href="{{orden.ver}}" class="amber-text text-darken-4"> Ver</a>
                 <a href="{{orden.imprimir}}" class="amber-text text-darken-4" target = '_blank'>Imprimir</a>
-                <a href="{{orden.finalizar}}" class="amber-text text-darken-4" data-method="post">Finalizar</a>
+                
             </div>
           </div>
         </div>
@@ -28,7 +28,7 @@
         <div class="col s12 m6">
           <div class="card z-depth-4" ng-repeat="orden in derecha">
             <div class="card-content">
-              <span class="card-title">Folio:{{orden.id}}</span>
+              <span class="card-title">Folio:{{orden.id}}</span>   <a href="{{orden.finalizar}}" class="amber-text text-darken-4 btn" data-method="post">Finalizar</a>
               <ul>
                 <li ng-repeat="platillo in orden.platillos">{{platillo.name}}:{{platillo.price}}</li>
               </ul>
@@ -39,7 +39,6 @@
             <div class="card-action">
                 <a href="{{orden.ver}}" class="amber-text text-darken-4"> Ver</a>
                 <a href="{{orden.imprimir}}" class="amber-text text-darken-4" target = '_blank'>Imprimir</a>
-                <a href="{{orden.finalizar}}" class="amber-text text-darken-4" data-method="post">Finalizar</a>
             </div>
           </div>
         </div>

@@ -15,22 +15,11 @@ class CategoriesController < ApplicationController
   def getPedidos(id)
     @id=id
     @bags= Bag.joins(:saucer_orders=>[:platillo=>:category]).where("categories.id = ?",id).where.not(:status=>3.to_s).where.not(:status=>4.to_s).uniq.order(:created_at)
-    bolsas = @bags
-    n=0
-    bolsas.each do |b|
-      ped = b.saucer_orders
-      b.saucer_orders do |p,index|
-        ped[index]={nombre:p.name}
-      end
-      bolsas[n] ={pedidos: ped}
-  
-     n+=1 
-    end
     @pedidos= SaucerOrder.joins(:bag, :platillo=>:category).where("categories.id = ?",id).where.not("bags.status = ?",3.to_s).where.not("bags.status = ?",4.to_s).order(:created_at)
      #@pedidos= SaucerOrder.joins(:platillo=>:category).where("categories.id = ? and status is not ? and status is not ?",id,3,4).order(:created_at)
     respond_to do |format|
           format.html {}
-          format.json { render :json=> bolsas  }
+          format.json { render :json=> @bags  }
           format.js {render :show}
     end
   end

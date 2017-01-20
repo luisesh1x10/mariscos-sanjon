@@ -34,7 +34,7 @@ gem 'coffee-script-source','1.8.0'
 gem 'prawn'
 gem 'prawn-table', '~> 0.1.0'
 gem 'groupdate'
-gem 'will_paginate'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

@@ -20,6 +20,10 @@ class OrdersController < ApplicationController
   end
   # GET /orders/1
   # GET /orders/1.json
+  def historial
+    @orders = Order.all.where(status:2)
+     @orders= @orders.where(table_id:params[:table_id]) unless params[:table_id].nil?|| params[:table_id]==""
+  end
   def show
     @categories=Category.all
     @saucer_order=SaucerOrder.new
@@ -101,6 +105,6 @@ class OrdersController < ApplicationController
       @table = Table.find(params[:table_id])
     end
      def customer_params
-       params.require(:order).permit(:takeaway,:customer_id,:payment)
+       params.require(:order).permit(:takeaway,:customer_id,:payment,:status,:table_id)
     end
 end

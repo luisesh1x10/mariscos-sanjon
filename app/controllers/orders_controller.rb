@@ -21,7 +21,7 @@ class OrdersController < ApplicationController
   # GET /orders/1
   # GET /orders/1.json
   def historial
-      @orders = Order.all.where(status:2)
+      @orders = Order.all.where(status:2).last(30)
   end
   def show
     @categories=Category.all

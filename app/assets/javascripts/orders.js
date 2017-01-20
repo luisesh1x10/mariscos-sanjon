@@ -83,4 +83,35 @@ controller('pedidos',['$scope','$http', function($scope,$http){
     }
     
     
+}])
+.controller("historial",["$scope","$http",function($scope,$http){
+    $scope.ordenes=[];
+    
+    $scope.query = function(pagina){
+        $http.get("/historial.json")
+        .success(function(data){
+            console.log(data);
+            $scope.ordenes= data;
+        })
+        .error(function(data){
+            console.log(data);
+        });
+    }
+    $scope.reactivar = function(val){
+          $.ajax({
+          type:'PUT',
+          url: '/orders/'+115,
+          dataType: 'json',
+          data: { order: {status:1}},
+          success: function(data){
+              console.log(data);
+              $scope.query(0);
+                     },
+          error: function(data){
+            console.log(data);
+          }
+         });
+        
+    }
+    $scope.query(0);
 }]);

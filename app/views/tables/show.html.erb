@@ -25,7 +25,10 @@
             <div class="card-action">
                 <a href="{{orden.ver}}" class="amber-text text-darken-4"> Ver</a>
                 <a href="{{orden.imprimir}}" class="amber-text text-darken-4" target = '_blank'>Imprimir</a>
-                
+                <label>Cambiar de mesa</label>
+                  <select class="browser-default" ng-model= "orden.table_id" ng-change= "cambiarMesa(orden)">
+                    <option ng-repeat="mesa in mesas" value="{{mesa.id}}">{{mesa.name}}</option>
+                  </select>
             </div>
           </div>
         </div>
@@ -50,7 +53,11 @@
             <div class="card-action">
                 <a href="{{orden.ver}}" class="amber-text text-darken-4"> Ver</a>
                 <a href="{{orden.imprimir}}" class="amber-text text-darken-4" target = '_blank'>Imprimir</a>
-                
+                <label>Cambiar de mesa</label>
+                  <select class="browser-default" ng-model= "orden.table_id" ng-change= "cambiarMesa(orden)">
+                    <option value="" disabled selected>Choose your option</option>
+                    <option ng-repeat="mesa in mesas" value="{{mesa.id}}">{{mesa.name}}</option>
+                  </select>
             </div>
           </div>
         </div>

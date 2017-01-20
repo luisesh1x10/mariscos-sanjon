@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :bags
+  get "historial",to:'orders#historial', as:'historial'
   get 'pedido',to:'mesero#pedido',as:'pedido'
   get 'orders/query', :to => "orders#query",as:'order_query'
   get 'orders/domicilio', :to => "orders#domicilio",as:'domicilio'

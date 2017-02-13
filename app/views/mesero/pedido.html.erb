@@ -79,8 +79,7 @@
                               <tr>
                                 <td>
                                     <p>
-                                      <input type="checkbox" id="casilla_solo{{$index}}" ng-model="pedido.select"/>
-                                      <label for="casilla_solo{{$index}}"></label>
+                                      <a id="casilla_solo{{$index}}" class="{{pedido.select==true?'waves-effect waves-light btn':'waves-effect amber darken-4 btn'}}" ng-model="pedido.select" ng-click="marcar(pedido)"> {{pedido.select==true?pedido.cap:'Suelto'}} </a>
                                     </p>
                                 </td>
                                 <td>{{pedido.name}}</td>

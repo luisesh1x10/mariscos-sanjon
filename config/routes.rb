@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
+  get 'avanzar/:id',to: 'bags#avanzar',as:'avanzar'
   resources :bags
+  
   get "historial",to:'orders#historial', as:'historial'
   get 'pedido',to:'mesero#pedido',as:'pedido'
   get 'orders/query', :to => "orders#query",as:'order_query'

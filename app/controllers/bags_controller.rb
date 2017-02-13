@@ -1,5 +1,5 @@
 class BagsController < ApplicationController
-  before_action :set_bag, only: [:show, :edit, :update, :destroy]
+  before_action :set_bag, only: [:show, :edit, :update, :destroy,:avanzar]
 
   # GET /bags
   # GET /bags.json
@@ -19,6 +19,16 @@ class BagsController < ApplicationController
 
   # GET /bags/1/edit
   def edit
+  end
+  
+  def avanzar
+    return if @bag.status==4
+    if @bag.saucer_orders[0].platillo.category.is_instant 
+      @bag.update(status:4)
+    else
+      @bag.update(status:(@bag.status+1))
+    end
+    render :show
   end
 
   # POST /bags

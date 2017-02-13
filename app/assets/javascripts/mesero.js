@@ -10,6 +10,18 @@
     $scope.pedido_actual=[];
     $scope.bolsas=[];
     $scope.estado=0;
+    $scope.marcar = function(pedido){
+        if (pedido.select==null){
+            pedido.select = true;
+            pedido.cap="Agrupado";
+            return;
+        }
+        pedido.select= !(pedido.select);
+        if (pedido.select)
+            pedido.cap="Agrupado";
+        else 
+            pedido.cap="Suelto";
+    }
     function limpiar(){
         $scope.mesas=[];
         $scope.ordenes=[];

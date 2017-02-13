@@ -1,6 +1,4 @@
-<div id="ListaPedidos">
-  <h4>Pedidos activos:<strong> <%=@pedidos.count%></strong></h4>
-  <%=form_tag @category, {:method => :get,remote:true,id:"pedidos_barra"} do %>
+<%=form_tag @category, {:method => :get,remote:true,id:"pedidos_barra"} do %>
       <table class="responsive-table centered striped">
           <thead>
             <tr>
@@ -76,4 +74,19 @@
           </tbody>
         </table>
   <%end%>
-</div>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+                    <%text=[]
+                  text.push("Iniciar platillo")
+                  text.push("Terminar platillo")
+                  text.push("Entregar")
+                  %>

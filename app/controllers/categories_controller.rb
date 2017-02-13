@@ -19,8 +19,7 @@ class CategoriesController < ApplicationController
      #@pedidos= SaucerOrder.joins(:platillo=>:category).where("categories.id = ? and status is not ? and status is not ?",id,3,4).order(:created_at)
     respond_to do |format|
           format.html {}
-          format.json { render :json=> @bags  }
-          format.js {render :show}
+          format.json
     end
   end
   private

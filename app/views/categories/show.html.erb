@@ -1,5 +1,56 @@
 <div ng-controller= "categorias">
-    {{5+5+5}}
-<h1 class="center-align card-panel z-depth-3 "><%=@category.name%></h1>
- <%=render "platillos"%>
+<h1 class="center-align card-panel z-depth-3 ">{{bolsas[0].nombre_categoria}}</h1>
+ <div id="ListaPedidos">
+  <h4>Pedidos activos:<strong> {{activos}}</strong></h4>
+      <table class="responsive-table centered striped">
+          <thead>
+            <tr>
+                <th data-field="cantidad">Cantidad</th>
+                <th data-field="platillo">Platillo</th>
+                <th data-field="anotaciones">Anotaciones</th>
+                <th data-field="status">Estado</th>
+                <th data-field="cantidad">Mesa</th>
+                <th data-field="customer">A domicilio</th>
+                <th></th>
+            </tr>
+           </thead>
+           <tbody>
+                <tr ng-repeat = "bolsa in bolsas">
+                  <td>
+                    <div ng-repeat = "pedido in bolsa.platillos">
+                         <h3>{{pedido.quantity}}</h3>   
+                    </div>
+                  </td>
+                  <td>
+                      <div ng-repeat = "pedido in bolsa.platillos">
+                          <h3>{{pedido.info.name}}</h3>   
+                      </div>
+                  </td>
+                  <td>
+                      <div ng-repeat = "pedido in bolsa.platillos">
+                          <h3>{{pedido.notes}}</h3>   
+                      </div>
+                  </td>
+                  <td>
+                    <h3>{{estados[bolsa.status-1]}}</h3>
+                  </td>
+                  <td>
+                      <div ng-repeat ="pedido in bolsa.platillos">
+                        <h3>
+                          {{pedido.takeaway?"":pedido.table_name}}
+                        </h3>
+                      </div>
+                  </td>
+                  <td>
+                    <h3>
+                      {{bolsa.is_instant?"No":"Si"}}
+                    </h3>
+                  </td>
+                  <td>
+                    <a class="waves-effect waves-light btn-large"  ng-click="avanzar(bolsa)" >{{bolsa.status==1? "Iniciar":bolsa.status==1?"Terminado":"Entregar"}}</a>
+                  </td>
+                </tr>
+          </tbody>
+        </table>
+</div>
 </div>

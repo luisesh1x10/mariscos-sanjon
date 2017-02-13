@@ -30,7 +30,7 @@ class SaucerOrdersController < ApplicationController
     parametros.each do |aux|
       bag= Bag.create
       aux.each do |record|
-        row = SaucerOrder.new(order_id:record["order_id"],platillo_id:record["platillo_id"],quantity:record["quantity"])
+        row = SaucerOrder.new(order_id:record["order_id"],platillo_id:record["platillo_id"],quantity:record["quantity"],notes:record["notes"])
         row.price = row.platillo.price.to_f
         row.user=current_user
         row.bag=bag

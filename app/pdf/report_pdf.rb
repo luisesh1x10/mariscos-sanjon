@@ -54,7 +54,7 @@ class ReportPdf < Prawn::Document
   def product_rows
     [['Platillo', 'Cantidad', 'Precio']] +
     @order.saucerOrders.map do |so|
-      [so.platillo.name,so.quantity,so.price]
+      [so.platillo.name,so.quantity,so.price*so.quantity]
     end
   end
 end

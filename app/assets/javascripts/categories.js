@@ -12,6 +12,8 @@ angular.module("sanjon")
     console.log( window.location.pathname);
     $scope.beep = function(){
         $scope.audio.play();
+        $scope.audio.pause();
+        $scope.audio.play();
     }
     $scope.avanzar = function(val){
         $http.get("/avanzar/"+val.id+".json")

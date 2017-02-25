@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :expenses
   get 'avanzar/:id',to: 'bags#avanzar',as:'avanzar'
   resources :bags
   

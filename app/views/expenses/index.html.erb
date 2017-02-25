@@ -1,0 +1,54 @@
+<div ng-controller = "gastos">
+  <div class="container">
+    <div class = "row card-panel">
+      <div class = "col s12 m6 l4">
+        <h1>Agregar gastos</h1>
+        
+        <div class="input-field col s6">
+            <select class="browser-default" ng-model="nuevo.category" ng-change="ocultar()">
+              <option value="" disabled selected>Choose your option</option>
+              <option value=1>Provedores</option>
+              <option value=2>Servicios</option>
+              <option value=3>Otros</option>
+            </select>
+        </div>
+        <div class="input-field col s6">
+          <input value=0 id="cantidad" type="number" class="validate" ng-model="nuevo.amount">
+          <label class="active" for="cantidad">Precio</label>
+        </div>
+        <div class="input-field col s12">
+          <textarea id="descripcion" class="materialize-textarea" ng-model="nuevo.descricion"></textarea>
+          <label class="active" for="descripcion">Descripcion</label>
+        </div>
+        <div id="solo_proveedor">
+          <div class="input-field col s6">
+              <select class="browser-default" ng-model="nuevo.ingredient_id">
+                <option value="" disabled selected>Choose your option</option>
+                <option value=1>Camarones</option>
+                <option value=2>Pulpo</option>
+                <option value=3>Piña</option>
+              </select>
+          </div>        
+          <div class="input-field col s6">
+            <input value="" id="cantidad" type="number" class="validate" ng-model="nuevo.quantity">
+            <label class="active" for="cantidad">Cantidad</label>
+          </div>
+        </div>
+        <a class="waves-effect waves-light btn" ng-click= "crear_gasto()">Agregar</a>
+      </div>
+      <div class="col s12 m6 l8">
+        <table>
+          <th>catrgoria</th>
+          <th>monto</th>
+          <th>descricion</th>
+          <tr ng-repeat="gasto  in  gastos" >
+            <td>{{gasto.category}}</td>
+            <td>{{gasto.amount}}</td>
+            <td>{{gasto.description}}</td>
+          </tr>
+        </table>
+        
+      </div>
+    </div>
+  </div>
+</div>

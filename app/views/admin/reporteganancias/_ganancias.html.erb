@@ -1,0 +1,86 @@
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"> </script>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css" type="text/css" >
+
+<script>
+    angular.module("ganancias",[])
+    .controller("gan",["$http","$scope",function($http,$scope){
+        $scope.datos = 1;
+        $scope.opciones = [];
+        $scope.pagina=0;
+        $scope.inicio;
+        $scope.fin;
+        $scope.url = "";
+        $scope.periocidad = 1;
+        
+        $scope.obtenerInfo = function(val){
+            
+            if($scope.periocidad == 1)
+                pag= "/ganacias/mes.json";
+            if($scope.periocidad == 2)
+                pag= "/ganacias/semana.json";
+            if($scope.periocidad == 3)
+                pag= "/ganacias/ano.json";
+            
+            var pag =pag + "?pagina="+$scope.pagina;
+            console.log(pag);
+            $http.get(pag)
+            .success(function(data){
+                $scope.datos = data;
+                console.log(data);
+            })
+            .error(function(data){
+                console.log(data);
+            });
+        }
+        $scope.atras =  function(){
+            $scope.pagina= $scope.pagina+1;
+            if ($scope.pagina>=-1)
+                $scope.pagina=0;
+             $scope.obtenerInfo();    
+        }
+        $scope.adelante = function(){
+            $scope.pagina= $scope.pagina+1;
+            $scope.obtenerInfo(); 
+        }
+        
+        $scope.obtenerInfo(); 
+    }]);
+</script>
+<style>
+    .marco{
+        border: 2px solid #aaa;
+    }
+</style>
+<div ng-app= "ganancias">
+    <div ng-controller="gan">
+        <div class="row">
+            <div class="col-xs-4">
+                <div class="box">
+                    <label>Periocidad</label>
+                    <select id="periocidad" ng-model=periocidad ng-change="obtenerInfo()">
+                        <option value=1 selected="selected">Mensual</option>
+                        <option value=2>semanal</option>
+                        <option value=3>Anual</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row" id = "elementos">
+            <div class="col-xs-2 marco" ng-repeat = "dato in datos">
+                <h3>{{dato.caption}}</h3>
+                Ingresos: {{dato.ingreso}}<br>
+                Egresos: {{dato.egreso}}<br>
+                Ganancias: {{dato.ganacia}}<br>
+            </div>
+        </div>
+        <div class= "row">
+            <div class="col-xs-6">
+                <h2 style="text-align: center;" ng-click="atras()"><</h2>
+            </div>
+            <div class="col-xs-6">
+                <h2 style="text-align: center;" ng-click="adelante()">></h2>
+            </div>
+        </div>
+    </div>
+</div>

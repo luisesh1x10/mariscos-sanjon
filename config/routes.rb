@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get 'ganacias/mes'
+
+  get 'ganacias/semana'
+
+  get 'ganacias/ano'
+
   resources :expenses
   get 'avanzar/:id',to: 'bags#avanzar',as:'avanzar'
   resources :bags

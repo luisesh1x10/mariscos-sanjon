@@ -1,0 +1,2 @@
+module GanaciasHelper
+end

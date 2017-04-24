@@ -10,6 +10,8 @@
     $scope.pedido_actual=[];
     $scope.bolsas=[];
     $scope.estado=0;
+    $scope.domicilio = [];
+    
     $scope.marcar = function(pedido){
         if (pedido.select==null){
             pedido.select = true;
@@ -46,6 +48,7 @@
         switch ($scope.estado) {
             case -1:
                 $scope.getMesas();
+                $("#domicilio").hide();
                 $scope.estado=$scope.estado+1;
             break;
             case 0:
@@ -86,9 +89,14 @@
         $scope.estado++;
         switch($scope.estado){
             case 1:
-                $scope.pedido_actual.table_id=val;
+                $scope.pedido_actual.table_id=val.id;
+                $scope.pedido_actual.take_away = val.take_away;
+                $scope.es_a_domicilio = val.take_away;
+                if (val.take_away)
+                    $("#domicilio").show();
+                console.log($scope.pedido_actual.take_away);
                 $scope.mesas=[];
-                $scope.getOrdenes(val);
+                $scope.getOrdenes(val.id);
                 $('#abrir_orden').show();
             break;
             case 2:
@@ -205,9 +213,35 @@
           }
          });
     }
+    $scope.updateOrden=function(order_id){
+         $.ajax({
+          type:'PUT',
+          url: '/orders/'+order_id,
+          dataType: 'json',
+          data: { order: {
+              nombre:$scope.domicilio.nombre
+              ,telefono:$scope.domicilio.telefono
+              ,calle:$scope.domicilio.calle
+              ,numero_exterior:$scope.domicilio.numero_exterior
+              ,numero_interior:$scope.domicilio.numero_interior
+              ,colonia:$scope.domicilio.colonia
+              ,notas:$scope.domicilio.notas
+              ,takeaway:true
+          }},
+          success: function(data){
+            Materialize.toast('Se han enviado datos de domicilio', 4000);  
+         },
+          error: function(data){
+            Materialize.toast('No se pudieron actualizar datos de domicilio', 4000);
+            return true;
+          }
+         });
+    }
     $scope.postPedidos = function(){
         $("#enviar").hide();
         postBolsas();
+        if ($scope.es_a_domicilio)
+            $scope.updateOrden($scope.pedido_actual.order_id);
         for (var x=0;x<$scope.pedidos.length;x++)
             postPedido($scope.pedidos,x);
     }
@@ -287,4 +321,5 @@
         $scope.bolsas.splice(i, 1);
     };
     $scope.getMesas();
+    $("#domicilio").hide();
  }]);

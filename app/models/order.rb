@@ -22,5 +22,4 @@ class Order < ActiveRecord::Base
     return "desconocido" if  self.saucerOrders.count==0
     self.saucerOrders.first.user.name
   end
- 
 end

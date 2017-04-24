@@ -104,6 +104,6 @@ class OrdersController < ApplicationController
       @table = Table.find(params[:table_id])
     end
      def customer_params
-       params.require(:order).permit(:takeaway,:customer_id,:payment,:status,:table_id)
+       params.require(:order).permit(:takeaway,:customer_id,:payment,:status,:table_id,:nombre,:telefono,:calle,  :numero_exterior, :numero_interior, :colonia,:notas)
     end
 end

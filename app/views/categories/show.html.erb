@@ -27,6 +27,7 @@
                       </div>
                   </td>
                   <td>
+                      hora de pedido: {{bolsa.hora}}
                       <div ng-repeat = "pedido in bolsa.platillos">
                           <h3>{{pedido.notes}}</h3>   
                       </div>
@@ -37,13 +38,13 @@
                   <td>
                       <div ng-repeat ="pedido in bolsa.platillos">
                         <h3>
-                          {{pedido.takeaway?"":pedido.table_name}}
+                          {{pedido.takeaway?"para llevar":pedido.table_name}}
                         </h3>
                       </div>
                   </td>
                   <td>
                     <h3>
-                      {{bolsa.is_instant?"No":"Si"}}
+                      {{bolsa.platillos[0].takeaway?"Si":" No"}}
                     </h3>
                   </td>
                   <td>

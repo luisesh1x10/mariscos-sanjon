@@ -26,10 +26,12 @@ class ReportPdf < Prawn::Document
       text "Mesero: #{@order.mesero}",size:9,:align => :center
       table_content
       if @order.takeaway
+        text "Nombre cliente:",size:9
+        text @order.nombre ,size:9
         text "Direccion:",size:9
-        text @order.customer.direccion,size:9
-        text "Anotaciones: #{@order.customer.anotaciones}",size:9
-        text "Telefono: #{@order.customer.telefono}",size:9
+        text " calle: #{@order.calle} colonia: #{@order.calle} numero_exterior: #{@order.numero_interior} numero_int: #{@order.numero_exterior} " ,size:9
+        text "Anotaciones: #{@order.notas}",size:9
+        text "Telefono: #{@order.telefono}",size:9
       else
         text "#{@order.table.name}"
       end

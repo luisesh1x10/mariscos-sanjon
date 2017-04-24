@@ -6,7 +6,7 @@
     <div class="row" >
         <div id="contenido">
             <div ng-repeat = "mesa in mesas" class="col s4 m3 l2" id="r{{mesa.id}}" >
-                <button class="col s12 card" ng-click="siguiente(mesa.id)" >
+                <button class="col s12 card" ng-click="siguiente(mesa)" >
                     <p class="flow-text">{{mesa.name}}</p>
                     <p>{{mesa.description}}</p>
                 </button>
@@ -62,6 +62,41 @@
         </div>
     </div>
     <div class="row">
+        <div id="domicilio">
+          <div class="col s12 m12 l6 ">
+            <div class="row card">
+                <h4 class="card-panel">Servicio  a domicilio  orden:{{pedido_actual.order_id}}</h4>
+                <div class="input-field col s12">
+                    <input id="nombre" type="text" class="validate" ng-model="domicilio.nombre">
+                    <label for="nombre">Nombre</label>
+                </div>
+                <div class="input-field col s12">
+                    <input id="telefono" type="text" class="validate" ng-model="domicilio.telefono">
+                    <label for="telefono">Telefono</label>
+                </div>
+                <div class="input-field col s12">
+                    <input id="calle" type="text" class="validate" ng-model="domicilio.calle">
+                    <label for="calle">Calle</label>
+                </div>
+                <div class="input-field col s12">
+                    <input id="colonia" type="text" class="validate" ng-model="domicilio.colonia">
+                    <label for="colonia">Colonia</label>
+                </div>
+                <div class="input-field col s12">
+                    <input id="numero_exterior" type="text" class="validate" ng-model="domicilio.numero_exterior">
+                    <label for="numero_exterior">Numero exterior</label>
+                </div>
+                <div class="input-field col s12">
+                    <input id="numero_interior" type="text" class="validate" ng-model="domicilio.numero_interior">
+                    <label for="numero_interior">Numero interior</label>
+                </div>
+                <div class="input-field col s12">
+                    <input id="notas" type="text" class="validate" ng-model="domicilio.notas">
+                    <label for="notas">Notas</label>
+                </div>
+            </div>
+          </div>
+        </div>
         <div id="tabla_pedidos">
               <div  class="col s12 m12 l6">
                     <div class="row card">
@@ -96,6 +131,7 @@
             <div id="tabla_pedidos">
               <div class="col s12 m12 l6">
                   <div class="row card">
+                    <h4 class="card-panel">Agrupados</h4>
                     <table class="striped">
                         <tbody ng-repeat="bolsa in bolsas">
                           <tr>

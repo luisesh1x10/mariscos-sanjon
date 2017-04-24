@@ -14,5 +14,6 @@ menu label: "Mesas"
 #   permitted
 # end
 
-permit_params :description, :name
+permit_params :description, :name,:take_away
+
 end

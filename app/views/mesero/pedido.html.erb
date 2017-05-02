@@ -12,7 +12,7 @@
                 </button>
             </div>
             <div ng-repeat = "orden in ordenes" class="col s4 m3 l2" id="r{{orden.id}}" >
-                <button class="col s12 card {{orden.color}}" ng-click="siguiente(orden.id)" >
+                <button class="col s12 card {{orden.color}}" ng-click="siguiente(orden)" >
                     <p class="flow-text">Folio: {{orden.id}}</p>
                     <p>Pedidos activos:{{orden.pedidos}}</p>
                 </button>
@@ -67,32 +67,32 @@
             <div class="row card">
                 <h4 class="card-panel">Servicio  a domicilio  orden:{{pedido_actual.order_id}}</h4>
                 <div class="input-field col s12">
-                    <input id="nombre" type="text" class="validate" ng-model="domicilio.nombre">
-                    <label for="nombre">Nombre</label>
+                    <label for="nombre">Nombre</label><br>
+                    <input id="nombre" type="text" class="validate" ng-model="domicilio.nombre" ng-change="updateOrden(pedido_actual.order_id)">
                 </div>
                 <div class="input-field col s12">
-                    <input id="telefono" type="text" class="validate" ng-model="domicilio.telefono">
-                    <label for="telefono">Telefono</label>
+                    <label for="telefono">Telefono</label><br>
+                    <input id="telefono" type="text" class="validate" ng-model="domicilio.telefono" ng-change="updateOrden(pedido_actual.order_id)">
                 </div>
                 <div class="input-field col s12">
-                    <input id="calle" type="text" class="validate" ng-model="domicilio.calle">
-                    <label for="calle">Calle</label>
+                    <label for="calle">Calle</label><br>
+                    <input id="calle" type="text" class="validate" ng-model="domicilio.calle" ng-change="updateOrden(pedido_actual.order_id)">
                 </div>
                 <div class="input-field col s12">
-                    <input id="colonia" type="text" class="validate" ng-model="domicilio.colonia">
-                    <label for="colonia">Colonia</label>
+                    <label for="colonia">Colonia</label><br>
+                    <input id="colonia" type="text" class="validate" ng-model="domicilio.colonia" ng-change="updateOrden(pedido_actual.order_id)">
                 </div>
                 <div class="input-field col s12">
-                    <input id="numero_exterior" type="text" class="validate" ng-model="domicilio.numero_exterior">
-                    <label for="numero_exterior">Numero exterior</label>
+                    <label for="numero_exterior">Numero exterior</label><br>
+                    <input id="numero_exterior" type="text" class="validate" ng-model="domicilio.numero_exterior" ng-change="updateOrden(pedido_actual.order_id)">
                 </div>
                 <div class="input-field col s12">
-                    <input id="numero_interior" type="text" class="validate" ng-model="domicilio.numero_interior">
-                    <label for="numero_interior">Numero interior</label>
+                    <label for="numero_interior">Numero interior</label><br>
+                    <input id="numero_interior" type="text" class="validate" ng-model="domicilio.numero_interior" ng-change="updateOrden(pedido_actual.order_id)">
                 </div>
                 <div class="input-field col s12">
-                    <input id="notas" type="text" class="validate" ng-model="domicilio.notas">
-                    <label for="notas">Notas</label>
+                    <label for="notas">Notas</label><br>
+                    <input id="notas" type="text" class="validate" ng-model="domicilio.notas" ng-change="updateOrden(pedido_actual.order_id)">
                 </div>
             </div>
           </div>

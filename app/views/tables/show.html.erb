@@ -15,8 +15,26 @@
                   <div class="col s12 m6 l4 center-align">Fecha:{{orden.fecha}}</div>
                   <div class="col s12 m6 l4 center-align">Hora:{{orden.hora}}</div>
                </div>
-              <ul>
-                <li ng-repeat="platillo in orden.platillos">nombre: {{platillo.name}} precio: ${{platillo.price}} cantidad: {{platillo.saucer_order}}  </li>
+              <ul class="collapsible" data-collapsible="accordion">
+                <li ng-repeat="platillo in orden.platillos">
+                  <div class="collapsible-header" ng-click="getOrdenes()">
+                    nombre: {{platillo.name}} precio: ${{platillo.price}} cantidad: {{platillo.quantity}}
+                  </div>
+                  <div class="collapsible-body" >
+                      Cantidad:
+                      <select ng-model="platillo.quantity" ng-change="cambiarCantidad(platillo)" class="browser-default">
+                        <option value="1"> 1 </option>
+                        <option value="2"> 2 </option>
+                        <option value="3"> 3 </option>
+                        <option value="4"> 4 </option>
+                        <option value="5"> 5 </option>
+                      </select>
+                      Mover pedido:
+                      <select ng-model="platillo.order_id" ng-change="cambiarOrden(platillo)" class="browser-default">
+                          <option ng-repeat="folio in ordenes_disponiblles" value="{{folio.id}}"> mesa: {{folio.table_name}}, Folio: {{folio.id}} </option>
+                      </select>
+                  </div>
+                </li>
               </ul>
               Total: ${{orden.total}}</br>
               pago con: $<input id="payment" type="number" ng-model="orden.payment" ng-change="actulizarPago(orden.id,orden.payment)"></br>
@@ -25,7 +43,7 @@
             <div class="card-action">
                 <a href="{{orden.ver}}" class="amber-text text-darken-4"> Ver</a>
                 <a href="{{orden.imprimir}}" class="amber-text text-darken-4" target = '_blank'>Imprimir</a>
-                <label>Cambiar de mesa</label>
+                Cambiar de mesa
                   <select class="browser-default" ng-model= "orden.table_id" ng-change= "cambiarMesa(orden)">
                     <option ng-repeat="mesa in mesas" value="{{mesa.id}}">{{mesa.name}}</option>
                   </select>
@@ -43,8 +61,26 @@
                   <div class="col s12 m6 l4 center-align">Fecha:{{orden.fecha}}</div>
                   <div class="col s12 m6 l4 center-align">Hora:{{orden.hora}}</div>
                </div>
-              <ul>
-                <li ng-repeat="platillo in orden.platillos">{{platillo.name}}: ${{platillo.price}}</li>
+             <ul class="collapsible" data-collapsible="accordion">
+                <li ng-repeat="platillo in orden.platillos">
+                  <div class="collapsible-header" ng-click="getOrdenes()">
+                    nombre: {{platillo.name}} precio: ${{platillo.price}} cantidad: {{platillo.quantity}}
+                  </div>
+                  <div class="collapsible-body" >
+                      Cantidad:
+                      <select ng-model="platillo.quantity" ng-change="cambiarCantidad(platillo)" class="browser-default">
+                        <option value="1"> 1 </option>
+                        <option value="2"> 2 </option>
+                        <option value="3"> 3 </option>
+                        <option value="4"> 4 </option>
+                        <option value="5"> 5 </option>
+                      </select>
+                      Mover pedido:
+                      <select ng-model="platillo.order_id" ng-change="cambiarOrden(platillo)" class="browser-default">
+                          <option ng-repeat="folio in ordenes_disponiblles" value="{{folio.id}}"> mesa: {{folio.table_name}}, Folio: {{folio.id}} </option>
+                      </select>
+                  </div>
+                </li>
               </ul>
               Total: ${{orden.total}}</br>
               pago con: $<input id="payment" type="number" ng-model="orden.payment" ng-change="actulizarPago(orden.id,orden.payment)"></br>

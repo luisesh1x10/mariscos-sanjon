@@ -9,7 +9,7 @@ class OrdersController < ApplicationController
     @orders= @orders.where(table_id:params[:table_id]) unless params[:table_id].nil?|| params[:table_id]==""
     @orders= @orders.where(takeaway:(params[:takeaway_v]=='true')) unless params[:takeaway_v].nil?|| params[:takeaway_v]==""
   end
- 
+  
   def index
     @orders = Order.all.where.not(status:2)
     

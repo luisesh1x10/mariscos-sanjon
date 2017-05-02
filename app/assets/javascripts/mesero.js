@@ -55,7 +55,7 @@
                 $scope.siguiente($scope.pedido_actual.table_id);
             break;
             case 1:
-                $scope.siguiente($scope.pedido_actual.order_id);
+                $scope.siguiente($scope.pedido_actual.order);
             break;
             case 2:
                 $scope.siguiente($scope.pedido_actual.category_actual);
@@ -100,7 +100,9 @@
                 $('#abrir_orden').show();
             break;
             case 2:
-                $scope.pedido_actual.order_id=val;
+                $scope.domicilio=val;
+                $scope.pedido_actual.order=val;
+                $scope.pedido_actual.order_id=val.id;
                 $('#abrir_orden').hide();
                 $scope.ordenes=[];
                 $scope.getCategorias();
@@ -229,7 +231,7 @@
               ,takeaway:true
           }},
           success: function(data){
-            Materialize.toast('Se han enviado datos de domicilio', 4000);  
+            
          },
           error: function(data){
             Materialize.toast('No se pudieron actualizar datos de domicilio', 4000);
@@ -320,6 +322,7 @@
         $scope.pedidos=$scope.pedidos.concat($scope.bolsas[i]);
         $scope.bolsas.splice(i, 1);
     };
+    
     $scope.getMesas();
     $("#domicilio").hide();
  }]);

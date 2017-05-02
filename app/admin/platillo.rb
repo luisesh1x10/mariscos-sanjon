@@ -45,11 +45,14 @@ form do |f|
           s.input :stock 
       end
     end
-    f.inputs "group" do
+    f.inputs "grupo" do
       f.input :group , :collection => Group.all.map{ |car| [car.name, car.id] }
     end
     f.inputs "Categoria" do
       f.input :category, :collection => Category.all.map{ |car| [car.name, car.id] }
+    end
+    f.inputs "Imagen" do
+  
     end
     f.actions
 end

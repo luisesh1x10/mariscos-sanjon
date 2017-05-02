@@ -4,7 +4,18 @@ angular.module('sanjon')
     $scope.ordenes=[];
     $scope.derecha=[];
     $scope.izquierda =[];
+    $scope.ordenes_disponiblles=[];
     $scope.tipo;
+    $scope.getOrdenes = function(){
+       $('.collapsible').collapsible();
+      $http.get("/orders/query.json?takeaway_v=false")
+      .success(function(data){
+        $scope.ordenes_disponiblles =data;
+      })
+      .error(function(data){
+        console.log(data);
+      });
+    }
     $scope.getMesas = function(){
       $http.get("/tables.json")
       .success(function(data){
@@ -26,6 +37,45 @@ angular.module('sanjon')
              $scope.cargarOrdenes();
                      },
           error: function(data){
+            console.log(data);
+          }
+      });
+  }
+  $scope.cambiarCantidad = function(val){
+    console.log(val);
+    if (val.quantity===null)
+     val.quantity=1;
+      $.ajax({
+          type:'PUT',
+          url: '/saucer_orders/'+val.id,
+          dataType: 'json',
+          data: { saucer_order: {quantity:val.quantity}},
+          success: function(data){
+            console.log(data);
+            
+                     },
+          error: function(data){
+            $scope.cargarOrdenes();
+            console.log(data);
+          }
+      });
+  }
+   $scope.cambiarOrden = function(val){
+    console.log(val);
+    if (val.quantity===null)
+     val.quantity=1;
+      $.ajax({
+          type:'PUT',
+          url: '/saucer_orders/'+val.id,
+          dataType: 'json',
+          data: { saucer_order: {order_id:val.order_id}},
+          success: function(data){
+            console.log(data);
+          
+            $scope.cargarOrdenes();
+                     },
+          error: function(data){
+            Materialize.toast('No se pudo cambiar pedido', 4000) 
             console.log(data);
           }
       });
@@ -71,4 +121,6 @@ angular.module('sanjon')
   }
    $scope.cargarOrdenes();
   $scope.getMesas();
+  $scope.getOrdenes();
+        
 }]);

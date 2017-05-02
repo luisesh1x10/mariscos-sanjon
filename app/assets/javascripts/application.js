@@ -19,7 +19,7 @@
 //= require materialize/extras/nouislider
 
 $(document).ready(function(){
-    $(".button-collapse").sideNav();    
-
+    $(".button-collapse").sideNav();  
+    $('.collapsible').collapsible();
 });
 

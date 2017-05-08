@@ -33,7 +33,7 @@ class ReportPdf < Prawn::Document
         text "Anotaciones: #{@order.notas}",size:9
         text "Telefono: #{@order.telefono}",size:9
       else
-        text "#{@order.table.name}"
+        text "#{@order.table.name unless @order.table.nil? }"
       end
       text "Gracias por su preferencia"
     end

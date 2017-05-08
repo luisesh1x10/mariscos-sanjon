@@ -19,7 +19,7 @@ class Order < ActiveRecord::Base
     self.saucerOrders.count
   end
   def mesero 
-    return "desconocido" if  self.saucerOrders.count==0
+    return "desconocido" if  self.saucerOrders.count==0 or self.saucerOrders.first.user.nil?
     self.saucerOrders.first.user.name
   end
 end

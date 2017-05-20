@@ -3,6 +3,7 @@ class Order < ActiveRecord::Base
   belongs_to :customer
   has_many :saucerOrders
   has_many :platillos, through: :saucerOrders
+  has_many :users, through: :saucerOrders
   validates :status, :inclusion => {:in => [nil,1,2]}
   validates :takeaway, :inclusion => { :in => [nil,true, false] }
   before_validation  :default_values
@@ -20,6 +21,10 @@ class Order < ActiveRecord::Base
   end
   def mesero 
     return "desconocido" if  self.saucerOrders.count==0 or self.saucerOrders.first.user.nil?
-    self.saucerOrders.first.user.name
+    ac = []
+    self.users.uniq.each do |u|
+      ac << u.name
+    end
+    ac.join(", ")
   end
 end

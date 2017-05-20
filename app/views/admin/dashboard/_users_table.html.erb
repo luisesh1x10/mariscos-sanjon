@@ -1,0 +1,92 @@
+<div class="column" style="width: 100.0%;">
+              <div class="panel">
+                  <h3>Reporte de meseros de hoy</h3>
+                  <div class="panel_contents">
+                    <table border="0" cellspacing="0" cellpadding="0">
+                      <thead>
+                        <tr>
+                          <th class="col col-usuario">Usuario</th>
+                          <th class="col col-correo">Correo</th>
+                          <th class="col col-efectivo">Efectivo</th>
+                          <th class="col col-tipo">Tipo</th>
+                          <th class="col col-folios">Folios</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <%User.all.each do |u|%>
+                        <tr class="odd" id="user">
+                          <td class="col col-usuario"><%=u.name%></td>
+                          <td class="col col-correo"><%=u.email%></td>
+                          <td class="col col-efectivo"><%=u.saucer_orders.where(:created_at => Date.today.beginning_of_day+6.hours..Date.today.end_of_day+6.hours).sum(:price)%></td>
+                          <td class="col col-tipo"><%=u.tipo%></td>
+                          <td class="col col-folios"><%=Order.joins(:saucerOrders).where("saucer_orders.user_id = ?",u.id).where(:created_at => Date.today.beginning_of_day+6.hours..Date.today.end_of_day+6.hours).uniq.count%></td>
+                        </tr>
+                        <%end%>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              
+              
+              
+              
+<div class="column" style="width: 100.0%;">
+              <div class="panel">
+                  <h3>Reporte de meseros de la Semana</h3>
+                  <div class="panel_contents">
+                    <table border="0" cellspacing="0" cellpadding="0">
+                      <thead>
+                        <tr>
+                          <th class="col col-usuario">Usuario</th>
+                          <th class="col col-correo">Correo</th>
+                          <th class="col col-efectivo">Efectivo</th>
+                          <th class="col col-tipo">Tipo</th>
+                          <th class="col col-folios">Folios</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <%User.all.each do |u|%>
+                        <tr class="odd" id="user">
+                          <td class="col col-usuario"><%=u.name%></td>
+                          <td class="col col-correo"><%=u.email%></td>
+                          <td class="col col-efectivo"><%=u.saucer_orders.where(:created_at => Date.today.beginning_of_week+6.hours..Date.today.end_of_week+6.hours).sum(:price)%></td>
+                          <td class="col col-tipo"><%=u.tipo%></td>
+                          <td class="col col-folios"><%=Order.joins(:saucerOrders).where("saucer_orders.user_id = ?",u.id).where(:created_at => Date.today.beginning_of_week+6.hours..Date.today.end_of_week+6.hours).uniq.count%></td>
+                        </tr>
+                        <%end%>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              
+<div class="column" style="width: 100.0%;">
+              <div class="panel">
+                  <h3>Reporte de meseros del mes</h3>
+                  <div class="panel_contents">
+                    <table border="0" cellspacing="0" cellpadding="0">
+                      <thead>
+                        <tr>
+                          <th class="col col-usuario">Usuario</th>
+                          <th class="col col-correo">Correo</th>
+                          <th class="col col-efectivo">Efectivo</th>
+                          <th class="col col-tipo">Tipo</th>
+                          <th class="col col-folios">Folios</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <%User.all.each do |u|%>
+                        <tr class="odd" id="user">
+                          <td class="col col-usuario"><%=u.name%></td>
+                          <td class="col col-correo"><%=u.email%></td>
+                          <td class="col col-efectivo"><%=u.saucer_orders.where(:created_at => Date.today.beginning_of_month+6.hours..Date.today.end_of_month+6.hours).sum(:price)%></td>
+                          <td class="col col-tipo"><%=u.tipo%></td>
+                          <td class="col col-folios"><%=Order.joins(:saucerOrders).where("saucer_orders.user_id = ?",u.id).where(:created_at => Date.today.beginning_of_month+6.hours..Date.today.end_of_month+6.hours).uniq.count%></td>
+                        </tr>
+                        <%end%>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>

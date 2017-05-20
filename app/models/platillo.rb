@@ -1,5 +1,6 @@
 class Platillo < ActiveRecord::Base
-  
+  has_attached_file :cover, styles: {big: "1024x780>", medium: "600x600>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
+  validates_attachment_content_type :cover, content_type: /\Aimage\/.*\z/
   belongs_to :category
   belongs_to :group
   has_many :saucer_orders

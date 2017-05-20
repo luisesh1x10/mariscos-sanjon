@@ -23,10 +23,10 @@
 
 
   <div class="container">
-    <div class="section">
+    <div class="section card-panel">
 
       <!--   Icon Section   -->
-      <div class="row light-green accent-4" >
+      <div class="row " >
         <div class="col s12 m4">
           <div class="icon-block">
             <h2 class="center brown-text"><i class="medium material-icons">location_on</i></h2>
@@ -84,51 +84,23 @@
         <div class="col s12">
           <h3><i class="mdi-content-send brown-text"></i></h3>
           <h4>Platillos nuevos.</h4>
-          <div class="col s12 m6 l4">
-              <div class="card">
-                <div class="card-image waves-effect waves-block waves-light">
-                  <%=image_tag "https://scontent.ftrc1-1.fna.fbcdn.net/v/t1.0-9/13680734_1242175029180162_1789595000631064566_n.jpg?oh=e1b768e99d05657096a5aa82ec177ef3&oe=58552E4D",class:"activator"%>
-                </div>
-                <div class="card-content">
-                  <span class="card-title activator grey-text text-darken-4">Piña volcan<i class="material-icons right">more_vert</i></span>
-                  <p><a href="#">This is a link</a></p>
-                </div>
-                <div class="card-reveal">
-                  <span class="card-title grey-text text-darken-4">Piña volcan<i class="material-icons right">close</i></span>
-                  <p>...</p>
-                </div>
-              </div>
-            </div>
+          <%@nuevos.each do |platillo|%>
             <div class="col s12 m6 l4">
               <div class="card">
                 <div class="card-image waves-effect waves-block waves-light">
-                  <%=image_tag "https://scontent.ftrc1-1.fna.fbcdn.net/v/t1.0-9/13612112_1233769793354019_6041531202022450940_n.jpg?oh=588a5f0092d39f7f646eaff0c58a7925&oe=5853EEA0",class:"activator"%>
+                  <%=image_tag platillo.cover.url,class:"activator"%>
                 </div>
                 <div class="card-content">
-                  <span class="card-title activator grey-text text-darken-4">Tostajon<i class="material-icons right">more_vert</i></span>
+                  <span class="card-title activator grey-text text-darken-4"><%=platillo.name%><i class="material-icons right">more_vert</i></span>
                   <p><a href="#">This is a link</a></p>
                 </div>
                 <div class="card-reveal">
-                  <span class="card-title grey-text text-darken-4">Tostajon<i class="material-icons right">close</i></span>
-                  <p>...</p>
+                  <span class="card-title grey-text text-darken-4"><%=platillo.name%><i class="material-icons right">close</i></span>
+                  <p><%=platillo.descripcion%></p>
                 </div>
               </div>
             </div>
-            <div class="col s12 m6 l4">
-              <div class="card">
-                <div class="card-image waves-effect waves-block waves-light">
-                  <%=image_tag "https://scontent.ftrc1-1.fna.fbcdn.net/v/t1.0-9/13669032_1232104530187212_1672240486538640051_n.jpg?oh=5dce68a1b1dcca7de0b9e08905c42f61&oe=584BAA47",class:"activator"%>
-                </div>
-                <div class="card-content">
-                  <span class="card-title activator grey-text text-darken-4">Parguito<i class="material-icons right">more_vert</i></span>
-                  <p><a href="#">This is a link</a></p>
-                </div>
-                <div class="card-reveal">
-                  <span class="card-title grey-text text-darken-4">Parguito<i class="material-icons right">close</i></span>
-                  <p>...</p>
-                </div>
-              </div>
-          </div>
+          <%end%>  
         </div>
       </div>
 

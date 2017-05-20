@@ -53,6 +53,7 @@ ActiveAdmin.register_page "Dashboard" do
        end
        
      end
+    render 'users_table'
   end # content
   
  

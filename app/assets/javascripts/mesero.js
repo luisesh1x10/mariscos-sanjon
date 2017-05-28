@@ -52,7 +52,7 @@
                 $scope.estado=$scope.estado+1;
             break;
             case 0:
-                $scope.siguiente($scope.pedido_actual.table_id);
+                $scope.siguiente($scope.pedido_actual.table);
             break;
             case 1:
                 $scope.siguiente($scope.pedido_actual.order);
@@ -89,7 +89,7 @@
         $scope.estado++;
         switch($scope.estado){
             case 1:
-                $scope.pedido_actual.table_id=val.id;
+                $scope.pedido_actual.table=val;
                 $scope.pedido_actual.take_away = val.take_away;
                 $scope.es_a_domicilio = val.take_away;
                 if (val.take_away)

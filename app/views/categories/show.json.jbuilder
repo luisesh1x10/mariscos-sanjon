@@ -7,11 +7,8 @@ json.array!(@bags) do |bag|
       json.platillos(bag.saucer_orders) do |pedido|
         json.extract! pedido, :id,:quantity,:notes
         json.takeaway pedido.order.takeaway
-        unless pedido.order.table.nil?
-          json.table_name pedido.order.table.name 
-        else
-          Error.create(clave:pedido.id)
-        end
+        json.table_name pedido.order.table.name unless pedido.order.table.nil?
+        json.error pedido.id  if  pedido.order.table.nil?
         json.info pedido.platillo
       end
 end

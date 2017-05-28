@@ -1,8 +1,14 @@
-
+<div ng-controller="pedidos_mesero">
+    <div class="row">
+        <br>
+        <div class="center-align">
+            <div class="center-align waves-effect amber darken-4 btn" ng-click="atras()" id="atras">atras</div>
+        </div>
+    </div>
 <div class = "row card">
     <h1 class="center-align">Pedidos</h1>
 </div>
-<div ng-controller="pedidos_mesero">
+
     <div class="row" >
         <div id="contenido">
             <div ng-repeat = "mesa in mesas" class="col s4 m3 l2" id="r{{mesa.id}}" >
@@ -51,12 +57,7 @@
         <div class="col s12 card">
         </div>
     </div>
-    <div class="row">
-        <div class="center-align">
-            <div class="center-align waves-effect amber darken-4 btn" ng-click="atras()" id="atras">atras</div>
-        </div>
-        
-    </div>
+    
     <div class="row">
         <div class="col s12 card">
         </div>
@@ -178,4 +179,3 @@
             </div>
         </div>
     </div>
-</div>

@@ -29,7 +29,7 @@
                             <td class="col col-efectivo"><%=efectivo%></td>
                             <td class="col col-tipo"><%=u.tipo%></td>
                             <td class="col col-folios"><%=folios%></td>
-                            <td class="col col-folios"><%= ec>0? ((efectivo/ec)*100).to_f : 0 %></td>
+                            <td class="col col-folios"><%= ec>0? ((efectivo.to_f/ec.to_f)*100).to_f : 0 %></td>
                             <td class="col col-folios"><%= fc>0? ((folios.to_f/fc.to_f)*100).to_f : 0%></td>
                           </tr>
                         <%end%>
@@ -70,7 +70,7 @@
                             <td class="col col-efectivo"><%=efectivo%></td>
                             <td class="col col-tipo"><%=u.tipo%></td>
                             <td class="col col-folios"><%=folios%></td>
-                            <td class="col col-folios"><%= ec>0? ((efectivo/ec)*100).to_f : 0 %></td>
+                            <td class="col col-folios"><%= ec>0? ((efectivo.to_f/ec.to_f)*100).to_f : 0 %></td>
                             <td class="col col-folios"><%= fc>0? ((folios.to_f/fc.to_f)*100).to_f : 0%></td>
                           </tr>
                         <%end%>
@@ -109,7 +109,7 @@
                             <td class="col col-efectivo"><%=efectivo%></td>
                             <td class="col col-tipo"><%=u.tipo%></td>
                             <td class="col col-folios"><%=folios%></td>
-                            <td class="col col-folios"><%= ec>0? ((efectivo/ec)*100).to_f : 0 %></td>
+                            <td class="col col-folios"><%= ec>0? ((efectivo.to_f/ec.to_f)*100).to_f : 0 %></td>
                             <td class="col col-folios"><%= fc>0? ((folios.to_f/fc.to_f)*100).to_f : 0%></td>
                           </tr>
                         <%end%>

@@ -1,3 +1,6 @@
+
+
+<%=Time.now%>
 <div class="column" style="width: 100.0%;">
               <div class="panel">
                   <h3>Reporte de meseros de hoy</h3>
@@ -10,17 +13,25 @@
                           <th class="col col-efectivo">Efectivo</th>
                           <th class="col col-tipo">Tipo</th>
                           <th class="col col-folios">Folios</th>
+                          <th class="col col-folios">% efectivo</th>
+                          <th class="col col-folios">% folios</th>
                         </tr>
                       </thead>
                       <tbody>
+                        <%ec = SaucerOrder.where(:created_at => Date.today.beginning_of_day..Date.today.end_of_day).sum(:price)%>
+                        <%fc =  Order.joins(:saucerOrders).where(:created_at => Date.today.beginning_of_day..Date.today.end_of_day).uniq.count%>
                         <%User.all.each do |u|%>
-                        <tr class="odd" id="user">
-                          <td class="col col-usuario"><%=u.name%></td>
-                          <td class="col col-correo"><%=u.email%></td>
-                          <td class="col col-efectivo"><%=u.saucer_orders.where(:created_at => Date.today.beginning_of_day+6.hours..Date.today.end_of_day+6.hours).sum(:price)%></td>
-                          <td class="col col-tipo"><%=u.tipo%></td>
-                          <td class="col col-folios"><%=Order.joins(:saucerOrders).where("saucer_orders.user_id = ?",u.id).where(:created_at => Date.today.beginning_of_day+6.hours..Date.today.end_of_day+6.hours).uniq.count%></td>
-                        </tr>
+                          <%efectivo = u.saucer_orders.where(:created_at => Date.today.beginning_of_day..Date.today.end_of_day).sum(:price)%>
+                          <%folios =  Order.joins(:saucerOrders).where("saucer_orders.user_id = ?",u.id).where(:created_at => Date.today.beginning_of_day..Date.today.end_of_day).uniq.count%>
+                          <tr class="odd" id="user">
+                            <td class="col col-usuario"><%=u.name%></td>
+                            <td class="col col-correo"><%=u.email%></td>
+                            <td class="col col-efectivo"><%=efectivo%></td>
+                            <td class="col col-tipo"><%=u.tipo%></td>
+                            <td class="col col-folios"><%=folios%></td>
+                            <td class="col col-folios"><%= ec>0? ((efectivo/ec)*100).to_i : 0 %></td>
+                            <td class="col col-folios"><%= fc>0? ((folios.to_f/fc.to_f)*100).to_i : 0%></td>
+                          </tr>
                         <%end%>
                       </tbody>
                     </table>
@@ -33,7 +44,7 @@
               
 <div class="column" style="width: 100.0%;">
               <div class="panel">
-                  <h3>Reporte de meseros de la Semana</h3>
+                  <h3>Reporte de meseros de la semana</h3>
                   <div class="panel_contents">
                     <table border="0" cellspacing="0" cellpadding="0">
                       <thead>
@@ -43,23 +54,32 @@
                           <th class="col col-efectivo">Efectivo</th>
                           <th class="col col-tipo">Tipo</th>
                           <th class="col col-folios">Folios</th>
+                          <th class="col col-folios">% efectivo</th>
+                          <th class="col col-folios">% folios</th>
                         </tr>
                       </thead>
                       <tbody>
+                        <%ec = SaucerOrder.where(:created_at => Date.today.beginning_of_week..Date.today.end_of_week).sum(:price)%>
+                        <%fc =  Order.joins(:saucerOrders).where(:created_at => Date.today.beginning_of_week..Date.today.end_of_week).uniq.count%>
                         <%User.all.each do |u|%>
-                        <tr class="odd" id="user">
-                          <td class="col col-usuario"><%=u.name%></td>
-                          <td class="col col-correo"><%=u.email%></td>
-                          <td class="col col-efectivo"><%=u.saucer_orders.where(:created_at => Date.today.beginning_of_week+6.hours..Date.today.end_of_week+6.hours).sum(:price)%></td>
-                          <td class="col col-tipo"><%=u.tipo%></td>
-                          <td class="col col-folios"><%=Order.joins(:saucerOrders).where("saucer_orders.user_id = ?",u.id).where(:created_at => Date.today.beginning_of_week+6.hours..Date.today.end_of_week+6.hours).uniq.count%></td>
-                        </tr>
+                          <%efectivo = u.saucer_orders.where(:created_at => Date.today.beginning_of_week..Date.today.end_of_week).sum(:price)%>
+                          <%folios =  Order.joins(:saucerOrders).where("saucer_orders.user_id = ?",u.id).where(:created_at => Date.today.beginning_of_week..Date.today.end_of_week).uniq.count%>
+                          <tr class="odd" id="user">
+                            <td class="col col-usuario"><%=u.name%></td>
+                            <td class="col col-correo"><%=u.email%></td>
+                            <td class="col col-efectivo"><%=efectivo%></td>
+                            <td class="col col-tipo"><%=u.tipo%></td>
+                            <td class="col col-folios"><%=folios%></td>
+                            <td class="col col-folios"><%= ec>0? ((efectivo/ec)*100).to_i : 0 %></td>
+                            <td class="col col-folios"><%= fc>0? ((folios.to_f/fc.to_f)*100).to_i : 0%></td>
+                          </tr>
                         <%end%>
                       </tbody>
                     </table>
                   </div>
                 </div>
               </div>
+              
               
 <div class="column" style="width: 100.0%;">
               <div class="panel">
@@ -73,17 +93,25 @@
                           <th class="col col-efectivo">Efectivo</th>
                           <th class="col col-tipo">Tipo</th>
                           <th class="col col-folios">Folios</th>
+                          <th class="col col-folios">% efectivo</th>
+                          <th class="col col-folios">% folios</th>
                         </tr>
                       </thead>
                       <tbody>
+                        <%ec = SaucerOrder.where(:created_at => Date.today.beginning_of_month..Date.today.end_of_month).sum(:price)%>
+                        <%fc =  Order.joins(:saucerOrders).where(:created_at => Date.today.beginning_of_month..Date.today.end_of_month).uniq.count%>
                         <%User.all.each do |u|%>
-                        <tr class="odd" id="user">
-                          <td class="col col-usuario"><%=u.name%></td>
-                          <td class="col col-correo"><%=u.email%></td>
-                          <td class="col col-efectivo"><%=u.saucer_orders.where(:created_at => Date.today.beginning_of_month+6.hours..Date.today.end_of_month+6.hours).sum(:price)%></td>
-                          <td class="col col-tipo"><%=u.tipo%></td>
-                          <td class="col col-folios"><%=Order.joins(:saucerOrders).where("saucer_orders.user_id = ?",u.id).where(:created_at => Date.today.beginning_of_month+6.hours..Date.today.end_of_month+6.hours).uniq.count%></td>
-                        </tr>
+                          <%efectivo = u.saucer_orders.where(:created_at => Date.today.beginning_of_month..Date.today.end_of_month).sum(:price)%>
+                          <%folios =  Order.joins(:saucerOrders).where("saucer_orders.user_id = ?",u.id).where(:created_at => Date.today.beginning_of_month..Date.today.end_of_month).uniq.count%>
+                          <tr class="odd" id="user">
+                            <td class="col col-usuario"><%=u.name%></td>
+                            <td class="col col-correo"><%=u.email%></td>
+                            <td class="col col-efectivo"><%=efectivo%></td>
+                            <td class="col col-tipo"><%=u.tipo%></td>
+                            <td class="col col-folios"><%=folios%></td>
+                            <td class="col col-folios"><%= ec>0? ((efectivo/ec)*100).to_i : 0 %></td>
+                            <td class="col col-folios"><%= fc>0? ((folios.to_f/fc.to_f)*100).to_i : 0%></td>
+                          </tr>
                         <%end%>
                       </tbody>
                     </table>

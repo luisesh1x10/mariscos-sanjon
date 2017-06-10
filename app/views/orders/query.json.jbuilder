@@ -6,6 +6,7 @@ json.array!(@orders) do |order|
   json.total order.total
   json.a_domicilio order.takeaway
   json.platillos  (order.saucerOrders) do |so|
+    json.notas so.notes
     json.id so.id
     json.name so.platillo.name unless so.platillo.nil?
     json.price so.price

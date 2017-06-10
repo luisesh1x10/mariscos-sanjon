@@ -33,6 +33,7 @@
                       <select ng-model="platillo.order_id" ng-change="cambiarOrden(platillo)" class="browser-default">
                           <option ng-repeat="folio in ordenes_disponiblles" value="{{folio.id}}"> mesa: {{folio.table_name}}, Folio: {{folio.id}} </option>
                       </select>
+                      notas: {{platillo.notas}}
                   </div>
                 </li>
               </ul>

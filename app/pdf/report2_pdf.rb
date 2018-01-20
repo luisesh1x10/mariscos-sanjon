@@ -21,7 +21,7 @@ class Report2Pdf < Prawn::Document
       
       image "#{Rails.root}/app/assets/images/sanjonLogo.jpg", position: :center,:width=>90
       text "Direccion: Boulevard Madero #1089 col. Las Vegas, 80090 Culiacán. ", size: 9,:align => :center
-      text "Fecha: #{Time.now.strftime("%m/%d/%Y")}", size: 9,:align => :center
+      text "Fecha: #{Time.now.strftime("%d/%m/%Y")}", size: 9,:align => :center
       text "Hora: #{Time.now.strftime("%I:%M")}", size: 9,:align => :center
       text "Folio: #{@folio}",size:9,:align => :center
       text "Mesero: #{@order.mesero}",size:9,:align => :center

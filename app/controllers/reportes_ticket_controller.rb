@@ -24,14 +24,14 @@ class ReportesTicketController < ApplicationController
     end
     def historial
         @tickets = [] 
-        elementos = 0...25
+        elementos = 0...4
         elementos.each do |i|
           total = 0
           fecha = Date.today 
           fecha = fecha - (i).months
           inicio = fecha.beginning_of_month+6.hours 
           fin = fecha.end_of_month+6.hours
-          @orders = Order.all.where(status:2).where(:created_at => inicio..fin).order(updated_at: :desc).first(10)
+          @orders = Order.all.where(status:2).where(:created_at => inicio..fin).order(updated_at: :desc).first(210)
           datos = []
           folio = 4932
           @orders.each do |order|

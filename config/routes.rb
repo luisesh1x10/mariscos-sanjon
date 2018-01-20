@@ -8,7 +8,9 @@ Rails.application.routes.draw do
   resources :expenses
   get 'avanzar/:id',to: 'bags#avanzar',as:'avanzar'
   resources :bags
-  
+  get 'reportes_ticket/historial', to:'reportes_ticket#historial'
+  get 'reportes_ticket/:id', to:'reportes_ticket#show', as:"rtickets"
+  get 'reportes_ticket', to:'reportes_ticket#index', as:"tickets"
   get "historial",to:'orders#historial', as:'historial'
   get 'pedido',to:'mesero#pedido',as:'pedido'
   get 'orders/query', :to => "orders#query",as:'order_query'

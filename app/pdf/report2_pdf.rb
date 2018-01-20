@@ -1,7 +1,8 @@
-class ReportPdf < Prawn::Document
-  def initialize(order)
+class Report2Pdf < Prawn::Document
+  def initialize(order,folio)
     super( :margin => [20,20,20,10],:skip_page_creation => false)
     @order = order
+    @folio = folio
     header
     text_content
   end
@@ -22,7 +23,7 @@ class ReportPdf < Prawn::Document
       text "Direccion: Boulevard Madero #1089 col. Las Vegas, 80090 Culiacán. ", size: 9,:align => :center
       text "Fecha: #{Time.now.strftime("%m/%d/%Y")}", size: 9,:align => :center
       text "Hora: #{Time.now.strftime("%I:%M")}", size: 9,:align => :center
-      text "Folio: #{@order.id}",size:9,:align => :center
+      text "Folio: #{@folio}",size:9,:align => :center
       text "Mesero: #{@order.mesero}",size:9,:align => :center
       table_content
       if @order.takeaway
@@ -46,7 +47,7 @@ class ReportPdf < Prawn::Document
       row(0).font_style = :bold
       self.header = true
     end
-     text "Total a pagar #{@order.saucerOrders.sum('price*quantity')}", size: 15, style: :bold
+     text "Total a pagar #{@order.regulador_total(200)}", size: 15, style: :bold
      unless @order.payment.nil?
       text "Pago con: #{@order.payment}", size: 12, style: :bold
       text "Cambio: #{@order.payment-@order.saucerOrders.sum('price*quantity')}", size: 15, style: :bold
@@ -55,7 +56,7 @@ class ReportPdf < Prawn::Document
 
   def product_rows
     [['Platillo', 'Cantidad', 'Precio']] +
-    @order.saucerOrders.map do |so|
+    @order.regulador(200).map do |so|
       [so.platillo.name,so.quantity,so.price*so.quantity]
     end
   end

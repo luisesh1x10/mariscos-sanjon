@@ -1,0 +1,24 @@
+ <div ng-controller ="ticket">
+     <div class = "row" >
+         <div class="container">
+             <ul class="collapsible" data-collapsible="accordion">
+              <li ng-repeat = "periodo in ordenes">
+                <div class="collapsible-header"><i class="material-icons">no_sim</i> Periodo: {{periodo.periodo}} Total: {{periodo.total}}</div>
+                <div class="collapsible-body card">
+                    <div class="container">
+                        <div class="row">
+                            <div class = "col  s12 m6 l3">
+                                <ul>
+                                    <li ng-repeat="orden in periodo.datos">Orden: folio: {{orden.folio}} mesa: {{orden.order.table_id }} Total: {{orden.valor}}
+                                        <a class="waves-effect waves-light btn" ng-click="imprimir(orden.order.id,orden.folio)" >Imprimir</a>
+                                    </li>
+                                </ul>  
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              </li>
+            </ul>
+        </div>
+    </div>
+ </div>

@@ -31,7 +31,8 @@ class ReportesTicketController < ApplicationController
           fecha = fecha - (i).months
           inicio = fecha.beginning_of_month+6.hours 
           fin = fecha.end_of_month+6.hours
-          @orders = Order.all.where(status:2).where(:created_at => inicio..fin).order(updated_at: :desc).first(210)
+          cantidad = (inicio.month==12)? 312 :210
+          @orders = Order.all.where(status:2).where(:created_at => inicio..fin).order(updated_at: :desc).first(cantidad)
           datos = []
           folio = 4932
           @orders.each do |order|

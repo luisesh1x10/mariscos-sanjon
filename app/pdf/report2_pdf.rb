@@ -37,6 +37,17 @@ class Report2Pdf < Prawn::Document
         text "#{@order.table.name unless @order.table.nil? }"
       end
       text "Gracias por su preferencia"
+      text "DATOS FISCALES",size:9
+      text "RFC: MEPG880120616",size:9
+      text "Domicilio:",size:9
+      text "BLV. francisco indalecio madero #1089 las vegas C.P.80090 Culiacan Sinaloa Mexico",size:9
+      text "Tel: 2752193",size:9
+      text "Regimen de incorporacion fiscal",size:9
+      text "Correo: organizacionmedina@hotmail.com",size:9
+      
+      
+      
+      
     end
 
 

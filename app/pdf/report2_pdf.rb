@@ -48,10 +48,7 @@ class Report2Pdf < Prawn::Document
       self.header = true
     end
      text "Total a pagar #{@order.regulador_total(200)}", size: 15, style: :bold
-     unless @order.payment.nil?
-      text "Pago con: #{@order.payment}", size: 12, style: :bold
-      text "Cambio: #{@order.payment-@order.saucerOrders.sum('price*quantity')}", size: 15, style: :bold
-     end
+    
   end
 
   def product_rows

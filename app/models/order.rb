@@ -27,4 +27,22 @@ class Order < ActiveRecord::Base
     end
     ac.join(", ")
   end
+  def regulador(limite)
+    lista = []
+    valor = 0
+    self.saucerOrders.each do |so|
+      if valor < limite
+        lista << so
+      end
+      valor = valor + so.price * so.quantity
+    end
+    lista
+  end
+  def regulador_total(limite)
+    valor = 0
+    regulador(limite).each do |r|
+      valor = valor + r.price * r.quantity
+    end
+    valor
+  end
 end

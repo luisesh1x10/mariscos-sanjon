@@ -3,7 +3,7 @@
          <div class="container">
              <ul class="collapsible" data-collapsible="accordion">
               <li ng-repeat = "periodo in ordenes">
-                <div class="collapsible-header"><i class="material-icons">no_sim</i> Periodo: {{periodo.periodo}} Total: {{periodo.total}}</div>
+                <div class="collapsible-header"><i class="material-icons">no_sim</i> Periodo: {{periodo.periodo}} Total: {{periodo.total}} | iva: {{periodo.iva}} | total + iva {{periodo.iva + periodo.total}}</div>
                 <div class="collapsible-body card">
                     <div class="container">
                         <div class="row">
@@ -19,6 +19,7 @@
                 </div>
               </li>
             </ul>
+            <a href="/reportes_ticket/generador_ticket" class="waves-effect waves-light btn">Generar ticket</a>
         </div>
     </div>
  </div>

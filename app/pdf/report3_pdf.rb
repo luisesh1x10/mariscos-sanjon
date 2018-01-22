@@ -1,9 +1,12 @@
-class Report2Pdf < Prawn::Document
-  def initialize(order,folio)
+class Report3Pdf < Prawn::Document
+  def initialize(lista,folio,fecha,hora,mesero,total)
     super( :margin => [20,20,20,10],:skip_page_creation => false)
-    @order = order
+    @order = lista
     @folio = folio
-    @limite = 200
+    @fecha = fecha
+    @hora = hora
+    @mesero = mesero
+    @total = total
     header
     text_content
   end
@@ -25,18 +28,9 @@ class Report2Pdf < Prawn::Document
       text "Fecha: #{Time.now.strftime("%d/%m/%Y")}", size: 9,:align => :center
       text "Hora: #{Time.now.strftime("%I:%M")}", size: 9,:align => :center
       text "Folio: #{@folio}",size:9,:align => :center
-      text "Mesero: #{@order.mesero}",size:9,:align => :center
+      text "Mesero: #{@mesero}",size:9,:align => :center
       table_content
-      if @order.takeaway
-        text "Nombre cliente:",size:9
-        text @order.nombre ,size:9
-        text "Direccion:",size:9
-        text " calle: #{@order.calle} colonia: #{@order.colonia} numero_exterior: #{@order.numero_interior} numero_int: #{@order.numero_exterior} " ,size:9
-        text "Anotaciones: #{@order.notas}",size:9
-        text "Telefono: #{@order.telefono}",size:9
-      else
-        text "#{@order.table.name unless @order.table.nil? }"
-      end
+      text "#{Table.all.sample.name}"
       text "Gracias por su preferencia"
       text "DATOS FISCALES",size:9
       text "RFC: MEPG880120616",size:9
@@ -55,16 +49,17 @@ class Report2Pdf < Prawn::Document
       row(0).font_style = :bold
       self.header = true
     end
-     text "Total: #{@order.regulador_total(@limite)}", size: 15, style: :bold
-     text "IVA: #{@order.ivaf(@limite)}", size: 15, style: :bold
-     text "Total + IVA: #{@order.conIvaf(@limite)}", size: 15, style: :bold
+     text "Total a pagar #{@total}", size: 15, style: :bold
+     text "IVA: #{((@total.to_f)*0.16).round(2)}", size: 15, style: :bold
+     text "Total + IVA: #{((@total.to_f)*1.16).round(2)}", size: 15, style: :bold
     
   end
 
   def product_rows
     [['Platillo', 'Cantidad', 'Precio']] +
-    @order.regulador(@limite).map do |so|
-      [so.platillo.name,so.quantity,so.price*so.quantity]
+    @order.map do |so|
+      [so["platillo"],so["cantidad"],so["precio"].to_f*so["cantidad"].to_i]
+      
     end
   end
 end

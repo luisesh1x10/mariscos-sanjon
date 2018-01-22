@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   get 'avanzar/:id',to: 'bags#avanzar',as:'avanzar'
   resources :bags
   get 'reportes_ticket/historial', to:'reportes_ticket#historial'
+  get 'reportes_ticket/reporte3', to:'reportes_ticket#reporte3'
+  get 'reportes_ticket/generador_ticket', to:'reportes_ticket#generador_ticket'
   get 'reportes_ticket/:id', to:'reportes_ticket#show', as:"rtickets"
   get 'reportes_ticket', to:'reportes_ticket#index', as:"tickets"
   get "historial",to:'orders#historial', as:'historial'

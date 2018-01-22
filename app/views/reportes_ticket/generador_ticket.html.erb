@@ -1,0 +1,73 @@
+<div class = "container" ng-controller="generadorTicket as vm">
+    <div class = "row">
+        <div class="card-panel center-align">
+            <h3>Generador de tickets</h3>
+        </div>
+    </div>
+    <div class = "row">
+        <div class="card-panel center-align">
+            <div class = "row">
+                <h4>Datos del tickes </h4>
+            </div>
+            <div class ="row">
+                <div class = "col s3">
+                    Folio: <input type="number" min=0 ng-model="vm.datos.folio">
+                </div>
+                <div class = "col s3">
+                    Fecha: <input type="date" ng-model="vm.datos.fecha">    
+                </div>
+                <div class = "col s3">
+                    hora: <input type="time" ng-model="vm.datos.hora">
+                </div>
+                <div class = "col s3">
+                    mesero: <input type="email" ng-model="vm.datos.mesero">    
+                </div>
+            </div>
+            <div class = "row">
+                <div class = " input-field col s3">
+                    <input type="text" ng-model="vm.platillo">
+                    <label for="platillo">Platillo</label>
+                </div>
+                <div class = " input-field col s3">
+                    <input type="number" ng-model="vm.cantidad">
+                    <label for="cantidad">Cantidad</label>
+                </div>
+                <div class = " input-field col s3">
+                    <input type="text" ng-model="vm.precio">
+                    <label for="precio">Precio</label>
+                </div>
+                <div class = "col s3">
+                    <a class="btn-floating" ng-click = "vm.agregarLista()"><i class="material-icons">add</i></a>
+                </div>
+            </div>
+            <div class = "row">
+                <table>
+                    <tr>
+                        <th>
+                            Platillo
+                        </th>
+                        <th>
+                            Cantidad
+                        </th>
+                        <th>
+                            Precio
+                        </th>
+                    </tr>
+                    <tr ng-repeat = "s in vm.datos.lista ">
+                        <td>{{s.platillo}}</td>
+                        <td>{{s.cantidad}}</td>
+                        <td>{{s.precio}}</td>
+                        <td><a ng-click="vm.eliminarLista($index)">Eliminar</a></td>
+                    </tr>
+                </table>
+            </div>
+            
+                Total: {{vm.datos.total}} <br></br>
+                iva: {{vm.datos.iva}} <br></br>
+                Total + Iva: {{vm.datos.total + vm.datos.iva}} <br></br>
+            <div class = "row">
+                <a class = "waves-effect waves-light btn" ng-click="vm.generar()">Generar</a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -20,8 +20,14 @@ class Report2Pdf < Prawn::Document
 
     # The bounding_box takes the x and y coordinates for positioning its content and some options to style it
     bounding_box([0, y_position], :width => 100) do
-      image "#{Rails.root}/app/assets/images/sanjonLogo.jpg", position: :center,:width=>90
-      text "Direccion: Boulevard Madero #1089 col. Las Vegas, 80090 Culiacán. ", size: 9,:align => :center
+      image "#{Rails.root}/app/assets/images/sanjonLogo.jpg", :align => :center,:width=>90
+      text "DATOS FISCALES",size:9, :align => :center
+      text "RFC: MEPG880120616",size:9, :align => :center
+      text "Domicilio:",size:9, :align => :center
+      text "BLV. francisco indalecio madero #1089 las vegas C.P.80090 Culiacan Sinaloa Mexico",size:9, :align => :center
+      text "Tel: 2752193",size:9, :align => :center
+      text "Regimen de incorporacion fiscal",size:9, :align => :center
+      text "Correo: organizacionmedina@hotmail.com",size:9, :align => :center
       text "Fecha: #{@fecha}", size: 9,:align => :center
       text "Folio: #{@folio}",size:9,:align => :center
       text "Mesero: #{@order.mesero}",size:9,:align => :center
@@ -37,13 +43,7 @@ class Report2Pdf < Prawn::Document
         text "#{@order.table.name unless @order.table.nil? }"
       end
       text "Gracias por su preferencia"
-      text "DATOS FISCALES",size:9
-      text "RFC: MEPG880120616",size:9
-      text "Domicilio:",size:9
-      text "BLV. francisco indalecio madero #1089 las vegas C.P.80090 Culiacan Sinaloa Mexico",size:9
-      text "Tel: 2752193",size:9
-      text "Regimen de incorporacion fiscal",size:9
-      text "Correo: organizacionmedina@hotmail.com",size:9
+      
     end
 
 
@@ -54,9 +54,9 @@ class Report2Pdf < Prawn::Document
       row(0).font_style = :bold
       self.header = true
     end
-     text "Total: #{@order.regulador_total(@limite)}", size: 15, style: :bold
+     text "Subtotal: #{@order.regulador_total(@limite)}", size: 15, style: :bold
      text "IVA: #{@order.ivaf(@limite)}", size: 15, style: :bold
-     text "Total + IVA: #{@order.conIvaf(@limite)}", size: 15, style: :bold
+     text "Total: #{@order.conIvaf(@limite)}", size: 15, style: :bold
     
   end
 

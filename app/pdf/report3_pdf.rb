@@ -24,20 +24,19 @@ class Report3Pdf < Prawn::Document
     bounding_box([0, y_position], :width => 100) do
       
       image "#{Rails.root}/app/assets/images/sanjonLogo.jpg", position: :center,:width=>90
-      text "Direccion: Boulevard Madero #1089 col. Las Vegas, 80090 Culiacán. ", size: 9,:align => :center
+      text "DATOS FISCALES",size:9, :align => :center
+      text "RFC: MEPG880120616",size:9, :align => :center
+      text "Domicilio:",size:9, :align => :center
+      text "BLV. francisco indalecio madero #1089 las vegas C.P.80090 Culiacan Sinaloa Mexico",size:9, :align => :center
+      text "Tel: 2752193",size:9, :align => :center
+      text "Regimen de incorporacion fiscal",size:9, :align => :center
+      text "Correo: organizacionmedina@hotmail.com",size:9, :align => :center
       text "Fecha: #{Time.now.strftime("%d/%m/%Y")}", size: 9,:align => :center
       text "Folio: #{@folio}",size:9,:align => :center
       text "Mesero: #{@mesero}",size:9,:align => :center
       table_content
       text "#{Table.all.sample.name}"
       text "Gracias por su preferencia"
-      text "DATOS FISCALES",size:9
-      text "RFC: MEPG880120616",size:9
-      text "Domicilio:",size:9
-      text "BLV. francisco indalecio madero #1089 las vegas C.P.80090 Culiacan Sinaloa Mexico",size:9
-      text "Tel: 2752193",size:9
-      text "Regimen de incorporacion fiscal",size:9
-      text "Correo: organizacionmedina@hotmail.com",size:9
     end
 
 
@@ -48,9 +47,9 @@ class Report3Pdf < Prawn::Document
       row(0).font_style = :bold
       self.header = true
     end
-     text "Total a pagar #{@total}", size: 15, style: :bold
+     text "Subtotal: #{@total}", size: 15, style: :bold
      text "IVA: #{((@total.to_f)*0.16).round(2)}", size: 15, style: :bold
-     text "Total + IVA: #{((@total.to_f)*1.16).round(2)}", size: 15, style: :bold
+     text "Total: #{((@total.to_f)*1.16).round(2)}", size: 15, style: :bold
     
   end
 

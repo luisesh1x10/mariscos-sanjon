@@ -61,7 +61,7 @@ class ReportesTicketController < ApplicationController
           @orders.each do |order|
             if cont == saltos[index]
               index += 1
-              count = 0
+              cont = 0
               fecha = fecha - 1.day
             end
             cont += 1

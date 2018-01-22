@@ -44,6 +44,7 @@ class ReportesTicketController < ApplicationController
     def historial
         @tickets = [] 
         elementos = 0...4
+        folio = 4932 + 522
         elementos.each do |i|
           total = 0
           fecha = Date.today 
@@ -53,7 +54,7 @@ class ReportesTicketController < ApplicationController
           cantidad = (inicio.month==12)? 312 :210
           @orders = Order.all.where(status:2).where(:created_at => inicio..fin).order(updated_at: :desc).first(cantidad)
           datos = []
-          folio = 4932
+          
           
           
           saltos = [5,6,8,11,10,7,6,8,7,5,5,6,7,5,9,10,7,5,7,6,10,6,8,10,10,8,5,5,8] if fin.day == 29

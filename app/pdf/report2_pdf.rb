@@ -1,8 +1,9 @@
 class Report2Pdf < Prawn::Document
-  def initialize(order,folio)
+  def initialize(order,folio,fecha)
     super( :margin => [20,20,20,10],:skip_page_creation => false)
     @order = order
     @folio = folio
+    @fecha = fecha
     @limite = 200
     header
     text_content
@@ -19,11 +20,9 @@ class Report2Pdf < Prawn::Document
 
     # The bounding_box takes the x and y coordinates for positioning its content and some options to style it
     bounding_box([0, y_position], :width => 100) do
-      
       image "#{Rails.root}/app/assets/images/sanjonLogo.jpg", position: :center,:width=>90
       text "Direccion: Boulevard Madero #1089 col. Las Vegas, 80090 Culiacán. ", size: 9,:align => :center
-      text "Fecha: #{Time.now.strftime("%d/%m/%Y")}", size: 9,:align => :center
-      text "Hora: #{Time.now.strftime("%I:%M")}", size: 9,:align => :center
+      text "Fecha: #{@fecha}", size: 9,:align => :center
       text "Folio: #{@folio}",size:9,:align => :center
       text "Mesero: #{@order.mesero}",size:9,:align => :center
       table_content

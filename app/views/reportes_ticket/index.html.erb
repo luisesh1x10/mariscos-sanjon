@@ -10,7 +10,7 @@
                             <div class = "col  s12 m6 l3">
                                 <ul>
                                     <li ng-repeat="orden in periodo.datos">Orden: folio: {{orden.folio}} mesa: {{orden.order.table_id }} Total: {{orden.valor}}
-                                        <a class="waves-effect waves-light btn" ng-click="imprimir(orden.order.id,orden.folio)" >Imprimir</a>
+                                        <a class="waves-effect waves-light btn" ng-click="imprimir(orden.order.id,orden.folio,orden.fecha)" >Imprimir</a>
                                     </li>
                                 </ul>  
                             </div>

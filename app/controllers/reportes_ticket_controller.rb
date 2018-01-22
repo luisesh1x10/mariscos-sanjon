@@ -54,7 +54,11 @@ class ReportesTicketController < ApplicationController
           @orders = Order.all.where(status:2).where(:created_at => inicio..fin).order(updated_at: :desc).first(cantidad)
           datos = []
           folio = 4932
-          saltos = [5,6,8,12,11,8,4,5,5,10,5,6,8,12,11,8,4,5,5,10,5,6,8,12,11,8,4,5,10,5,10,8,12,11,8,4,5,5,5,10]
+          
+          saltos = [5,6,8,11,10,7,6,8,7,5,5,6,7,5,9,10,7,5,7,6,10,6,8,10,10,8,5,5,8] if fin.day == 29
+          saltos = [5,6,8,11,10,7,6,5,7,5,5,6,7,5,9,10,7,5,7,5,5,6,8,10,10,8,4,5,5,3,10] if fin.day == 31
+          saltos = [5,6,8,12,11,8,4,5,8,5,5,6,8,5,11,12,7,5,7,5,5,6,8,12,11,8,4,5,5,3] if fin.day == 30
+          saltos = [5,6,8,12,11,8,4,5,5,10,5,6,8,12,11,8,4,5,5,10,5,6,8,12,11,8,4,5,10,5,10,8,12,11,8,4,5,5,5,10] if fin.month == 12
           cont = 0 
           index = 0
           fecha = fin

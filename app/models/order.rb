@@ -45,4 +45,10 @@ class Order < ActiveRecord::Base
     end
     valor
   end
+  def ivaf(limite)
+    return (regulador_total(limite) * 0.16).round(2)
+  end
+  def conIvaf(limite)
+    return (regulador_total(limite) * 1.16).round(2)
+  end
 end

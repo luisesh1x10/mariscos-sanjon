@@ -7,18 +7,21 @@
     <div class="section no-pad-bot">
       <div class="container">
         <br><br>
-        <h1 class="header center amber-text text-darken-4">Tacos y mariscos Hnos SanJon</h1>
-        <div class="row center">
-          <h5 class="header col s12 light " style="background-color:lightgrey;">Calidad, Sabor y Servicio que ¡Nos distinguen! No seremos los mejores del mundo pero... ¡Si los Mejores del rumbo!</h5>
+        <div class = "fondo">
+          <h1 class="header center amber-text text-darken-4">Tacos y mariscos Hnos SanJon</h1>
+          <div class="center">
+            <h5 class="header col s12 light " style="opacity:1; background-color:lightgrey;">Calidad, Sabor y Servicio que ¡Nos distinguen! No seremos los mejores del mundo pero... ¡Si los Mejores del rumbo!</h5>
+          </div>
         </div>
         <div class="row center">
           <a href="" id="download-button" class="btn-large waves-effect amber darken-4">Ver nuestro menu</a>
         </div>
+        
         <br><br>
 
       </div>
     </div>
-    <div class="parallax"><%=image_tag "deseada.jpg"%></div>
+    <div class="parallax"><%=image_tag "im0.jpg"%></div>
   </div>
 
 
@@ -70,7 +73,7 @@
     <div class="section no-pad-bot">
       <div class="container">
         <div class="row center">
-      <!--   <h5 class="header col s12 light">Elegante</h5> -->
+           <h5 class="header col s12 light letra-grande">Elegante</h5>
         </div>
       </div>
     </div>
@@ -84,11 +87,11 @@
         <div class="col s12">
           <h3><i class="mdi-content-send brown-text"></i></h3>
           <h4>Platillos nuevos.</h4>
-          <%@nuevos.each do |platillo|%>
+         <!-- <%@nuevos.each do |platillo|%>
             <div class="col s12 m6 l4">
               <div class="card">
                 <div class="card-image waves-effect waves-block waves-light">
-                  <%=image_tag platillo.cover.url,class:"activator"%>
+                  <%=image_tag "im0c",class:"activator"%>
                 </div>
                 <div class="card-content">
                   <span class="card-title activator grey-text text-darken-4"><%=platillo.name%><i class="material-icons right">more_vert</i></span>
@@ -100,7 +103,52 @@
                 </div>
               </div>
             </div>
-          <%end%>  
+          <%end%>  -->
+          <div class="col s12 m6 l4">
+              <div class="card">
+                <div class="card-image waves-effect waves-block waves-light">
+                  <%=image_tag "torre",class:"activator"%>
+                </div>
+                <div class="card-content">
+                  <span class="card-title activator grey-text text-darken-4">Torre<i class="material-icons right">more_vert</i></span>
+                  <p><a href="#">Ver más</a></p>
+                </div>
+                <div class="card-reveal">
+                  <span class="card-title grey-text text-darken-4">Torre<i class="material-icons right">close</i></span>
+                  <p></p>
+                </div>
+              </div>
+            </div>
+            <div class="col s12 m6 l4">
+              <div class="card">
+                <div class="card-image waves-effect waves-block waves-light">
+                  <%=image_tag "lanza_llamas",class:"activator"%>
+                </div>
+                <div class="card-content">
+                  <span class="card-title activator grey-text text-darken-4">Lanza llamas<i class="material-icons right">more_vert</i></span>
+                  <p><a href="#">Ver más</a></p>
+                </div>
+                <div class="card-reveal">
+                  <span class="card-title grey-text text-darken-4">Lanza llamas<i class="material-icons right">close</i></span>
+                  <p></p>
+                </div>
+              </div>
+            </div>
+            <div class="col s12 m6 l4">
+              <div class="card">
+                <div class="card-image waves-effect waves-block waves-light">
+                  <%=image_tag "aguacate_relleno",class:"activator"%>
+                </div>
+                <div class="card-content">
+                  <span class="card-title activator grey-text text-darken-4">Aguacate relleno<i class="material-icons right">more_vert</i></span>
+                  <p><a href="#">Ver más</a></p>
+                </div>
+                <div class="card-reveal">
+                  <span class="card-title grey-text text-darken-4">Aguacate relleno<i class="material-icons right">close</i></span>
+                  <p></p>
+                </div>
+              </div>
+            </div>
         </div>
       </div>
 
@@ -112,7 +160,7 @@
     <div class="section no-pad-bot">
       <div class="container">
         <div class="row center">
-  <!--        <h5 class="header col s12 light">Delicioso</h5>  -->
+          <h5 class="header col s12 light letra-grande">Delicioso</h5>  
         </div>
       </div>
     </div>

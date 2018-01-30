@@ -1,0 +1,63 @@
+<div class = "container">
+    <div class = "card-panel">
+        <h3 class="center-align" >Corte de caja</h3>
+    </div>
+    <div class = "row">
+        <div class = "card-panel">
+            <div class = "row">
+                <div class = "col s12 m3 l3">
+                    <label>
+                        Ingresa una fecha para generar corte de caja
+                    </label>
+                    <br></br>
+                    <div class="input-field col s12">
+                      Fecha: <br>
+                      <input id="fecha" value = "<%= @fecha%>" type="date" class="validate">
+                    </div>
+                    <a class="waves-effect waves-light btn" id = "generarTicket">Generar Corte</a>
+                    <div class="hide-on-small-only">
+                        <br></br>
+                        <br></br>
+                        <br></br>
+                        <br></br>
+                        <br></br>
+                    </div>
+                    <a class="waves-effect waves-light btn" id="imprimir">Imprimir</a>
+                   <!-- <a class="waves-effect waves-light btn">Generar Corte</a>-->
+                    
+                </div>
+                <div class = "col s12 m9 l9">
+                    <div class = " lienzo">
+                     <table>
+                        <thead>
+                          <tr>
+                              <th>Ventas</th>
+                              <th>Salidas</th>
+                              <th>descripción</th>
+                          </tr>
+                        </thead>
+                
+                        <tbody>
+                        <%@ingresos.each do |i|%>
+                          <tr>
+                            <td><%= i.price * i.quantity%></td>
+                            <td></td>
+                            <td><%= i.platillo.name%></td>
+                          </tr>
+                         <%end%>
+                         <%@egresos.each do |e|%>
+                          <tr>
+                            <td></td>
+                            <td><%= e.amount%></td>
+                            <td><%= e.description%></td>
+                          </tr>
+                         <%end%>
+                        </tbody>
+                      </table>
+                    </div>
+                    Ingresos: <%=  @sumIngresos%>   Gastos: <%= @sumEgresos%> Ganancias: <%= @sumIngresos + @sumEgresos%>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

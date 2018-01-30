@@ -6,7 +6,7 @@
         
         <div class="input-field col s6">
             <select class="browser-default" ng-model="nuevo.category" ng-change="ocultar()">
-              <option value="" disabled selected>Choose your option</option>
+              <option value="" disabled selected>Selecciona una opción</option>
               <option value=1>Provedores</option>
               <option value=2>Servicios</option>
               <option value=4>Nomina</option>
@@ -39,9 +39,9 @@
       </div>
       <div class="col s12 m6 l8">
         <table>
-          <th>catrgoria</th>
+          <th>categoria</th>
           <th>monto</th>
-          <th>descricion</th>
+          <th>descripcion</th>
           <tr ng-repeat="gasto  in  gastos" >
             <td>{{gasto.category}}</td>
             <td>{{gasto.amount}}</td>

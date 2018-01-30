@@ -19,7 +19,13 @@ class ReportPdf < Prawn::Document
     bounding_box([0, y_position], :width => 100) do
       
       image "#{Rails.root}/app/assets/images/sanjonLogo.jpg", position: :center,:width=>90
-      text "Direccion: Boulevard Madero #1089 col. Las Vegas, 80090 Culiacán. ", size: 9,:align => :center
+      text "DATOS FISCALES",size:9, :align => :center
+      text "RFC: MEPG880120616",size:9, :align => :center
+      text "Domicilio:",size:9, :align => :center
+      text "BLV. francisco indalecio madero #1089 las vegas C.P.80090 Culiacan Sinaloa Mexico",size:9, :align => :center
+      text "Tel: 2752193",size:9, :align => :center
+      text "Regimen de incorporacion fiscal",size:9, :align => :center
+      text "Correo: organizacionmedina@hotmail.com",size:9, :align => :center
       text "Fecha: #{Time.now.strftime("%m/%d/%Y")}", size: 9,:align => :center
       text "Hora: #{Time.now.strftime("%I:%M")}", size: 9,:align => :center
       text "Folio: #{@order.id}",size:9,:align => :center

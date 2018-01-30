@@ -1,13 +1,10 @@
-class Report3Pdf < Prawn::Document
-  def initialize(lista,folio,fecha,hora,mesero,total)
+class CortePdf < Prawn::Document
+  def initialize(ingresos,egresos,sumIngresos,sumEgresos)
     super( :margin => [20,20,20,10],:skip_page_creation => false)
-    @order = lista
-    @folio = folio
-    @fecha = fecha
-    @hora = hora
-    @mesero = mesero
-    @total = total
-    
+    @ingresos = ingresos
+    @egresos = egresos
+    @sumIngresos = sumIngresos
+    @sumEgresos = sumEgresos
     header
     text_content
   end
@@ -32,32 +29,22 @@ class Report3Pdf < Prawn::Document
       text "Tel: 2752193",size:9, :align => :center
       text "Regimen de incorporacion fiscal",size:9, :align => :center
       text "Correo: organizacionmedina@hotmail.com",size:9, :align => :center
-      text "Fecha: #{@fecha.to_date.strftime("%d/%m/%Y")}", size: 9,:align => :center
-      text "Folio: #{@folio}",size:9,:align => :center
-      text "Mesero: #{@mesero}",size:9,:align => :center
-      table_content
-      text "#{Table.all.sample.name}"
-      text "Gracias por su preferencia"
-    end
-
-
-  end
-
-  def table_content
-    table  product_rows,:cell_style => { size: 5,border_width:0} do
-      row(0).font_style = :bold
-      self.header = true
-    end
-     text "Subtotal: #{@total}", size: 15, style: :bold
-     text "IVA: #{((@total.to_f)*0.16).round(2)}", size: 15, style: :bold
-     text "Total: #{((@total.to_f)*1.16).round(2)}", size: 15, style: :bold
-    
-  end
-
-  def product_rows
-    [['Platillo', 'Cantidad', 'Precio']] +
-    @order.map do |so|
-      [so["platillo"],so["cantidad"],so["precio"].to_f*so["cantidad"].to_i]
+      text "Fecha: #{Time.now.strftime("%m/%d/%Y")}", size: 9,:align => :center
+      text "Hora: #{Time.now.strftime("%I:%M")}", size: 9,:align => :center
+      text "CORTE DEL DIA", :align => :center
+      text "Ventas Totales: "
+      text "#{Dinero.to_money @sumIngresos}", :align => :right
+      text "Egresos:"
+      text "#{Dinero.to_money @sumEgresos}", :align => :right
+      text "Ganancias: "
+      text "#{Dinero.to_money @sumIngresos - @sumEgresos}", :align => :right
+      text "#{@ingresos.count} ventas en el dia"
+      text "-------------------------"
+      text "---ventas---", :align => :center
+      text "Ventas Totales: #{Dinero.to_money @sumIngresos}"
+      text "Descuentos: #{Dinero.to_money 0}"
+      
+      text "-------------------------"
       
     end
   end

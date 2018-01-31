@@ -16,53 +16,57 @@ class ReportPdf < Prawn::Document
     y_position = cursor - 0
 
     # The bounding_box takes the x and y coordinates for positioning its content and some options to style it
-    bounding_box([0, y_position], :width => 100) do
+    bounding_box([0, y_position], :width => 180) do
       
       image "#{Rails.root}/app/assets/images/sanjonLogo.jpg", position: :center,:width=>90
       text "DATOS FISCALES",size:9, :align => :center
       text "RFC: MEPG880120616",size:9, :align => :center
-      text "Domicilio:",size:9, :align => :center
-      text "BLV. francisco indalecio madero #1089 las vegas C.P.80090 Culiacan Sinaloa Mexico",size:9, :align => :center
-      text "Tel: 2752193",size:9, :align => :center
-      text "Regimen de incorporacion fiscal",size:9, :align => :center
-      text "Correo: organizacionmedina@hotmail.com",size:9, :align => :center
-      text "Fecha: #{Time.now.strftime("%m/%d/%Y")}", size: 9,:align => :center
-      text "Hora: #{Time.now.strftime("%I:%M")}", size: 9,:align => :center
-      text "Folio: #{@order.id}",size:9,:align => :center
-      text "Mesero: #{@order.mesero}",size:9,:align => :center
+      text "DOMICILIO:",size:9, :align => :center
+      text "BLV. FRANCISCO INDALECIO MADERO #1089 LAS VEGAS C.P.80090 CULIACÁN SINALOA MÉXICO",size:9, :align => :center
+      text "TEL: 2752193",size:9, :align => :center
+      text "REGIMÉN DE INCORPORACIÓN FISCAL",size:9, :align => :center
+      text "CORREO: organizacionmedina@hotmail.com",size:9, :align => :center
+      text "FECHA: #{Time.now.strftime("%m/%d/%Y")}", size: 9,:align => :center
+      text "HORA: #{Time.now.strftime("%I:%M")}", size: 9,:align => :center
+      text "FOLIO: #{@order.id}",size:9,:align => :center
+      text "MESERO: #{@order.mesero}",size:9,:align => :center
       table_content
       if @order.takeaway
-        text "Nombre cliente:",size:9
+        text "NOMBRE CLIENTE:",size:9
         text @order.nombre ,size:9
-        text "Direccion:",size:9
-        text " calle: #{@order.calle} colonia: #{@order.colonia} numero_exterior: #{@order.numero_interior} numero_int: #{@order.numero_exterior} " ,size:9
-        text "Anotaciones: #{@order.notas}",size:9
-        text "Telefono: #{@order.telefono}",size:9
+        text "DIRECCIÓN:",size:9
+        text "CALLE: #{@order.calle} colonia: #{@order.colonia} numero_exterior: #{@order.numero_interior} numero_int: #{@order.numero_exterior} " ,size:9
+        text "ANOTACIONES: #{@order.notas}",size:9
+        text "TELEFONO: #{@order.telefono}",size:9
       else
         text "#{@order.table.name unless @order.table.nil? }"
       end
-      text "Gracias por su preferencia"
+      text "GRACIAS POR  SU PREFERENCIA"
     end
 
 
   end
 
   def table_content
-    table  product_rows,:cell_style => { size: 5,border_width:0} do
+    table  product_rows,:cell_style => { size:8,border_width:0} do
       row(0).font_style = :bold
       self.header = true
     end
-     text "Total a pagar #{@order.saucerOrders.sum('price*quantity')}", size: 15, style: :bold
+     text "TOTAL A PAGAR #{@order.saucerOrders.sum('price*quantity')}", size: 15, style: :bold
      unless @order.payment.nil?
-      text "Pago con: #{@order.payment}", size: 12, style: :bold
-      text "Cambio: #{@order.payment-@order.saucerOrders.sum('price*quantity')}", size: 15, style: :bold
+      text "PAGÓ CON: #{@order.payment}", size: 12, style: :bold
+      text "SU CAMBIO: #{@order.payment-@order.saucerOrders.sum('price*quantity')}", size: 15, style: :bold
      end
   end
 
   def product_rows
-    [['Platillo', 'Cantidad', 'Precio']] +
+    [['PLATILLO', 'CATIDAD', 'PRECIO']] +
     @order.saucerOrders.map do |so|
-      [so.platillo.name,so.quantity,so.price*so.quantity]
+      [so.platillo.name,so.quantity,Dinero.to_money(so.price*so.quantity)]
+      
+      
+      
+      
     end
   end
 end

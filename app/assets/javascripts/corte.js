@@ -1,5 +1,5 @@
 
-$(document).ready(()=>{
+$(document).ready(function(){
     $("#generarTicket").click(function(){
         window.location = "/corte/index?fecha="+$("#fecha").val();
     });    

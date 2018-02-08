@@ -1,4 +1,4 @@
-ActiveAdmin.register Password do
+ActiveAdmin.register Expense do
 
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters

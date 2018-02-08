@@ -52,7 +52,9 @@ class ReportPdf < Prawn::Document
       row(0).font_style = :bold
       self.header = true
     end
-     text "TOTAL A PAGAR #{@order.saucerOrders.sum('price*quantity')}", size: 15, style: :bold
+     text "Sub Total: #{Dinero.to_money @order.total}", size: 15, style: :bold
+     text "Descuento: #{Dinero.to_money @order.descuentoTotal}", size: 15, style: :bold
+     text "Total: #{Dinero.to_money @order.totalConDescuento}", size: 15, style: :bold
      unless @order.payment.nil?
       text "PAGÓ CON: #{@order.payment}", size: 12, style: :bold
       text "SU CAMBIO: #{@order.payment-@order.saucerOrders.sum('price*quantity')}", size: 15, style: :bold

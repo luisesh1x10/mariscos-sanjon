@@ -8,8 +8,28 @@
         <div class="col s12 m6">
           <div class="card z-depth-4" ng-repeat="orden in izquierda">
             <div class="card-content">
-              <div class="right-align"><a href="{{orden.finalizar}}" class=" white-text text-darken-4 red darken-1 btn" data-method="post">Finalizar</a></br><br></div>
+              <div class="col s6 left-align">
+                <a ng-click="descuentoPanel(orden)"  href="#descuentos" class=" white-text text-darken-4 red darken-1 btn">Descuento</a></br><br>
+              </div>
+              <div class="col s6 right-align">
+                <a href="{{orden.finalizar}}" class=" white-text text-darken-4 red darken-1 btn" data-method="post">Finalizar</a></br><br>
+              </div>
               <div class="card-title center-align"><span>Folio:{{orden.id}}</span></div> <br>
+              <div ng-if="orden.panel" class = "row">
+                <div class = "col s12">
+                   <div class="input-field col s12" ng-if="!orden.descuentoFlag">
+                    <input id="Password" type="password" class="validate" ng-model="orden.pass" autocomplete="off">
+                    <label for="password">Contraseña</label>
+                    <a class="waves-light btn" ng-click="verificarClave(orden)">Verificar</a>
+                  </div>
+                  <div ng-if = "orden.descuentoFlag">
+                     <label>Selecione Descuento</label>
+                      <select class="browser-default" id = "descuentoGeneral" ng-model="orden.descuentoGeneral" ng-change = "aplicarDescuentoGeneral(orden)" >
+                        <option ng-repeat="x in descuentoOpciones" value="{{x}}">{{x}}%</option>
+                      </select>
+                  </div>
+                </div>
+              </div>
                <div class ="row">
                   <div class="col s12 m6 l4 center-align">Mesero: {{orden.mesero}}</div> 
                   <div class="col s12 m6 l4 center-align">Fecha:{{orden.fecha}}</div>
@@ -33,13 +53,16 @@
                       <select ng-model="platillo.order_id" ng-change="cambiarOrden(platillo)" class="browser-default">
                           <option ng-repeat="folio in ordenes_disponiblles" value="{{folio.id}}"> mesa: {{folio.table_name}}, Folio: {{folio.id}} </option>
                       </select>
+                      Descuento: {{platillo.discount}}</br>
                       notas: {{platillo.notas}}
                   </div>
                 </li>
               </ul>
-              Total: ${{orden.total}}</br>
-              pago con: $<input id="payment" type="number" ng-model="orden.payment" ng-change="actulizarPago(orden.id,orden.payment)"></br>
-              Cambio: $<lable >{{orden.payment-orden.total}}</lable>
+              subTotal: ${{orden.total}} <br>
+              Descuento: ${{orden.descuentoTotal}} <br>
+              Total: ${{orden.total - orden.descuentoTotal}}</br>
+              pago con: <input id="payment" type="number" ng-model="orden.payment" ng-change="actulizarPago(orden.id,orden.payment)"></br>
+              Cambio: $<lable >{{orden.payment-orden.total + orden.descuentoTotal}}</lable>
             </div>
             <div class="card-action">
                 <a href="{{orden.ver}}" class="amber-text text-darken-4"> Ver</a>
@@ -51,18 +74,37 @@
             </div>
           </div>
         </div>
-        
         <div class="col s12 m6">
           <div class="card z-depth-4" ng-repeat="orden in derecha">
-             <div class="card-content">
-              <div class="right-align"><a href="{{orden.finalizar}}" class=" white-text text-darken-4 red darken-1 btn" data-method="post">Finalizar</a></br><br></div>
+            <div class="card-content">
+              <div class="col s6 left-align">
+                <a ng-click="descuentoPanel(orden)"  href="#descuentos" class=" white-text text-darken-4 red darken-1 btn">Descuento</a></br><br>
+              </div>
+              <div class="col s6 right-align">
+                <a href="{{orden.finalizar}}" class=" white-text text-darken-4 red darken-1 btn" data-method="post">Finalizar</a></br><br>
+              </div>
               <div class="card-title center-align"><span>Folio:{{orden.id}}</span></div> <br>
+              <div ng-if="orden.panel" class = "row">
+                <div class = "col s12">
+                   <div class="input-field col s12" ng-if="!orden.descuentoFlag">
+                    <input id="Password" type="password" class="validate" ng-model="orden.pass" autocomplete="off">
+                    <label for="password">Contraseña</label>
+                    <a class="waves-light btn" ng-click="verificarClave(orden)">Verificar</a>
+                  </div>
+                  <div ng-if = "orden.descuentoFlag">
+                     <label>Selecione Descuento</label>
+                      <select class="browser-default" id = "descuentoGeneral" ng-model="orden.descuentoGeneral" ng-change = "aplicarDescuentoGeneral(orden)" >
+                        <option ng-repeat="x in descuentoOpciones" value="{{x}}">{{x}}%</option>
+                      </select>
+                  </div>
+                </div>
+              </div>
                <div class ="row">
                   <div class="col s12 m6 l4 center-align">Mesero: {{orden.mesero}}</div> 
                   <div class="col s12 m6 l4 center-align">Fecha:{{orden.fecha}}</div>
                   <div class="col s12 m6 l4 center-align">Hora:{{orden.hora}}</div>
                </div>
-             <ul class="collapsible" data-collapsible="accordion">
+              <ul class="collapsible" data-collapsible="accordion">
                 <li ng-repeat="platillo in orden.platillos">
                   <div class="collapsible-header" ng-click="getOrdenes()">
                     nombre: {{platillo.name}} precio: ${{platillo.price}} cantidad: {{platillo.quantity}}
@@ -80,23 +122,31 @@
                       <select ng-model="platillo.order_id" ng-change="cambiarOrden(platillo)" class="browser-default">
                           <option ng-repeat="folio in ordenes_disponiblles" value="{{folio.id}}"> mesa: {{folio.table_name}}, Folio: {{folio.id}} </option>
                       </select>
+                      Descuento: {{platillo.discount}}</br>
+                      notas: {{platillo.notas}}
                   </div>
                 </li>
               </ul>
-              Total: ${{orden.total}}</br>
-              pago con: $<input id="payment" type="number" ng-model="orden.payment" ng-change="actulizarPago(orden.id,orden.payment)"></br>
-              Cambio: $<lable >{{orden.payment-orden.total}}</lable>
+              subTotal: ${{orden.total}} <br>
+              Descuento: ${{orden.descuentoTotal}} <br>
+              Total: ${{orden.total - orden.descuentoTotal}}</br>
+              pago con: <input id="payment" type="number" ng-model="orden.payment" ng-change="actulizarPago(orden.id,orden.payment)"></br>
+              Cambio: $<lable >{{orden.payment-orden.total + orden.descuentoTotal}}</lable>
             </div>
             <div class="card-action">
                 <a href="{{orden.ver}}" class="amber-text text-darken-4"> Ver</a>
                 <a href="{{orden.imprimir}}" class="amber-text text-darken-4" target = '_blank'>Imprimir</a>
-                <label>Cambiar de mesa</label>
+                Cambiar de mesa
                   <select class="browser-default" ng-model= "orden.table_id" ng-change= "cambiarMesa(orden)">
-                    <option value="" disabled selected>Choose your option</option>
                     <option ng-repeat="mesa in mesas" value="{{mesa.id}}">{{mesa.name}}</option>
                   </select>
             </div>
           </div>
         </div>
+        
+        
+        
+        
     </div>
 <div>
+</div>  

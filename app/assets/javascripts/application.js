@@ -15,9 +15,14 @@
 //= requier turbolinks
 //= require_tree 
 //= require jquery
+//= require materialize
 //= require materialize-sprockets
 //= require materialize/extras/nouislider
 
+
+$(document).ready(function() {
+$('.modal-trigger').leanModal();
+ });
 $(document).ready(function(){
     $(".button-collapse").sideNav();  
     $('.collapsible').collapsible();
@@ -47,3 +52,5 @@ setInterval(function(){
       $("#barra_coneccion").show();
      } 
 }, 15000);
+
+

@@ -5,7 +5,7 @@ angular.module('sanjon')
         window.open("/reportes_ticket/"+val+".pdf?folio="+folio+"&fecha="+fecha,"_blank")
     }
     $scope.query = function(pagina){
-        $http.get("reportes_ticket/historial")
+        $http.get("/reportes_ticket/historial")
         .success(function(data){
             console.log(data);
             $scope.ordenes= data;

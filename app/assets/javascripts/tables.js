@@ -6,6 +6,8 @@ angular.module('sanjon')
     $scope.izquierda =[];
     $scope.ordenes_disponiblles=[];
     $scope.tipo;
+    $scope.descuentoOpciones = [0,5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100];
+    $scope.descuentoGeneral ="0" ;
     $scope.getOrdenes = function(){
        $('.collapsible').collapsible();
       $http.get("/orders/query.json?takeaway_v=false")
@@ -80,6 +82,7 @@ angular.module('sanjon')
           }
       });
   }
+  
   table_id=$location.absUrl().split('?')[0].split('/')[4];
   if (Number(table_id))
     cat ="/orders/query.json?table_id="+table_id;
@@ -92,6 +95,7 @@ angular.module('sanjon')
     $http.get(cat)
     .success(function (data){
         $scope.ordenes=data;
+        console.log(data);
         for (var x=0;x<data.length;x++){
             if (x%2==0){
                 $scope.izquierda.push(data[x]);
@@ -119,8 +123,71 @@ angular.module('sanjon')
           }
       });
   }
-   $scope.cargarOrdenes();
-  $scope.getMesas();
-  $scope.getOrdenes();
-        
+  
+  $scope.aplicarDescuentoGeneral = function(val){
+    //if (val.platillos.length==undefined)
+    //  return;
+    for(var i=0;i<val.platillos.length;i++){
+      val.platillos[i].discount = val.descuentoGeneral;
+      $scope.cambiarDescuento(val.platillos[i]);
+    }
+    console.log(val.descuentoGeneral);
+    $scope.calcularDescuento(val);
+  }
+  $scope.calcularDescuento = function(val){
+    var acu=0;
+    for(var i=0;i<val.platillos.length;i++){
+      var precio = val.platillos[i].quantity * val.platillos[i].price;
+      var descuento = (precio)*(val.platillos[i].discount/100);
+       acu =  acu + descuento;
+    }
+    val.descuentoTotal = acu;
+  }
+   $scope.cambiarDescuento = function(val){
+    console.log(val);
+    if (val.discount===null)
+     val.quantity=1;
+      $.ajax({
+          type:'PUT',
+          url: '/saucer_orders/'+val.id,
+          dataType: 'json',
+          data: { saucer_order: {discount:val.discount}},
+          success: function(data){
+            console.log(data);
+            Materialize.toast(val.discount+'% de descuento en '+val.name, 4000)
+                     },
+          error: function(data){
+            $scope.cargarOrdenes();
+            console.log(data);
+          }
+      });
+  }
+  $scope.descuentoPanel = function(val){
+    val.panel = true;
+  }
+  
+  
+  $scope.verificarClave = function(val){
+     $.ajax({
+          type:'POST',
+          url: '/passwords/verificar',
+          dataType: 'json',
+          data: { pass:val.pass},
+          success: function(data){
+            val.descuentoFlag = data;   
+          },
+          error: function(data){
+            val.descuentoFlag = false;
+            console.log(data);
+          }
+      });
+  }
+  function init(){
+    $scope.cargarOrdenes();
+    $scope.getMesas();
+    $scope.getOrdenes();    
+  }
+  init();
+  //setInterval(init, 10000);     
 }]);
+

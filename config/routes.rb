@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  post 'passwords/verificar'
+
   get 'corte/index'
 
   get 'ganacias/mes'
@@ -36,7 +38,9 @@ Rails.application.routes.draw do
   resources :measurement_units
   resources :groups
   resources :categories
+  
   resources :saucer_orders 
+  
   resources :tables do
     resources :orders, shallow: true do 
       resources :saucer_orders 

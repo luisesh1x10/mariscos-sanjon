@@ -4,10 +4,12 @@ json.array!(@orders) do |order|
   json.url order_url(order)
   json.pedidos order.pedidos
   json.total order.total
+  json.descuentoTotal order.descuentoTotal
   json.a_domicilio order.takeaway
   json.platillos  (order.saucerOrders) do |so|
     json.notas so.notes
     json.id so.id
+    json.discount so.discount
     json.name so.platillo.name unless so.platillo.nil?
     json.price so.price
     json.category_id so.platillo

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170520021947) do
+ActiveRecord::Schema.define(version: 20180207081511) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -143,6 +143,12 @@ ActiveRecord::Schema.define(version: 20170520021947) do
   add_index "orders", ["customer_id"], name: "index_orders_on_customer_id"
   add_index "orders", ["table_id"], name: "index_orders_on_table_id"
 
+  create_table "passwords", force: :cascade do |t|
+    t.string   "pass"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "platillo_ingredientes", force: :cascade do |t|
     t.integer  "platillo_id"
     t.integer  "ingredient_id"
@@ -198,6 +204,7 @@ ActiveRecord::Schema.define(version: 20170520021947) do
     t.boolean  "takeaway",    default: false
     t.integer  "bag_id"
     t.integer  "user_id"
+    t.float    "discount",    default: 0.0
   end
 
   add_index "saucer_orders", ["bag_id"], name: "index_saucer_orders_on_bag_id"

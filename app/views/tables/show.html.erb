@@ -111,6 +111,7 @@
                   <div class="col s12 m6 l4 center-align">Mesero: {{orden.mesero}}</div> 
                   <div class="col s12 m6 l4 center-align">Fecha:{{orden.fecha}}</div>
                   <div class="col s12 m6 l4 center-align">Hora:{{orden.hora}}</div>
+                  <div class="col s12 m6 l4 center-align">Descuento: {{orden.descuentoGeneral}}%</div>
                </div>
               <ul class="collapsible" data-collapsible="accordion">
                 <li ng-repeat="platillo in orden.platillos">
@@ -135,11 +136,18 @@
                   </div>
                 </li>
               </ul>
-              subTotal: ${{orden.total}} <br>
-              Descuento: ${{orden.descuentoTotal}} <br>
-              Total: ${{orden.total - orden.descuentoTotal}}</br>
+              subTotal: {{orden.total | currency}} <br>
+              Descuento: {{orden.descuentoTotal | currency}} <br>
+              impuestos: {{orden.ivaTotal | currency}} <br>
+              Total: {{orden.total - orden.descuentoTotal + orden.ivaTotal | currency}}</br>
               pago con: <input id="payment" type="number" ng-model="orden.payment" ng-change="actulizarPago(orden.id,orden.payment)"></br>
-              Cambio: $<lable >{{orden.payment-orden.total + orden.descuentoTotal}}</lable>
+              Cambio: $<lable >{{orden.payment-orden.total + orden.descuentoTotal - orden.ivaTotal| currency}}</lable>
+              <br></br>
+              <p>
+                <input type="hidden" ng-model="orden.iva_valor" ng-init ="orden.iva_valor = <%= Config.iva%>" ></input>
+                <input type="checkbox" id="test6" ng-model="orden.iva_check" ng-change = "aplicarDescuentoGeneral(orden)"/>
+                <label for="test6">Iva <%= Config.iva%>%</label>
+              </p>
             </div>
             <div class="card-action">
                 <a href="{{orden.ver}}" class="amber-text text-darken-4"> Ver</a>

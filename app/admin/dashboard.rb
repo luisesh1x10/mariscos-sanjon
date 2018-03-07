@@ -34,24 +34,30 @@ ActiveAdmin.register_page "Dashboard" do
     end
        column do
          panel "Ganancias totales" do
-           para "Total vendido bruto #{SaucerOrder.all.sum('price*quantity')}"
+           para "Total vendido bruto #{Dinero.to_money SaucerOrder.all.sum('price*quantity')}"
          end
          panel "Tickets falsos" do
             link_to('Ir a generador de tickets','/reportes_ticket/generador_ticket')
          end
+         panel "Cofiguracion" do
+           
+           render "config"
+            
+         end
+         
        end
        column do
          
          panel "Ingresos de hoy" do
-           para "Total vendido #{SaucerOrder.where(:created_at => Date.today.beginning_of_day+6.hours..Date.today.end_of_day+6.hours).sum('price*quantity')}"
+           para "Total vendido #{Dinero.to_money SaucerOrder.where(:created_at => Date.today.beginning_of_day+6.hours..Date.today.end_of_day+6.hours).sum('price*quantity')}"
          end
          
          panel "Egresos de hoy" do
-           para "Total gastado #{Expense.where(:created_at => Date.today.beginning_of_day+6.hours..Date.today.end_of_day+6.hours).sum('amount')}"
+           para "Total gastado #{Dinero.to_money Expense.where(:created_at => Date.today.beginning_of_day+6.hours..Date.today.end_of_day+6.hours).sum('amount')}"
          end
          
          panel "Ganancias de hoy" do
-           para "Total ganacias #{SaucerOrder.where(:created_at => Date.today.beginning_of_day+6.hours..Date.today.end_of_day+6.hours).sum('price*quantity') - Expense.where(:created_at => Date.today.beginning_of_day+6.hours..Date.today.end_of_day+6.hours).sum('amount')}"
+           para "Total ganacias #{Dinero.to_money  SaucerOrder.where(:created_at => Date.today.beginning_of_day+6.hours..Date.today.end_of_day+6.hours).sum('price*quantity') - Expense.where(:created_at => Date.today.beginning_of_day+6.hours..Date.today.end_of_day+6.hours).sum('amount')}"
          end
        end
        

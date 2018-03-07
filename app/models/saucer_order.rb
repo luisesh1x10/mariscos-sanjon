@@ -21,6 +21,21 @@ class SaucerOrder < ActiveRecord::Base
     :inclusion => { :in => [nil,true, false] }
   validates :takeaway,
     :presence => { :if => 'takeaway.nil?' }
+
+  def self.ingresos_brutos(f1,f2)
+    SaucerOrder.where(:created_at => f1.beginning_of_day+6.hours..f2.end_of_day+6.hours).sum('price*quantity')  
+  end
+  def self.ingresos_iva(f1,f2)
+    SaucerOrder.where(:created_at => f1.beginning_of_day+6.hours..f2.end_of_day+6.hours).sum('price*quantity')
+  end
+  def self.ingresos_descuento(f1,f2)
+    SaucerOrder.where(:created_at => f1.beginning_of_day+6.hours..f2.end_of_day+6.hours).sum('price*quantity')
+  end
+  def self.ingresos_total(f1,f2)
+    SaucerOrder.where(:created_at => f1.beginning_of_day+6.hours..f2.end_of_day+6.hours).sum('price*quantity')
+  end
+  
+
 end
 
 

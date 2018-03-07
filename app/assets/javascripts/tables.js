@@ -129,19 +129,28 @@ angular.module('sanjon')
     //  return;
     for(var i=0;i<val.platillos.length;i++){
       val.platillos[i].discount = val.descuentoGeneral;
+      if (val.iva_check)
+        val.platillos[i].iva = val.iva_valor;
+      else
+        val.platillos[i].iva = 0;
       $scope.cambiarDescuento(val.platillos[i]);
     }
     console.log(val.descuentoGeneral);
     $scope.calcularDescuento(val);
   }
+  
+  
   $scope.calcularDescuento = function(val){
     var acu=0;
+    var iva=0;
     for(var i=0;i<val.platillos.length;i++){
       var precio = val.platillos[i].quantity * val.platillos[i].price;
       var descuento = (precio)*(val.platillos[i].discount/100);
+      iva =iva + (precio - descuento)*(val.platillos[i].iva/100);
        acu =  acu + descuento;
     }
     val.descuentoTotal = acu;
+    val.ivaTotal = iva;
   }
    $scope.cambiarDescuento = function(val){
     console.log(val);
@@ -151,10 +160,10 @@ angular.module('sanjon')
           type:'PUT',
           url: '/saucer_orders/'+val.id,
           dataType: 'json',
-          data: { saucer_order: {discount:val.discount}},
+          data: { saucer_order: {discount:val.discount,iva:val.iva}},
           success: function(data){
             console.log(data);
-            Materialize.toast(val.discount+'% de descuento en '+val.name, 4000)
+            Materialize.toast(val.discount+'% de descuento en '+val.name + ' mas iva: ' + val.iva+'%', 4000)
                      },
           error: function(data){
             $scope.cargarOrdenes();
@@ -174,7 +183,8 @@ angular.module('sanjon')
           dataType: 'json',
           data: { pass:val.pass},
           success: function(data){
-            val.descuentoFlag = data;   
+            val.descuentoFlag = data;
+            console.log(val.descuentoFlag);
           },
           error: function(data){
             val.descuentoFlag = false;

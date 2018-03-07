@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180207081511) do
+ActiveRecord::Schema.define(version: 20180306085411) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -24,9 +27,9 @@ ActiveRecord::Schema.define(version: 20180207081511) do
     t.datetime "updated_at"
   end
 
-  add_index "active_admin_comments", ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id"
-  add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace"
-  add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
+  add_index "active_admin_comments", ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id", using: :btree
+  add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace", using: :btree
+  add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
 
   create_table "admin_users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -43,8 +46,8 @@ ActiveRecord::Schema.define(version: 20180207081511) do
     t.datetime "updated_at",                          null: false
   end
 
-  add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true
-  add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+  add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
+  add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "bags", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -57,6 +60,12 @@ ActiveRecord::Schema.define(version: 20180207081511) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean  "is_instant"
+  end
+
+  create_table "configs", force: :cascade do |t|
+    t.integer  "iva"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "customers", force: :cascade do |t|
@@ -87,7 +96,7 @@ ActiveRecord::Schema.define(version: 20180207081511) do
     t.integer  "quantity"
   end
 
-  add_index "expenses", ["ingredient_id"], name: "index_expenses_on_ingredient_id"
+  add_index "expenses", ["ingredient_id"], name: "index_expenses_on_ingredient_id", using: :btree
 
   create_table "groups", force: :cascade do |t|
     t.string   "name"
@@ -103,7 +112,7 @@ ActiveRecord::Schema.define(version: 20180207081511) do
     t.datetime "updated_at",          null: false
   end
 
-  add_index "ingredientes", ["measurement_unit_id"], name: "index_ingredientes_on_measurement_unit_id"
+  add_index "ingredientes", ["measurement_unit_id"], name: "index_ingredientes_on_measurement_unit_id", using: :btree
 
   create_table "ingredients", force: :cascade do |t|
     t.string   "name"
@@ -114,8 +123,8 @@ ActiveRecord::Schema.define(version: 20180207081511) do
     t.integer  "platillo_id"
   end
 
-  add_index "ingredients", ["measurement_unit_id"], name: "index_ingredients_on_measurement_unit_id"
-  add_index "ingredients", ["platillo_id"], name: "index_ingredients_on_platillo_id"
+  add_index "ingredients", ["measurement_unit_id"], name: "index_ingredients_on_measurement_unit_id", using: :btree
+  add_index "ingredients", ["platillo_id"], name: "index_ingredients_on_platillo_id", using: :btree
 
   create_table "measurement_units", force: :cascade do |t|
     t.string   "name"
@@ -140,8 +149,8 @@ ActiveRecord::Schema.define(version: 20180207081511) do
     t.text     "notas"
   end
 
-  add_index "orders", ["customer_id"], name: "index_orders_on_customer_id"
-  add_index "orders", ["table_id"], name: "index_orders_on_table_id"
+  add_index "orders", ["customer_id"], name: "index_orders_on_customer_id", using: :btree
+  add_index "orders", ["table_id"], name: "index_orders_on_table_id", using: :btree
 
   create_table "passwords", force: :cascade do |t|
     t.string   "pass"
@@ -156,8 +165,8 @@ ActiveRecord::Schema.define(version: 20180207081511) do
     t.datetime "updated_at",    null: false
   end
 
-  add_index "platillo_ingredientes", ["ingredient_id"], name: "index_platillo_ingredientes_on_ingredient_id"
-  add_index "platillo_ingredientes", ["platillo_id"], name: "index_platillo_ingredientes_on_platillo_id"
+  add_index "platillo_ingredientes", ["ingredient_id"], name: "index_platillo_ingredientes_on_ingredient_id", using: :btree
+  add_index "platillo_ingredientes", ["platillo_id"], name: "index_platillo_ingredientes_on_platillo_id", using: :btree
 
   create_table "platillo_ingredients", force: :cascade do |t|
     t.integer  "platillo_id"
@@ -167,8 +176,8 @@ ActiveRecord::Schema.define(version: 20180207081511) do
     t.datetime "updated_at",    null: false
   end
 
-  add_index "platillo_ingredients", ["ingredient_id"], name: "index_platillo_ingredients_on_ingredient_id"
-  add_index "platillo_ingredients", ["platillo_id"], name: "index_platillo_ingredients_on_platillo_id"
+  add_index "platillo_ingredients", ["ingredient_id"], name: "index_platillo_ingredients_on_ingredient_id", using: :btree
+  add_index "platillo_ingredients", ["platillo_id"], name: "index_platillo_ingredients_on_platillo_id", using: :btree
 
   create_table "platillos", force: :cascade do |t|
     t.string   "name"
@@ -190,8 +199,8 @@ ActiveRecord::Schema.define(version: 20180207081511) do
     t.text     "descripcion"
   end
 
-  add_index "platillos", ["category_id"], name: "index_platillos_on_category_id"
-  add_index "platillos", ["group_id"], name: "index_platillos_on_group_id"
+  add_index "platillos", ["category_id"], name: "index_platillos_on_category_id", using: :btree
+  add_index "platillos", ["group_id"], name: "index_platillos_on_group_id", using: :btree
 
   create_table "saucer_orders", force: :cascade do |t|
     t.integer  "platillo_id"
@@ -205,12 +214,13 @@ ActiveRecord::Schema.define(version: 20180207081511) do
     t.integer  "bag_id"
     t.integer  "user_id"
     t.float    "discount",    default: 0.0
+    t.integer  "iva",         default: 0
   end
 
-  add_index "saucer_orders", ["bag_id"], name: "index_saucer_orders_on_bag_id"
-  add_index "saucer_orders", ["order_id"], name: "index_saucer_orders_on_order_id"
-  add_index "saucer_orders", ["platillo_id"], name: "index_saucer_orders_on_platillo_id"
-  add_index "saucer_orders", ["user_id"], name: "index_saucer_orders_on_user_id"
+  add_index "saucer_orders", ["bag_id"], name: "index_saucer_orders_on_bag_id", using: :btree
+  add_index "saucer_orders", ["order_id"], name: "index_saucer_orders_on_order_id", using: :btree
+  add_index "saucer_orders", ["platillo_id"], name: "index_saucer_orders_on_platillo_id", using: :btree
+  add_index "saucer_orders", ["user_id"], name: "index_saucer_orders_on_user_id", using: :btree
 
   create_table "tables", force: :cascade do |t|
     t.string   "description"
@@ -237,7 +247,23 @@ ActiveRecord::Schema.define(version: 20180207081511) do
     t.string   "name"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "expenses", "ingredients"
+  add_foreign_key "ingredientes", "measurement_units"
+  add_foreign_key "ingredients", "measurement_units"
+  add_foreign_key "ingredients", "platillos"
+  add_foreign_key "orders", "customers"
+  add_foreign_key "orders", "tables"
+  add_foreign_key "platillo_ingredientes", "ingredients"
+  add_foreign_key "platillo_ingredientes", "platillos"
+  add_foreign_key "platillo_ingredients", "ingredients"
+  add_foreign_key "platillo_ingredients", "platillos"
+  add_foreign_key "platillos", "categories"
+  add_foreign_key "platillos", "groups"
+  add_foreign_key "saucer_orders", "bags"
+  add_foreign_key "saucer_orders", "orders"
+  add_foreign_key "saucer_orders", "platillos"
+  add_foreign_key "saucer_orders", "users"
 end

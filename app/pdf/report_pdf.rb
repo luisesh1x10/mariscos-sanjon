@@ -20,6 +20,7 @@ class ReportPdf < Prawn::Document
       
       image "#{Rails.root}/app/assets/images/sanjonLogo.jpg", position: :center,:width=>90
       text "DATOS FISCALES",size:9, :align => :center
+      text "GUADALUPE MEDINA PÁEZ",size:9, :align => :center
       text "RFC: MEPG880120616",size:9, :align => :center
       text "DOMICILIO:",size:9, :align => :center
       text "BLV. FRANCISCO INDALECIO MADERO #1089 LAS VEGAS C.P.80090 CULIACÁN SINALOA MÉXICO",size:9, :align => :center
@@ -53,8 +54,9 @@ class ReportPdf < Prawn::Document
       self.header = true
     end
      text "Sub Total: #{Dinero.to_money @order.total}", size: 15, style: :bold
-     text "Descuento: #{Dinero.to_money @order.descuentoTotal}", size: 15, style: :bold
-     text "Total: #{Dinero.to_money @order.totalConDescuento}", size: 15, style: :bold
+     text "Descuento: #{Dinero.to_money @order.descuentoTotal}", size: 15, style: :bold if @order.descuentoTotal > 0
+     text "Impuestos: #{Dinero.to_money @order.ivaTotal}", size: 15, style: :bold 
+     text "Total: #{Dinero.to_money @order.totalConDescuentoYIva}", size: 15, style: :bold
      unless @order.payment.nil?
       text "PAGÓ CON: #{@order.payment}", size: 12, style: :bold
       text "SU CAMBIO: #{@order.payment-@order.saucerOrders.sum('price*quantity')}", size: 15, style: :bold

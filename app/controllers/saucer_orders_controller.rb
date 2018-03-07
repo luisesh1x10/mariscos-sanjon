@@ -106,9 +106,9 @@ class SaucerOrdersController < ApplicationController
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def saucer_order_params
-      params.require(:saucer_order).permit(:bag_id,:order_id,:platillo_id,:notes,:quantity,:discount)
+      params.require(:saucer_order).permit(:bag_id,:order_id,:platillo_id,:notes,:quantity,:discount,:iva)
     end
     def datos_bag(record)
-        record.require(:datos).permit(:bag_id,:order_id,:platillo_id,:notes,:status,:quantity,:discount )
+        record.require(:datos).permit(:bag_id,:order_id,:platillo_id,:notes,:status,:quantity,:discount,:iva )
     end
 end

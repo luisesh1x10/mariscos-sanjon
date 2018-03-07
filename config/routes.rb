@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get 'ganacias/ano'
 
   resources :expenses
+  get '/configs/', to:'config#update', as:'config'
   get 'avanzar/:id',to: 'bags#avanzar',as:'avanzar'
   resources :bags
   get 'reportes_ticket/historial', to:'reportes_ticket#historial'

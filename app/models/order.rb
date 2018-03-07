@@ -19,9 +19,16 @@ class Order < ActiveRecord::Base
   def descuentoTotal
     self.saucerOrders.sum('(price*quantity)*(discount/100)')
   end
+  def ivaTotal
+   (self.total - self.descuentoTotal) * (Config.iva.to_f/100)
+  end
   def totalConDescuento
     total-descuentoTotal
   end
+  def totalConDescuentoYIva
+    total-descuentoTotal+ivaTotal
+  end
+  
   def pedidos
     self.saucerOrders.count
   end

@@ -69,9 +69,9 @@
         <div class="row" id = "elementos">
             <div class="col-xs-2 marco" ng-repeat = "dato in datos">
                 <h3>{{dato.caption}}</h3>
-                Ingresos: {{dato.ingreso}}<br>
-                Egresos: {{dato.egreso}}<br>
-                Ganancias: {{dato.ganacia}}<br>
+                Ingresos:<strong> {{dato.ingreso | currency}}</strong><br>
+                Egresos: <strong>{{dato.egreso | currency}}</strong><br>
+                Ganancias: <strong>{{dato.ganacia | currency}}</strong><br>
             </div>
         </div>
         <div class= "row">

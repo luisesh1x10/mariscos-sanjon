@@ -1,0 +1,19 @@
+<%= form_for Config.last do |f| %>
+  <%= f.label :iva %>: %
+  <%= f.text_field :iva, id:"iva" %><br />
+<% end %>
+
+<br></br>
+<button id="actualizar">
+    Actualizar configuraciones
+</button>
+
+<script>
+    $("#actualizar").click(function(){
+        $.get("/configs?iva="+$("#iva").val(), function(data, status){
+            location.reload(true);
+        });
+    });
+    
+    
+</script>

@@ -104,6 +104,7 @@ angular.module('sanjon')
             }
         }
         $scope.tipo=data[0].user_type;
+        
     })
     .error(function (data){
         console.log(data);
@@ -152,6 +153,7 @@ angular.module('sanjon')
     val.descuentoTotal = acu;
     val.ivaTotal = iva;
   }
+  
    $scope.cambiarDescuento = function(val){
     console.log(val);
     if (val.discount===null)

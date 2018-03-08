@@ -61,7 +61,7 @@
               </ul>
               subTotal: {{orden.total | currency}} <br>
               Descuento: {{orden.descuentoTotal | currency}} <br>
-              impuestos: {{orden.ivaTotal | currency}} <br>
+              IVA: {{orden.ivaTotal | currency}} <br>
               Total: {{orden.total - orden.descuentoTotal + orden.ivaTotal | currency}}</br>
               pago con: <input id="payment" type="number" ng-model="orden.payment" ng-change="actulizarPago(orden.id,orden.payment)"></br>
               Cambio: $<lable >{{orden.payment-orden.total + orden.descuentoTotal - orden.ivaTotal| currency}}</lable>
@@ -138,7 +138,7 @@
               </ul>
               subTotal: {{orden.total | currency}} <br>
               Descuento: {{orden.descuentoTotal | currency}} <br>
-              impuestos: {{orden.ivaTotal | currency}} <br>
+              IVA: {{orden.ivaTotal | currency}} <br>
               Total: {{orden.total - orden.descuentoTotal + orden.ivaTotal | currency}}</br>
               pago con: <input id="payment" type="number" ng-model="orden.payment" ng-change="actulizarPago(orden.id,orden.payment)"></br>
               Cambio: $<lable >{{orden.payment-orden.total + orden.descuentoTotal - orden.ivaTotal| currency}}</lable>

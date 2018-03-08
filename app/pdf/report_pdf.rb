@@ -55,7 +55,7 @@ class ReportPdf < Prawn::Document
     end
      text "Sub Total: #{Dinero.to_money @order.total}", size: 15, style: :bold
      text "Descuento: #{Dinero.to_money @order.descuentoTotal}", size: 15, style: :bold if @order.descuentoTotal > 0
-     text "Impuestos: #{Dinero.to_money @order.ivaTotal}", size: 15, style: :bold 
+     text "IVA: #{Dinero.to_money @order.ivaTotal}", size: 15, style: :bold 
      text "Total: #{Dinero.to_money @order.totalConDescuentoYIva}", size: 15, style: :bold
      unless @order.payment.nil?
       text "PAGÓ CON: #{@order.payment}", size: 12, style: :bold

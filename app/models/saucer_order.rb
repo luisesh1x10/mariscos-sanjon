@@ -22,19 +22,42 @@ class SaucerOrder < ActiveRecord::Base
   validates :takeaway,
     :presence => { :if => 'takeaway.nil?' }
 
-  def self.ingresos_brutos(f1,f2)
+  def self.ingresosBrutos(f1,f2)
     SaucerOrder.where(:created_at => f1.beginning_of_day+6.hours..f2.end_of_day+6.hours).sum('price*quantity')  
   end
-  def self.ingresos_iva(f1,f2)
-    SaucerOrder.where(:created_at => f1.beginning_of_day+6.hours..f2.end_of_day+6.hours).sum('price*quantity')
+  def self.descuentoTotal(f1,f2)
+    SaucerOrder.where(:created_at => f1.beginning_of_day+6.hours..f2.end_of_day+6.hours).sum('(price*quantity)*(discount/100)')  
   end
-  def self.ingresos_descuento(f1,f2)
-    SaucerOrder.where(:created_at => f1.beginning_of_day+6.hours..f2.end_of_day+6.hours).sum('price*quantity')
+  def self.ivaTotal(f1,f2)
+    tuplas = SaucerOrder.where(:created_at => f1.beginning_of_day+6.hours..f2.end_of_day+6.hours)
+    if (tuplas.count > 0 )
+      tuplas = SaucerOrder.where(:created_at => f1.beginning_of_day+6.hours..f2.end_of_day+6.hours)
+      tuplas.sum('(price*quantity) - (price*quantity)*(discount/100)') * (tuplas.first.iva.to_f / 100.to_f)
+    else
+      0
+    end 
   end
-  def self.ingresos_total(f1,f2)
-    SaucerOrder.where(:created_at => f1.beginning_of_day+6.hours..f2.end_of_day+6.hours).sum('price*quantity')
+  def self.ingresosDescuento(f1,f2)
+    ingresosBrutos(f1,f2) - descuentoTotal(f1,f2)
   end
-  
+  def self.ingresosTotal(f1,f2)
+    ingresosBrutos(f1,f2) - descuentoTotal(f1,f2) + ivaTotal(f1,f2)
+  end
+  def valorTotal
+    price * quantity
+  end
+  def descuentoTotal
+    valorTotal * (discount/100)
+  end
+  def valorMenosDescuento
+    valorTotal - descuentoTotal
+  end
+  def ivaTotal
+    valorMenosDescuento * (iva.to_f/100)
+  end
+  def total
+    valorMenosDescuento + ivaTotal
+  end
 
 end
 

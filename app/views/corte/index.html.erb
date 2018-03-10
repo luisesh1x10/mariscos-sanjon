@@ -32,6 +32,9 @@
                         <thead>
                           <tr>
                               <th>Ventas</th>
+                              <th>Descuento</th>
+                              <th>Iva</th>
+                              <th>Cobrado</th>
                               <th>Salidas</th>
                               <th>descripción</th>
                           </tr>
@@ -40,7 +43,10 @@
                         <tbody>
                         <%@ingresos.each do |i|%>
                           <tr>
-                            <td><%= i.price * i.quantity%></td>
+                            <td><%=Dinero.to_money i.valorTotal %></td>
+                            <td><%=Dinero.to_money i.descuentoTotal %></td>
+                            <td><%=Dinero.to_money i.ivaTotal %></td>
+                            <td><%=Dinero.to_money i.total %></td>
                             <td></td>
                             <td><%= i.platillo.name%></td>
                           </tr>
@@ -48,16 +54,59 @@
                          <%@egresos.each do |e|%>
                           <tr>
                             <td></td>
-                            <td><%= e.amount%></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td><%=Dinero.to_money e.amount%></td>
                             <td><%= e.description%></td>
                           </tr>
                          <%end%>
                         </tbody>
                       </table>
                     </div>
-                    Ingresos: <%=  @sumIngresos%>   Gastos: <%= @sumEgresos%> Ganancias: <%= @sumIngresos + @sumEgresos%>
+                    Ingresos: <%= Dinero.to_money @sumIngresos%> <br>
+                    Descuento: <%=Dinero.to_money @sumDescuento%> <br>
+                    Iva: <%=Dinero.to_money @sumIva%> <br>
+                    Total: <%=Dinero.to_money @ingresoTotal%> <br>
+                    Gastos: <%=Dinero.to_money @sumEgresos%> <br>
+                    Ganancias: <%=Dinero.to_money @ingresoTotal - @sumEgresos%> <br>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class = "card-panel">
+            <h3 class="center-align" >Moviemientos de Caja</h3>
+        </div>
+    </div>
+    
+    <div class="card-panel">
+        <div class = "row">
+            <div class="input-field col s2">
+              <input id="cantidad" type="number" step = "0.01">
+              <label for="cantidad">Importe</label>
+            </div>
+            <div class="input-field col s4">
+              <textarea id="textarea1" class="materialize-textarea"></textarea>
+              <label for="textarea1">Justificacion</label>
+            </div>
+            <div class="input-field col s4">
+                <select>
+                  <option value="" disabled selected>Seleciona Tipo de Moviemiento</option>
+                  <option value="1">Retiro a caja Fuerte</option>
+                  <option value="2">Entrada a caja chica</option>
+                  <option value="3">Pagos</option>
+                </select>
+                <label>Tipo de Moviemiento</label>
+             </div>
+             <div class="input-field col s2">
+                <input id="responsable" type = "text" disabled value = "<%= current_user.name%>">
+                <label for="responsable">Resposable</label>
+             </div>
+        </div>
+        
+        <div class = "row">
+            <a class="waves-effect waves-light btn">Realizar movimiento</a>   
         </div>
     </div>
 </div>

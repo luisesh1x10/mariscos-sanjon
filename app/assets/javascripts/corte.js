@@ -6,4 +6,7 @@ $(document).ready(function(){
     $("#imprimir").click(function(){
         window.open("/corte/index.pdf?fecha="+$("#fecha").val(),"_blank");
     });    
+    $(document).ready(function() {
+        $('select').material_select();
+    });
 });

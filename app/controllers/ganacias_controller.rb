@@ -8,7 +8,7 @@ class GanaciasController < ApplicationController
       fecha = fecha - ((elementos.size() *page)+i).months
       inicio = fecha.beginning_of_month+6.hours 
       fin = fecha.end_of_month+6.hours
-      ingreso = SaucerOrder.where(:created_at => inicio..fin).sum('price*quantity')
+      ingreso = SaucerOrder.where(:created_at => inicio..fin).sum('(price*quantity) - (price*quantity)*(discount/100)')
       egreso = Expense.where(:created_at => inicio..fin).sum('amount') 
       @meses << {:inicio => inicio, :fin => fin, :ingreso => ingreso, :egreso =>egreso }
       
@@ -24,7 +24,7 @@ class GanaciasController < ApplicationController
       fecha = fecha - ((elementos.size() *page)+i).weeks
       inicio = fecha.beginning_of_week+6.hours 
       fin = fecha.end_of_week+6.hours
-      ingreso = SaucerOrder.where(:created_at => inicio..fin).sum('price*quantity')
+      ingreso = SaucerOrder.where(:created_at => inicio..fin).sum('(price*quantity) - (price*quantity)*(discount/100)')
       egreso = Expense.where(:created_at => inicio..fin).sum('amount') 
       @semanas << {:inicio => inicio, :fin => fin, :ingreso => ingreso, :egreso =>egreso }
     end
@@ -39,7 +39,7 @@ class GanaciasController < ApplicationController
       fecha = fecha - ((elementos.size() *page)+i).years
       inicio = fecha.beginning_of_year+6.hours 
       fin = fecha.end_of_year+6.hours
-      ingreso = SaucerOrder.where(:created_at => inicio..fin).sum('price*quantity')
+      ingreso = SaucerOrder.where(:created_at => inicio..fin).sum('(price*quantity) - (price*quantity)*(discount/100)')
       egreso = Expense.where(:created_at => inicio..fin).sum('amount') 
       @anos << {:inicio => inicio, :fin => fin, :ingreso => ingreso, :egreso =>egreso }
     end

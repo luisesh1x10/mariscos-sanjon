@@ -1,10 +1,13 @@
 class CortePdf < Prawn::Document
-  def initialize(ingresos,egresos,sumIngresos,sumEgresos)
+  def initialize(ingresos,egresos,sumIngresos,sumEgresos,sumDescuento,sumIva,ingresoTotal)
     super( :margin => [20,20,20,10],:skip_page_creation => false)
     @ingresos = ingresos
     @egresos = egresos
     @sumIngresos = sumIngresos
     @sumEgresos = sumEgresos
+    @sumDescuento = sumDescuento
+    @sumIva = sumIva
+    @ingresoTotal = ingresoTotal
     header
     text_content
   end
@@ -32,18 +35,19 @@ class CortePdf < Prawn::Document
       text "Fecha: #{Time.now.strftime("%m/%d/%Y")}", size: 9,:align => :center
       text "Hora: #{Time.now.strftime("%I:%M")}", size: 9,:align => :center
       text "CORTE DEL DIA", :align => :center
-      text "Ventas Totales: "
-      text "#{Dinero.to_money @sumIngresos}", :align => :right
+      text "Ingresos Totales: "
+      text "#{Dinero.to_money @ingresoTotal}", :align => :right
       text "Egresos:"
       text "#{Dinero.to_money @sumEgresos}", :align => :right
       text "Ganancias: "
-      text "#{Dinero.to_money @sumIngresos - @sumEgresos}", :align => :right
+      text "#{Dinero.to_money @ingresoTotal - @sumEgresos}", :align => :right
       text "#{@ingresos.count} ventas en el dia"
       text "-------------------------"
       text "---ventas---", :align => :center
-      text "Ventas Totales: #{Dinero.to_money @sumIngresos}"
-      text "Descuentos: #{Dinero.to_money 0}"
-      
+      text "Ventas Totales: #{ Dinero.to_money @sumIngresos}"
+      text "Descuentos: #{ Dinero.to_money @sumDescuento}"
+      text "Iva: #{ Dinero.to_money @sumIva}"
+      text "Total: #{ Dinero.to_money @ingresoTotal}"
       text "-------------------------"
       
     end

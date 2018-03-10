@@ -64,13 +64,9 @@ class ReportPdf < Prawn::Document
   end
 
   def product_rows
-    [['PLATILLO', 'CATIDAD', 'PRECIO']] +
+    [['PLATILLO', 'CATIDAD', 'PRECIO','IVA']] +
     @order.saucerOrders.map do |so|
-      [so.platillo.name,so.quantity,Dinero.to_money(so.price*so.quantity)]
-      
-      
-      
-      
+      [so.platillo.name,so.quantity,Dinero.to_money(so.valorTotal),Dinero.to_money(so.valorTotal*(so.iva.to_f/100))]
     end
   end
 end

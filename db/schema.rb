@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180306085411) do
+ActiveRecord::Schema.define(version: 20180309080302) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -131,6 +131,17 @@ ActiveRecord::Schema.define(version: 20180306085411) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "movements", force: :cascade do |t|
+    t.integer  "tipo"
+    t.decimal  "cantidad",    precision: 15, scale: 2
+    t.integer  "user_id"
+    t.string   "descripcion"
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+  end
+
+  add_index "movements", ["user_id"], name: "index_movements_on_user_id", using: :btree
 
   create_table "orders", force: :cascade do |t|
     t.integer  "table_id"
@@ -254,6 +265,7 @@ ActiveRecord::Schema.define(version: 20180306085411) do
   add_foreign_key "ingredientes", "measurement_units"
   add_foreign_key "ingredients", "measurement_units"
   add_foreign_key "ingredients", "platillos"
+  add_foreign_key "movements", "users"
   add_foreign_key "orders", "customers"
   add_foreign_key "orders", "tables"
   add_foreign_key "platillo_ingredientes", "ingredients"

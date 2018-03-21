@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 
+  justificacion: MyString
+  platillo: MyString
+  quantity: 
+
+two:
+  user_id: 
+  justificacion: MyString
+  platillo: MyString
+  quantity: 

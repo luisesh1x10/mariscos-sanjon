@@ -83,11 +83,13 @@ class SaucerOrdersController < ApplicationController
   # DELETE /saucer_orders/1
   # DELETE /saucer_orders/1.json
   def destroy
+    justi = (params[:justificacion].nil?)? "" :  params[:justificacion]
     
     order=@saucer_order.order
     if order.status==2
       redirect_to pay_path(order)
     else  
+      Cancellation.create(user_id:current_user.id,justificacion:justi,platillo:@saucer_order.platillo.name,quantity:@saucer_order.quantity)
       @saucer_order.destroy
       respond_to do |format|
         format.html { redirect_to pay_path(order), notice: 'Saucer order was successfully destroyed.' }

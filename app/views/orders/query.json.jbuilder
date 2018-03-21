@@ -30,6 +30,7 @@ json.array!(@orders) do |order|
   unless order.saucerOrders.first.nil?
     json.descuentoGeneral  order.saucerOrders.first.discount 
     json.iva_check (order.saucerOrders.first.iva > 0)
+    json.iva_valor order.saucerOrders.first.iva
   else
     json.descuentoGeneral  0 
   end

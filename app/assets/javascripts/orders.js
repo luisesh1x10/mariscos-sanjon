@@ -114,4 +114,48 @@ controller('pedidos',['$scope','$http', function($scope,$http){
         
     }
     $scope.query(0);
+}])
+.controller('verOrden',['$scope','$http', function($scope,$http){
+    $scope.PlatilloActual = "";
+    $scope.contra ="";
+    $scope.justificacion ="";
+    $scope.mostrarModal = function(id,nombre,cantidad){
+        $scope.PlatilloActual = {id,nombre,cantidad};
+    }
+    
+    $scope.eliminar = function(val){
+     $.ajax({
+          type:'POST',
+          url: '/passwords/verificar',
+          dataType: 'json',
+          data: { pass:$scope.contra},
+          success: function(data){
+              if(data && $scope.justificacion.length > 20 ){
+                  $.ajax({
+                      type:'DELETE',
+                      url: '/saucer_orders/'+$scope.PlatilloActual.id+"?justificacion="+$scope.justificacion,
+                      dataType: 'json',
+                      data: { justificacion:$scope.justificacion},
+                      success: function(data){
+                        Materialize.toast('Se elimino el platillo', 4000);
+                        location.reload();
+                      },
+                      error: function(data){
+                        Materialize.toast('Error al verificar contraseña!', 4000)
+                      }});
+              }else{
+                  if (!data)
+                    Materialize.toast('Contraseña incorrecta', 4000);
+                  if ($scope.justificacion.length <= 20)
+                    Materialize.toast('Ingresa una justificacion mas larga', 4000);
+              }
+          },
+          error: function(data){
+            Materialize.toast('Error al verificar contraseña!', 4000)
+          }
+      });
+  }
+   $(document).ready(function() {
+        $('textarea#justificacion').characterCounter();
+   });
 }]);

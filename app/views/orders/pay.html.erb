@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" ng-controller = "verOrden">
     <div class="card">
         <h1 class="center-align">Reporte de orden</h1>
         <h4 class="center-align">Total: <%=@order.saucerOrders.sum('price*quantity')%></h4>
@@ -23,7 +23,7 @@
     <table class="responsive-table card">
     <thead>
       <tr>
-          <th data-field="id">Platillo</th>
+          <th data-field="id">Platillo{{ddd}}</th>
           <th data-field="id">Cantidad</th>
           <th data-field="name">Precio unitario</th>
           <th data-field="name">Precio total</th>
@@ -38,10 +38,31 @@
             <td><%="$#{saucerOrder.price}"%></td>
             <td><%="$#{saucerOrder.price*saucerOrder.quantity}"%></td>
             <td><%= link_to 'Cancelar', saucerOrder, method: :delete, data: { confirm: 'Are you sure?' },class:"waves-effect red darken-1 btn" if @order.status==1 %></td>
+            <td><%= link_to 'Cancelar','#modal1',class:"waves-effect red darken-1 btn  modal-trigger", "ng-click":"mostrarModal(#{saucerOrder.id},'#{saucerOrder.platillo.name}',#{saucerOrder.quantity})" if @order.status==1 %></td>
           </tr>
         <%end%>
        
     </tbody>
   </table>
-  
+
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <h4>Eliminar Platillo</h4>
+      <p>Ingresa la contraseña y justificacion para poder eliminar un platillo</p>
+      <h3>Nombre: {{PlatilloActual.nombre}}</h3>
+      <h4>Cantidad: {{PlatilloActual.cantidad}}</h4>
+      <div class="input-field col s6">
+          <input id="contra" type="password" autocomplete="off" ng-model= "contra">
+          <label for="contra">Contraseña</label>
+      </div>
+      <div class="input-field col s12">
+          <textarea id="justificacion" class="materialize-textarea" data-length="20" ng-model= "justificacion" ></textarea>
+          <label for="justificacion">Justificacion</label>
+        </div>
+      <a  class="waves-effect red darken-1 btn" ng-click = "eliminar()">Eliminar</a>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cerrar</a>
+    </div>
+  </div>
 </div>

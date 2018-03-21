@@ -97,11 +97,14 @@ angular.module('sanjon')
         $scope.ordenes=data;
         console.log(data);
         for (var x=0;x<data.length;x++){
-            if (x%2==0){
-                $scope.izquierda.push(data[x]);
-            }else{
-                $scope.derecha.push(data[x]);
-            }
+          data[x].ivaTotal = 0;
+          if (x%2==0){
+              $scope.izquierda.push(data[x]);
+          }else{
+              $scope.derecha.push(data[x]);
+          }
+          if(data[x].iva_check)
+            $scope.aplicarDescuentoGeneral(data[x]);
         }
         $scope.tipo=data[0].user_type;
         

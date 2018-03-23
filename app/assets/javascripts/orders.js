@@ -122,13 +122,16 @@ angular.module('sanjon').controller("historial",["$scope","$http",function($scop
         
     }
     $scope.query(0);
-}])
-.controller('verOrden',['$scope','$http', function($scope,$http){
+}]);
+
+
+
+angular.module('sanjon').controller('verOrden',['$scope','$http', function($scope,$http){
     $scope.PlatilloActual = "";
     $scope.contra ="";
     $scope.justificacion ="";
     $scope.mostrarModal = function(id,nombre,cantidad){
-        $scope.PlatilloActual = {id,nombre,cantidad};
+        $scope.PlatilloActual = {'id':id,'nombre':nombre,'cantidad':cantidad};
     }
     
     $scope.eliminar = function(val){

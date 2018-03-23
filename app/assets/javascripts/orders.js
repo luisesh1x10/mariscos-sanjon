@@ -83,8 +83,16 @@ controller('pedidos',['$scope','$http', function($scope,$http){
     }
     
     
-}])
-.controller("historial",["$scope","$http",function($scope,$http){
+}]);
+
+
+
+
+
+
+
+
+angular.module('sanjon').controller("historial",["$scope","$http",function($scope,$http){
     $scope.ordenes=[];
     
     $scope.query = function(pagina){
@@ -146,7 +154,7 @@ controller('pedidos',['$scope','$http', function($scope,$http){
               }else{
                   if (!data)
                     Materialize.toast('Contraseña incorrecta', 4000);
-                  if ($scope.justificacion.length <= 20)
+                  if ($scope.justificacion.length < 20)
                     Materialize.toast('Ingresa una justificacion mas larga', 4000);
               }
           },

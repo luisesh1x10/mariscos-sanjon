@@ -37,7 +37,7 @@
             <td><%=saucerOrder.quantity%></td>
             <td><%="$#{saucerOrder.price}"%></td>
             <td><%="$#{saucerOrder.price*saucerOrder.quantity}"%></td>
-            <td><%= link_to 'Cancelar', saucerOrder, method: :delete, data: { confirm: 'Are you sure?' },class:"waves-effect red darken-1 btn" if @order.status==1 %></td>
+            <!--<td><%= link_to 'Cancelar', saucerOrder, method: :delete, data: { confirm: 'Are you sure?' },class:"waves-effect red darken-1 btn" if @order.status==1 %></td>-->
             <td><%= link_to 'Cancelar','#modal1',class:"waves-effect red darken-1 btn  modal-trigger", "ng-click":"mostrarModal(#{saucerOrder.id},'#{saucerOrder.platillo.name}',#{saucerOrder.quantity})" if @order.status==1 %></td>
           </tr>
         <%end%>

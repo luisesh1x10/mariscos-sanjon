@@ -58,8 +58,8 @@ class ReportPdf < Prawn::Document
      text "IVA: #{Dinero.to_money @order.ivaTotal}", size: 15, style: :bold 
      text "Total: #{Dinero.to_money @order.totalConDescuentoYIva}", size: 15, style: :bold
      unless @order.payment.nil?
-      text "PAGÓ CON: #{@order.payment}", size: 12, style: :bold
-      text "SU CAMBIO: #{@order.payment-@order.saucerOrders.sum('price*quantity')}", size: 15, style: :bold
+      text "PAGÓ CON: #{Dinero.to_money @order.payment}", size: 12, style: :bold
+      text "SU CAMBIO: #{Dinero.to_money(@order.payment-@order.totalConDescuentoYIva)}", size: 15, style: :bold
      end
   end
 

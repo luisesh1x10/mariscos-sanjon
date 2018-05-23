@@ -1,17 +1,21 @@
 class CorteController < ApplicationController
+  before_action :set_sucursal, only: [:index]
+  def set_sucursal
+      @sucursal = User.find(current_user.id).sucursal
+  end
   def index
     @fecha = params[:fecha]
     @fecha  =  Time.now if @fecha.nil? or @fecha == "" 
     @fecha = @fecha.to_date
     f1 = @fecha.beginning_of_day
     f2 = @fecha.end_of_day
-    @ingresos =  SaucerOrder.where(:created_at => @fecha.beginning_of_day+6.hours..@fecha.end_of_day+6.hours) #.sum('price*quantity')
-    @egresos = Expense.where(:created_at => @fecha.beginning_of_day+6.hours..@fecha.end_of_day+6.hours) #.sum('amount')
+    @ingresos =  @sucursal.saucer_orders.where(:created_at => @fecha.beginning_of_day+6.hours..@fecha.end_of_day+6.hours) #.sum('price*quantity')
+    @egresos = @sucursal.expenses.where(:created_at => @fecha.beginning_of_day+6.hours..@fecha.end_of_day+6.hours) #.sum('amount')
     
-    @sumIngresos =  SaucerOrder.ingresosBrutos(f1,f2)
-    @sumDescuento =  SaucerOrder.descuentoTotal(f1,f2)
-    @sumIva =  SaucerOrder.ivaTotal(f1,f2)
-    @ingresoTotal =  SaucerOrder.ingresosTotal(f1,f2)
+    @sumIngresos =  @sucursal.ingresosBrutos(f1,f2)
+    @sumDescuento =  @sucursal.descuentoTotal(f1,f2)
+    @sumIva =  @sucursal.ivaTotal(f1,f2)
+    @ingresoTotal =  @sucursal.ingresosTotal(f1,f2)
     @sumEgresos = @egresos.sum('amount')
     respond_to do |format|
       format.html  

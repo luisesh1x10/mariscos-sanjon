@@ -14,6 +14,14 @@ menu label: "Mesas"
 #   permitted
 # end
 
-permit_params :description, :name,:take_away
-
+permit_params :description, :name,:take_away,:sucursal_id
+  form do |f|
+    inputs 'Details' do
+      input :description, label:"Descripcion"
+      input :name, label:"Nombre de mesa"
+      f.input :sucursal , :collection => Sucursal.all.map{ |suc| [suc.nombre, suc.id] }
+      input :take_away, label: "Para llevar"
+      actions
+    end
+  end
 end

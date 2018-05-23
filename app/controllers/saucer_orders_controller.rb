@@ -1,11 +1,15 @@
 class SaucerOrdersController < ApplicationController
   before_action :set_saucer_order, only: [:show, :edit, :update,:update_clave, :destroy]
   before_action :set_order, only: [:create,:new]
+  before_action :set_sucursal, only: [:index, :create_bag, :create]
+  def set_sucursal
+      @sucursal = User.find(current_user.id).sucursal
+  end
 
   # GET /saucer_orders
   # GET /saucer_orders.json
   def index
-    @saucer_orders = SaucerOrder.all
+    @saucer_orders = @sucursal.saucer_orders
   end
 
   # GET /saucer_orders/1
@@ -28,12 +32,15 @@ class SaucerOrdersController < ApplicationController
     exito=true
     parametros = JSON.parse(params[:datos])
     parametros.each do |aux|
-      bag= Bag.create
+      bag= Bag.new
+      bag.sucursal_id = @sucursal.id
+      bag.save
       aux.each do |record|
         row = SaucerOrder.new(order_id:record["order_id"],platillo_id:record["platillo_id"],quantity:record["quantity"],notes:record["notes"])
         row.price = row.platillo.price.to_f
         row.user=current_user
         row.bag=bag
+        row.sucursal_id = @sucursal.id
         exito =false unless  row.save
       end
     end
@@ -47,11 +54,14 @@ class SaucerOrdersController < ApplicationController
   end
   
   def create
-    bag=Bag.create
+    bag=Bag.new
+    bag.sucursal_id = @sucursal.id
+    bag.save
     @saucer_order = SaucerOrder.new(saucer_order_params)
     @saucer_order.price = @saucer_order.platillo.price.to_f
     @saucer_order.user=current_user
     @saucer_order.bag=bag
+    @saucer_order.sucursal_id = @sucursal.id
     unless  @order.nil?
       @saucer_order.order_id = @order.id
     end

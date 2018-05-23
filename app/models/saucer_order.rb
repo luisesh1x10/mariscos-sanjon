@@ -3,6 +3,7 @@ class SaucerOrder < ActiveRecord::Base
   belongs_to :order
   belongs_to :bag
   belongs_to :user
+  belongs_to :sucursal
   validates_presence_of :platillo
   validates_presence_of :order
   validates :platillo_id,
@@ -32,7 +33,7 @@ class SaucerOrder < ActiveRecord::Base
     tuplas = SaucerOrder.where(:created_at => f1.beginning_of_day+6.hours..f2.end_of_day+6.hours)
     if (tuplas.count > 0 )
       tuplas = SaucerOrder.where(:created_at => f1.beginning_of_day+6.hours..f2.end_of_day+6.hours)
-      tuplas.sum('(price*quantity) - (price*quantity)*(discount/100)') * (tuplas.first.iva.to_f / 100.to_f)
+      tuplas.sum('((price*quantity) - (price*quantity)*(discount/100)) * (iva/100.0)') #* (tuplas.first.iva.to_f / 100.to_f)
     else
       0
     end 

@@ -1,10 +1,13 @@
 class BagsController < ApplicationController
   before_action :set_bag, only: [:show, :edit, :update, :destroy,:avanzar]
-
+  before_action :set_sucursal, only: [:index, :create]
+    def set_sucursal
+        @sucursal = User.find(current_user.id).sucursal
+    end
   # GET /bags
   # GET /bags.json
   def index
-    @bags = Bag.all
+    @bags = @sucursal.bags.all
   end
 
   # GET /bags/1
@@ -34,8 +37,9 @@ class BagsController < ApplicationController
   # POST /bags
   # POST /bags.json
   def create
+    @sucursal = User.find(current_user.id).sucursal
     @bag = Bag.new(bag_params)
-
+    @bag.sucursal = @sucursal
     respond_to do |format|
       if @bag.save
         format.html { redirect_to @bag, notice: 'Bag was successfully created.' }

@@ -83,11 +83,15 @@ end
 =end
 class ExpensesController < ApplicationController
   before_action :set_expense, only: [:show, :edit, :update, :destroy]
+  before_action :set_sucursal, only: [:index, :create]
+  def set_sucursal
+      @sucursal = User.find(current_user.id).sucursal
+  end
 
   # GET /expenses
   # GET /expenses.json
   def index
-    @expenses = Expense.where(:created_at => Date.today.beginning_of_day+6.hours..Date.today.end_of_day+6.hours)
+    @expenses = @sucursal.expenses.where(:created_at => Date.today.beginning_of_day+6.hours..Date.today.end_of_day+6.hours)
   end
 
   # GET /expenses/1
@@ -108,7 +112,7 @@ class ExpensesController < ApplicationController
   # POST /expenses.json
   def create
     @expense = Expense.new(expense_params)
-
+    @expense.sucursal_id = @sucursal.id 
     respond_to do |format|
       if @expense.save
         format.html { redirect_to @expense, notice: 'Expense was successfully created.' }

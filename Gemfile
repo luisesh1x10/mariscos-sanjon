@@ -35,6 +35,7 @@ gem 'prawn'
 gem 'prawn-table', '~> 0.1.0'
 gem 'groupdate'
 gem 'money'
+gem "mini_magick"
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

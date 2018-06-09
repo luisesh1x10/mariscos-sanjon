@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  sucursal_id: 
+  ingrediente_id: 
+  existencia: 1.5
+
+two:
+  sucursal_id: 
+  ingrediente_id: 
+  existencia: 1.5

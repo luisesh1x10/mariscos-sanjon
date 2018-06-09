@@ -14,7 +14,7 @@ ActiveAdmin.register Platillo do
 # end
 
 permit_params :name,:cover,:price, :category_id,:map,:map_file_name,:group_id,:is_child ,:descripcion,
-ingredients_attributes: [:id,:platillo_id,:name,:stock,:_destroy, :_create, :_update]
+ingredients_attributes: [:id,:platillo_id,:name,:stock,:ingrediente_id,:_destroy, :_create, :_update]
 
 filter :name
 filter :price
@@ -52,7 +52,7 @@ form do |f|
       end
       f.inputs "Ingredientes" do
         f.has_many :ingredients, heading: 'Ingrediente',new_record: true, allow_destroy: true do |s|
-            s.input :name, :collection => Ingrediente.all.map{ |car| [car.nombre, car.id] }
+            s.input :ingrediente, :collection => Ingrediente.all.map{ |car| [car.nombre, car.id] }
             s.input :stock 
         end
       end

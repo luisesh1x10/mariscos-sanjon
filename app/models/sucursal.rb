@@ -5,7 +5,8 @@ class Sucursal < ActiveRecord::Base
     has_many :orders
     has_many :tables
     has_many :saucer_orders
-
+    has_many :invetarios
+    after_create :inicializar_inventario
     def self.init_sucursal(id)
         puts "inicio"
         User.update_all(sucursal_id:id)
@@ -37,6 +38,12 @@ class Sucursal < ActiveRecord::Base
     end
     def ingresosTotal(f1,f2)
         ingresosBrutos(f1,f2) - descuentoTotal(f1,f2) + ivaTotal(f1,f2)
+    end
+    
+    def inicializar_inventario
+        Ingrediente.all.each do | ing |
+            Inventario.create(sucursal_id:self.id,ingrediente_id:ing.id) unless Inventario.where(sucursal_id:self.id,ingrediente_id:ing.id).count > 0
+        end
     end
 
 end

@@ -49,7 +49,7 @@ class ReportPdf < Prawn::Document
   end
 
   def table_content
-    table  product_rows,:cell_style => { size:8,border_width:0} do
+    table  product_rows,:cell_style => { size:8,border_width:0,padding:2.5} do
       row(0).font_style = :bold
       self.header = true
     end
@@ -64,7 +64,7 @@ class ReportPdf < Prawn::Document
   end
 
   def product_rows
-    [['PLATILLO', 'CATIDAD', 'PRECIO','IVA']] +
+    [['PLATILLO','#','PRECIO','IVA']] +
     @order.saucerOrders.map do |so|
       [so.platillo.name,so.quantity,Dinero.to_money(so.valorTotal),Dinero.to_money(so.valorTotal*(so.iva.to_f/100))]
     end

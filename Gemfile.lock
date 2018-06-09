@@ -149,6 +149,7 @@ GEM
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
     mimemagic (0.3.2)
+    mini_magick (4.8.0)
     mini_portile2 (2.1.0)
     minitest (5.9.0)
     money (6.10.1)
@@ -266,6 +267,7 @@ DEPENDENCIES
   jquery-rails
   jquery-turbolinks
   materialize-sass
+  mini_magick
   money
   paperclip
   pg
@@ -286,4 +288,4 @@ DEPENDENCIES
   web-console (~> 2.0)
 
 BUNDLED WITH
-   1.12.5
+   1.14.4

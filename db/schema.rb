@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180510070635) do
+ActiveRecord::Schema.define(version: 20180609091304) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -103,15 +103,15 @@ ActiveRecord::Schema.define(version: 20180510070635) do
   create_table "expenses", force: :cascade do |t|
     t.integer  "category"
     t.decimal  "amount"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
     t.string   "description"
-    t.integer  "ingredient_id"
     t.integer  "quantity"
     t.integer  "sucursal_id"
+    t.integer  "ingrediente_id"
   end
 
-  add_index "expenses", ["ingredient_id"], name: "index_expenses_on_ingredient_id", using: :btree
+  add_index "expenses", ["ingrediente_id"], name: "index_expenses_on_ingrediente_id", using: :btree
   add_index "expenses", ["sucursal_id"], name: "index_expenses_on_sucursal_id", using: :btree
 
   create_table "groups", force: :cascade do |t|
@@ -137,10 +137,24 @@ ActiveRecord::Schema.define(version: 20180510070635) do
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
     t.integer  "platillo_id"
+    t.integer  "ingrediente_id"
   end
 
+  add_index "ingredients", ["ingrediente_id"], name: "index_ingredients_on_ingrediente_id", using: :btree
   add_index "ingredients", ["measurement_unit_id"], name: "index_ingredients_on_measurement_unit_id", using: :btree
   add_index "ingredients", ["platillo_id"], name: "index_ingredients_on_platillo_id", using: :btree
+
+  create_table "inventarios", force: :cascade do |t|
+    t.integer  "sucursal_id"
+    t.integer  "ingrediente_id"
+    t.float    "existencia"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.float    "minimo"
+  end
+
+  add_index "inventarios", ["ingrediente_id"], name: "index_inventarios_on_ingrediente_id", using: :btree
+  add_index "inventarios", ["sucursal_id"], name: "index_inventarios_on_sucursal_id", using: :btree
 
   create_table "measurement_units", force: :cascade do |t|
     t.string   "name"
@@ -294,11 +308,14 @@ ActiveRecord::Schema.define(version: 20180510070635) do
 
   add_foreign_key "bags", "sucursals"
   add_foreign_key "cancellations", "users"
-  add_foreign_key "expenses", "ingredients"
+  add_foreign_key "expenses", "ingredientes"
   add_foreign_key "expenses", "sucursals"
   add_foreign_key "ingredientes", "measurement_units"
+  add_foreign_key "ingredients", "ingredientes"
   add_foreign_key "ingredients", "measurement_units"
   add_foreign_key "ingredients", "platillos"
+  add_foreign_key "inventarios", "ingredientes"
+  add_foreign_key "inventarios", "sucursals"
   add_foreign_key "movements", "users"
   add_foreign_key "orders", "customers"
   add_foreign_key "orders", "sucursals"

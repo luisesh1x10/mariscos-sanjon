@@ -2,6 +2,7 @@ class Order < ActiveRecord::Base
   belongs_to :table
   belongs_to :customer
   has_many :saucerOrders
+  belongs_to :sucursal
   has_many :platillos, through: :saucerOrders
   has_many :users, through: :saucerOrders
   validates :status, :inclusion => {:in => [nil,1,2]}

@@ -8,4 +8,7 @@ class User < ActiveRecord::Base
   #'mesero'--->2
   #'Caja'----->3
   has_many :saucer_orders
+  belongs_to :sucursal
+  
+  validates :sucursal_id, presence:true
 end

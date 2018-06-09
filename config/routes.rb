@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get 'ganacias/semana'
 
   get 'ganacias/ano'
+  get 'ganacias/sucursales'
 
   resources :expenses
   get '/configs/', to:'config#update', as:'config'

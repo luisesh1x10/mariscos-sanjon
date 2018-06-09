@@ -1,27 +1,31 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy,:pay,:paynow]
   before_action :set_table, only: [:create]
+  before_action :set_sucursal, only: [:query, :index, :domicilio, :historial, :create]
+  def set_sucursal
+      @sucursal = User.find(current_user.id).sucursal
+  end
 
   # GET /orders
   # GET /orders.json
   def query
-     @orders = Order.all.where(status:1)
+     @orders = @sucursal.orders.where(status:1)
     @orders= @orders.where(table_id:params[:table_id]) unless params[:table_id].nil?|| params[:table_id]==""
     @orders= @orders.where(takeaway:(params[:takeaway_v]=='true')) unless params[:takeaway_v].nil?|| params[:takeaway_v]==""
   end
   
   def index
-    @orders = Order.all.where.not(status:2)
+    @orders = @sucursal.orders.where.not(status:2)
     
   end
   def domicilio
-    @orders = Order.where("takeaway = ?",true).where.not(:status=>2)
+    @orders = @sucursal.orders.where("takeaway = ?",true).where.not(:status=>2)
   
   end
   # GET /orders/1
   # GET /orders/1.json
   def historial
-      @orders = Order.all.where(status:2).order(updated_at: :desc).first(30)
+      @orders = @sucursal.orders.where(status:2).order(updated_at: :desc).first(30)
   end
   def show
     @categories=Category.all
@@ -58,6 +62,7 @@ class OrdersController < ApplicationController
   # POST /orders.json
   def create
     @order =Order.new()
+    @order.sucursal_id = @sucursal.id
     @order.table = @table
     respond_to do |format|
       if @order.save

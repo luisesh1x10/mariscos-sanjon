@@ -25,7 +25,13 @@ angular.module('sanjon').
           type:'POST',
           url: '/expenses',
           dataType: 'json',
-          data: { expense: {category:$scope.nuevo.category,amount:$scope.nuevo.amount, description:$scope.nuevo.descricion,quantity:$scope.nuevo.cantidad,ingredients_id:$scope.nuevo.ingredient_id}},
+          data: { expense: {category:$scope.nuevo.category,
+                               amount:$scope.nuevo.amount, 
+                               description:$scope.nuevo.descricion,
+                               quantity:$scope.nuevo.quantity,
+                               ingrediente_id:$scope.nuevo.ingrediente_id
+           
+          }},
           success: function(data){
              console.log(data);
              $scope.obtener_gastos();

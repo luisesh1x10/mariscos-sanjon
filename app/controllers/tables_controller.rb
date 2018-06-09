@@ -1,7 +1,11 @@
 class TablesController < ApplicationController
     before_action :set_table, only: [:show]
+    before_action :set_sucursal, only: [:index]
+    def set_sucursal
+        @sucursal = User.find(current_user.id).sucursal
+    end
     def index
-        @tables = Table.all.order(:name)
+        @tables = @sucursal.tables.all.order(:name)
     end
     def show
         @order = Order.new
@@ -10,4 +14,5 @@ class TablesController < ApplicationController
     def set_table
       @table = Table.find(params[:id])
     end
+    
 end

@@ -22,7 +22,7 @@ class CortePdf < Prawn::Document
     y_position = cursor - 0
 
     # The bounding_box takes the x and y coordinates for positioning its content and some options to style it
-    bounding_box([0, y_position], :width => 100) do
+    bounding_box([0, y_position], :width => 180) do
       
       image "#{Rails.root}/app/assets/images/sanjonLogo.jpg", position: :center,:width=>90
       text "DATOS FISCALES",size:9, :align => :center
@@ -35,20 +35,17 @@ class CortePdf < Prawn::Document
       text "Fecha: #{Time.now.strftime("%m/%d/%Y")}", size: 9,:align => :center
       text "Hora: #{Time.now.strftime("%I:%M")}", size: 9,:align => :center
       text "CORTE DEL DIA", :align => :center
-      text "Ingresos Totales: "
-      text "#{Dinero.to_money @ingresoTotal}", :align => :right
-      text "Egresos:"
-      text "#{Dinero.to_money @sumEgresos}", :align => :right
-      text "Ganancias: "
-      text "#{Dinero.to_money @ingresoTotal - @sumEgresos}", :align => :right
       text "#{@ingresos.count} ventas en el dia"
-      text "-------------------------"
-      text "---ventas---", :align => :center
       text "Ventas Totales: #{ Dinero.to_money @sumIngresos}"
       text "Descuentos: #{ Dinero.to_money @sumDescuento}"
+      text "Ingresos Totales: #{Dinero.to_money @ingresoTotal}"
+      text "", :align => :right
       text "Iva: #{ Dinero.to_money @sumIva}"
-      text "Total: #{ Dinero.to_money @ingresoTotal}"
-      text "-------------------------"
+      text "Egresos: #{Dinero.to_money @sumEgresos}"
+      text "", :align => :right
+      text "Ganancias: #{Dinero.to_money @ingresoTotal - @sumEgresos}"
+      text "", :align => :right
+      
       
     end
   end

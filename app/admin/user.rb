@@ -1,15 +1,22 @@
 ActiveAdmin.register User do
+    remove_filter :saucer_orders
+    filter :sucursal, collection: -> {
+        Sucursal.all.map { |suc| [suc.nombre, suc.id] }
+    }
+    
     menu label: "Usuarios"
-    index do
+    index do 
         column :email
         column :tipo
+        column :sucursal_id
         actions
     end
-permit_params :email, :password,:tipo,:name
+permit_params :email, :password,:tipo,:name,:sucursal_id
  form do |f|
     inputs 'Details' do
       input :name, label:"Nombre del empleado"
       input :email
+      f.input :sucursal , :collection => Sucursal.all.map{ |suc| [suc.nombre, suc.id] }
       input :password, label: "Contraseña"
       f.input :tipo, :label => 'Tipo', :as => :select, :collection => [['Cocina',1],['mesero',2],['Caja',3]]
       li "Created at #{f.object.created_at}" unless f.object.new_record?

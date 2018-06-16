@@ -45,5 +45,12 @@ class Sucursal < ActiveRecord::Base
             Inventario.create(sucursal_id:self.id,ingrediente_id:ing.id) unless Inventario.where(sucursal_id:self.id,ingrediente_id:ing.id).count > 0
         end
     end
+    def self.inicializar_inventarios_sucursales
+        Sucursal.all.each do |suc|    
+            Ingrediente.all.each do | ing |
+                Inventario.create(sucursal_id:suc.id,ingrediente_id:ing.id) unless Inventario.where(sucursal_id:suc.id,ingrediente_id:ing.id).count > 0
+            end
+        end
+    end
 
 end

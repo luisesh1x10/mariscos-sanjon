@@ -21,6 +21,7 @@ angular.module('sanjon').
          $("#solo_proveedor").hide();
      }
      $scope.crear_gasto = function(){
+       console.log($scope.nuevo)
           $.ajax({
           type:'POST',
           url: '/expenses',

@@ -9,13 +9,13 @@ class CorteController < ApplicationController
     @fecha = @fecha.to_date
     f1 = @fecha.beginning_of_day
     f2 = @fecha.end_of_day
-    @ingresos =  @sucursal.saucer_orders.where(:created_at => @fecha.beginning_of_day+6.hours..@fecha.end_of_day+6.hours) #.sum('price*quantity')
-    @egresos = @sucursal.expenses.where(:created_at => @fecha.beginning_of_day+6.hours..@fecha.end_of_day+6.hours) #.sum('amount')
+    @ingresos =  @sucursal.saucer_orders.joins(:order).where(:created_at => @fecha.beginning_of_day+6.hours..@fecha.end_of_day+6.hours).where("orders.cajero_id = ?",current_user.id) #.sum('price*quantity')
+    @egresos = @sucursal.expenses.where(:created_at => @fecha.beginning_of_day+6.hours..@fecha.end_of_day+6.hours).where(user_id:current_user.id) #.sum('amount')
     
-    @sumIngresos =  @sucursal.ingresosBrutos(f1,f2)
-    @sumDescuento =  @sucursal.descuentoTotal(f1,f2)
-    @sumIva =  @sucursal.ivaTotal(f1,f2)
-    @ingresoTotal =  @sucursal.ingresosTotal(f1,f2)
+    @sumIngresos =  @sucursal.ingresosBrutos(f1,f2,current_user.id)
+    @sumDescuento =  @sucursal.descuentoTotal(f1,f2,current_user.id)
+    @sumIva =  @sucursal.ivaTotal(f1,f2,current_user.id)
+    @ingresoTotal =  @sucursal.ingresosTotal(f1,f2,current_user.id)
     @sumEgresos = @egresos.sum('amount')
     respond_to do |format|
       format.html  

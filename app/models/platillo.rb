@@ -6,7 +6,7 @@ class Platillo < ActiveRecord::Base
   belongs_to :group
   has_many :saucer_orders
   has_many :orders, through: :saucerOrders
-  
+  validates :price, numericality: { greater_than_or_equal_to: 0 }
   validates_presence_of :category
   validates_presence_of :group
   validates :price,:name,

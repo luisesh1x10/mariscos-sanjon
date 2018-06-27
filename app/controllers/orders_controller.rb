@@ -54,7 +54,8 @@ class OrdersController < ApplicationController
   end
   
   def paynow
-    @order.update(status:2)
+    
+    @order.update(status:2,cajero_id:current_user.id)
     redirect_to tables_path
   end
 

@@ -12,6 +12,7 @@ ActiveAdmin.register Platillo do
 #   permitted << :other if params[:action] == 'create' && current_user.admin?
 #   permitted
 # end
+menu label: "Platillos"
 
 permit_params :name,:cover,:price, :category_id,:map,:map_file_name,:group_id,:is_child ,:descripcion,
 ingredients_attributes: [:id,:platillo_id,:name,:stock,:ingrediente_id,:_destroy, :_create, :_update]

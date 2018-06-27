@@ -16,7 +16,6 @@ ActiveAdmin.register Ingrediente do
 	permit_params :nombre,:stock, :measurement_unit_id
 	index do
 	  column :nombre
-	  column :stock
 	  column :measurement_unit
 	  actions
 
@@ -25,7 +24,6 @@ ActiveAdmin.register Ingrediente do
     f.semantic_errors *f.object.errors.keys
 	    f.inputs "Unidad de medida" do
 	      f.input :nombre
-	      f.input :stock
 	      f.input :measurement_unit_id,:as => :select, :collection => MeasurementUnit.all.map{ |car| [car.name, car.id] }
 	    end
 	    actions

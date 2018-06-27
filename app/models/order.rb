@@ -13,7 +13,9 @@ class Order < ActiveRecord::Base
   end
   
   attr_accessor :total,:pedidos
-  
+  def cajero
+    User.where(id:self.cajero_id).last
+  end
   def total
     self.saucerOrders.sum('price*quantity')
   end

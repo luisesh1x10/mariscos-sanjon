@@ -11,10 +11,11 @@
         $scope.inicio;
         $scope.fin;
         $scope.url = "";
-        $scope.periocidad = 1;
+        $scope.periocidad = "1";
         
         $scope.obtenerInfo = function(val){
-            
+            if($scope.periocidad == 0)
+                pag= "/ganacias/dia.json";
             if($scope.periocidad == 1)
                 pag= "/ganacias/mes.json";
             if($scope.periocidad == 2)
@@ -22,7 +23,7 @@
             if($scope.periocidad == 3)
                 pag= "/ganacias/ano.json";
             
-            var pag =pag + "?pagina="+$scope.pagina;
+            var pag =pag + "?pagina="+$scope.pagina+"&sucursal="+$scope.sucursal;
             console.log(pag);
             $http.get(pag)
             .success(function(data){
@@ -59,17 +60,19 @@
                 <div class="box">
                     <label>Periocidad</label>
                     <select id="periocidad" ng-model=periocidad ng-change="obtenerInfo()">
-                        <option value=1 selected="selected">Mensual</option>
-                        <option value=2>semanal</option>
-                        <option value=3>Anual</option>
+                        <option value="0" selected>Diario</option>
+                        <option value="1">Mensual</option>
+                        <option value="2">semanal</option>
+                        <option value="3">Anual</option>
                     </select>
                 </div>
                 <div class="box">
                     <label>Sucursal</label>
-                    <select id="periocidad" ng-model=sucursal ng-change="obtenerInfo()">
-                        <option value=1 selected="selected">Mensual</option>
-                        <option value=2>semanal</option>
-                        <option value=3>Anual</option>
+                    <select id="sucursal" ng-model=sucursal ng-change="obtenerInfo()">
+                        <option value="" selected>Todas</option>
+                        <% Sucursal.all.each do |suc|%>
+                            <option value="<%=suc.id%>"><%=suc.nombre%></option>
+                        <%end%>
                     </select>
                 </div>
             </div>

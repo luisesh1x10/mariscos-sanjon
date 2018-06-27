@@ -1,7 +1,9 @@
 class Expense < ActiveRecord::Base
     belongs_to :sucursal
     belongs_to :ingrediente
+    belongs_to :user
     validates :category, :amount, :description, presence:true
+    validates :amount, numericality: { greater_than_or_equal_to: 0 }
     after_create :guardar_inventario
     after_initialize :init
     def init

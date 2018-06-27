@@ -1,3 +1,13 @@
 .browser-default{
      border:1px solid #000;
 }
+
+
+.anchura-def{
+    height: 371px;
+    margin-bottom: 20px;
+}
+.margenes{
+    margin-left: 15px;
+    margin-right: 15px;
+}

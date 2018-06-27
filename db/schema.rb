@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180609091304) do
+ActiveRecord::Schema.define(version: 20180622185912) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,8 +65,10 @@ ActiveRecord::Schema.define(version: 20180609091304) do
     t.integer  "quantity"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.integer  "sucursal_id"
   end
 
+  add_index "cancellations", ["sucursal_id"], name: "index_cancellations_on_sucursal_id", using: :btree
   add_index "cancellations", ["user_id"], name: "index_cancellations_on_user_id", using: :btree
 
   create_table "categories", force: :cascade do |t|
@@ -109,10 +111,12 @@ ActiveRecord::Schema.define(version: 20180609091304) do
     t.integer  "quantity"
     t.integer  "sucursal_id"
     t.integer  "ingrediente_id"
+    t.integer  "user_id"
   end
 
   add_index "expenses", ["ingrediente_id"], name: "index_expenses_on_ingrediente_id", using: :btree
   add_index "expenses", ["sucursal_id"], name: "index_expenses_on_sucursal_id", using: :btree
+  add_index "expenses", ["user_id"], name: "index_expenses_on_user_id", using: :btree
 
   create_table "groups", force: :cascade do |t|
     t.string   "name"
@@ -123,7 +127,6 @@ ActiveRecord::Schema.define(version: 20180609091304) do
   create_table "ingredientes", force: :cascade do |t|
     t.string   "nombre"
     t.integer  "measurement_unit_id"
-    t.float    "stock"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
   end
@@ -189,6 +192,7 @@ ActiveRecord::Schema.define(version: 20180609091304) do
     t.string   "colonia"
     t.text     "notas"
     t.integer  "sucursal_id"
+    t.integer  "cajero_id"
   end
 
   add_index "orders", ["customer_id"], name: "index_orders_on_customer_id", using: :btree
@@ -307,9 +311,11 @@ ActiveRecord::Schema.define(version: 20180609091304) do
   add_index "users", ["sucursal_id"], name: "index_users_on_sucursal_id", using: :btree
 
   add_foreign_key "bags", "sucursals"
+  add_foreign_key "cancellations", "sucursals"
   add_foreign_key "cancellations", "users"
   add_foreign_key "expenses", "ingredientes"
   add_foreign_key "expenses", "sucursals"
+  add_foreign_key "expenses", "users"
   add_foreign_key "ingredientes", "measurement_units"
   add_foreign_key "ingredients", "ingredientes"
   add_foreign_key "ingredients", "measurement_units"

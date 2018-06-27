@@ -1,32 +1,32 @@
-<div class="container">
+
   <h3 class="card center-align">Lista de mesas</h3>
-  <a href="<%=historial_path%>"><i class="material-icons">toc</i> Historial de ordenes</a>
-      <%cont=0%>
-      <% @tables.each do |table| %>
-        <%if cont%2==0 %>
-          <div class="row">
-        <%end%>
-          <div class="col s12 m6">
-            <div class="card z-depth-4">
-              <a href="<%=table_url(table)%>">
-                <%if table.orders.where(status:1).count==0%>
-                  <div class="card-content">
-                <%else%>
-                  <div class="card-content amber darken-2">
-                <%end%>
-                  <span class="card-title black-text" ><h1><%=table.name%></h1></span>
-                  <p class="black-text"><%=table.description%></p>
-                  <h4 class="black-text">Ordenes activas: <%=table.orders.where(status:1).count%></h4>
-                </div>
-              </a>
-            </div>
-          </div>
-        <%if cont%2!=0 %>
-          </div>
-        <%end%>
-        <%cont+=1%>
-      <% end %>
+  <div>
+    <h4 class="center-align">
+      <a href="<%=historial_path%>"><i class="material-icons">toc</i> Historial de ordenes</a>
+    </h4>
+  </div>
+  <div class="margenes">
       <div class="row">
+        <% @tables.each do |table| %>
+            <div class="col s12 m4 l3 anchura-def hoverable">
+              <div class="card z-depth-4 anchura-def">
+                  <a href="<%=table_url(table)%>">
+                      <%if table.orders.where(status:1).count==0%>
+                        <div class="card-content anchura-def">
+                      <%else%>
+                        <div class="card-content amber darken-2 anchura-def">
+                      <%end%>
+                      <span class="card-title black-text" ><h1><%=table.name%></h1></span>
+                      <p class="black-text truncate"><%=table.description%></p>
+                      <h4 class="black-text truncate">Ordenes activas: <%=table.orders.where(status:1).count%></h4>
+                    </div>
+                  </a>
+                </div>
+              </div>
+        <% end %>
+      </div>
+    </div>
+     <!-- <div class="row">
          <div class="col s12 m12">
             <div class="card z-depth-4">
               <a  class="black-text"  href="<%=domicilio_path%>">
@@ -44,4 +44,4 @@
           </div>
       </div>
     </div>
-
+-->

@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   get 'corte/index'
 
+  get 'ganacias/dia'
+  
   get 'ganacias/mes'
 
   get 'ganacias/semana'

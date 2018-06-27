@@ -12,6 +12,7 @@ ActiveAdmin.register Password do
 #   permitted << :other if params[:action] == 'create' && current_user.admin?
 #   permitted
 # end
+menu label: "Contraseñas"
 
 permit_params :pass
 end

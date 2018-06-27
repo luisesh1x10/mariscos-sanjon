@@ -99,7 +99,7 @@ class SaucerOrdersController < ApplicationController
     if order.status==2
       redirect_to pay_path(order)
     else  
-      Cancellation.create(user_id:current_user.id,justificacion:justi,platillo:@saucer_order.platillo.name,quantity:@saucer_order.quantity)
+      Cancellation.create(user_id:current_user.id,justificacion:justi,platillo:@saucer_order.platillo.name,quantity:@saucer_order.quantity,sucursal_id:current_user.sucursal_id)
       @saucer_order.destroy
       respond_to do |format|
         format.html { redirect_to pay_path(order), notice: 'Saucer order was successfully destroyed.' }

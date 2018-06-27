@@ -9,6 +9,10 @@ class User < ActiveRecord::Base
   #'Caja'----->3
   has_many :saucer_orders
   belongs_to :sucursal
+  has_many :expenses
   
   validates :sucursal_id, presence:true
+  def ordenes_cerradas
+    Order.where(cajero_id:self.id)
+  end
 end

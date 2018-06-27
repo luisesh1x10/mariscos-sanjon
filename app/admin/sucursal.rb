@@ -3,6 +3,7 @@ ActiveAdmin.register Sucursal do
 
 
 
+menu label: "Sucursales"
 
 
    config.filters = false

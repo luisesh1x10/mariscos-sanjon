@@ -1,9 +1,25 @@
 class GanaciasController < ApplicationController
-   before_action :setSucursal, only: [:mes, :semana, :ano]
+   before_action :setSucursal, only: [:mes, :semana, :ano,:dia]
   def sucursales
     render :json => Sucursal.all.to_json
   end
-  def mes
+  def dia
+    @dias = [] 
+    page = params[:pagina].to_i
+    elementos = 0...19
+    elementos.each do |i|
+      fecha = Date.today 
+      fecha = fecha - ((elementos.size() *page)+i).months
+      inicio = fecha.beginning_of_day+6.hours 
+      fin = fecha.end_of_day+6.hours
+      ingreso = @sauceOrders.where(:created_at => inicio..fin).sum('(price*quantity) - (price*quantity)*(discount/100)')
+      egreso = @expenses.where(:created_at => inicio..fin).sum('amount') 
+      @dias << {:inicio => inicio, :fin => fin, :ingreso => ingreso, :egreso =>egreso }
+      
+    end
+  end
+  
+   def mes
     @meses = [] 
     page = params[:pagina].to_i
     elementos = 0...19
@@ -49,7 +65,7 @@ class GanaciasController < ApplicationController
     end
   end
   def setSucursal
-    unless params[:sucursal].nil? or params[:sucursal]==""
+    unless params[:sucursal].nil? or params[:sucursal]=="" or params[:sucursal]=="undefined"
       sucursal = Sucursal.find(params[:sucursal].to_i) 
       @sauceOrders = sucursal.saucer_orders
       @expenses = sucursal.expenses

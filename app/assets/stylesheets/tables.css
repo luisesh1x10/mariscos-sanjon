@@ -4,10 +4,41 @@
 
 
 .anchura-def{
-    height: 371px;
+    display: inline-block;
+    position: relative;
+    top: 0;
+    margin-top: 0;
+    height: 240px;
     margin-bottom: 20px;
+   
+    
+    
 }
-.margenes{
-    margin-left: 15px;
-    margin-right: 15px;
+
+@media only screen and (max-width: 600px) {
+    .tam-def{
+        width: 93%;
+        margin: 0 auto;
+    }
+}
+@media only screen and (min-width: 600px) {
+    .tam-def{
+        width: 30%;
+        margin-left: 3%;
+    }
+}
+@media only screen and (min-width: 992px) {
+    .tam-def{
+        position: absolute;
+        top: 0;
+        margin-top: 0;
+        width: 11.4%;
+        margin-left: 0.8%;
+    }
+}
+.f{ 
+    position: relative;
+}
+.d{
+    width:100%;
 }

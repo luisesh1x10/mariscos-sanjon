@@ -44,6 +44,7 @@ class CortePdf < Prawn::Document
       text "Egresos: #{Dinero.to_money @sumEgresos}"
       text "", :align => :right
       text "Ganancias: #{Dinero.to_money @ingresoTotal - @sumEgresos}"
+      text "Total: #{Dinero.to_money @ingresoTotal - @sumEgresos + @sumIva}"
       text "", :align => :right
       
       

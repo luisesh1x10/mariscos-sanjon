@@ -4,6 +4,9 @@ angular.module('sanjon')
     $scope.imprimir = function(val,folio,fecha){
         window.open("/reportes_ticket/"+val+".pdf?folio="+folio+"&fecha="+fecha,"_blank")
     }
+    $scope.imprimirTodo = function(){
+        window.open("/reportes_ticket/imprimir_todo.pdf/","_blank")
+    }
     $scope.query = function(pagina){
         $http.get("/reportes_ticket/historial")
         .success(function(data){

@@ -37,7 +37,7 @@ ActiveAdmin.register_page "Dashboard" do
            para "Total vendido bruto #{Dinero.to_money SaucerOrder.all.sum('price*quantity')}"
          end
          panel "Tickets falsos" do
-            link_to('Ir a generador de tickets','/reportes_ticket/generador_ticket')
+            link_to('Ir a generador de tickets','/reportes_ticket')
          end
          panel "Cofiguracion" do
            

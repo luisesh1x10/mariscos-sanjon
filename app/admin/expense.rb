@@ -27,5 +27,21 @@ menu label: "Gastos"
       actions
     end
   end
+  index do 
+    column "Sucursal", :sucursal_id do |ing|
+        link_to ing.sucursal.nombre, admin_sucursal_path(ing.sucursal.id)
+      end
+    column "usuario", :user_id do |ing|
+        link_to ing.user.name, admin_user_path(ing.user) unless ing.user.nil?
+      end
+      column :category
+      column :amount
+      column :description
+      column :quantity
+      column "Ingrediente", :ingrediente_id do |ing|
+        link_to ing.ingrediente.nombre, admin_ingrediente_path(ing.ingrediente) unless ing.ingrediente.nil?
+      end
+      column :created_at
+  end
 
 end

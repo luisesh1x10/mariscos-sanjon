@@ -7,7 +7,7 @@ class CocinaController < ApplicationController
   end
   def terminados
     @direccion = terminados_path
-     @pedidos = @sucursal.saucer_orders.where('status = ?',3)
+     @pedidos = @sucursal.bags
      respond_to do |format|
           format.html {}
           format.json { render :json=> @pedidos  }

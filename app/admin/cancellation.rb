@@ -19,8 +19,9 @@ filter :sucursal, collection: -> {
     Sucursal.all.map { |suc| [suc.nombre, suc.id] }
 }
 filter :user, collection: -> {
-    Ingrediente.all.map { |suc| [suc.nombre, suc.id] }
+    User.all.map { |suc| [suc.nombre, suc.id] }
 }
+
 filter :justificacion
 filter :platillo
 filter :created_at

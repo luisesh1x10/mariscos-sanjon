@@ -46,6 +46,11 @@ class CortePdf < Prawn::Document
       text "Ganancias: #{Dinero.to_money @ingresoTotal - @sumEgresos}"
       text "Total: #{Dinero.to_money @ingresoTotal - @sumEgresos + @sumIva}"
       text "", :align => :right
+      text "", :align => :right
+      @egresos.each do |ex|
+        text "#{Dinero.to_money(ex.amount)} - #{ex.description}  
+              #{" - "+ex.quantity.to_s unless ex.ingrediente.nil?} #{ ex.ingrediente.measurement_unit.name unless ex.ingrediente.nil?}  #{"de "+ex.ingrediente.nombre unless ex.ingrediente.nil?}"  
+      end
       
       
     end

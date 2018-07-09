@@ -1,9 +1,10 @@
  <div ng-controller ="ticket">
      <div class = "row" >
          <div class="container">
+             <button ng-click="imprimirTodo(periodo.datos)" class="waves-effect waves-light btn">Imprimir Todo</button>
              <ul class="collapsible" data-collapsible="accordion">
               <li ng-repeat = "periodo in ordenes">
-                <div class="collapsible-header"><i class="material-icons">no_sim</i> Periodo: {{periodo.periodo}} Total: {{periodo.total}} | iva: {{periodo.iva}} | total + iva {{periodo.iva + periodo.total}}</div>
+                <div class="collapsible-header"><i class="material-icons">no_sim</i> Periodo: {{periodo.periodo}} Total: {{periodo.total}} | iva: {{periodo.iva}} | total + iva {{periodo.iva + periodo.total}} </div>
                 <div class="collapsible-body card">
                     <div class="container">
                         <div class="row">

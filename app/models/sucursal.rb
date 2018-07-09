@@ -8,6 +8,7 @@ class Sucursal < ActiveRecord::Base
     has_many :invetarios
     after_create :inicializar_inventario
     def self.init_sucursal(id)
+        #este metodo se uso para que todos los elementos que habia se acoplaran a una sucursal NO USAR!!!
         puts "inicio"
         User.update_all(sucursal_id:id)
         Expense.update_all(sucursal_id:id)
@@ -24,7 +25,6 @@ class Sucursal < ActiveRecord::Base
         else
             self.saucer_orders.joins(:order).where(:created_at => f1.beginning_of_day+6.hours..f2.end_of_day+6.hours).where("orders.cajero_id = ?",user_id).sum('saucer_orders.price*saucer_orders.quantity')  
         end
-       
     end
     def descuentoTotal(f1,f2 , user_id = nil)
         if(user_id.nil?)

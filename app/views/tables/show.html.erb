@@ -8,12 +8,14 @@
         <div class="col s12 m6">
           <div class="card z-depth-4" ng-repeat="orden in izquierda">
             <div class="card-content">
-              <div class="col s6 left-align">
-                <a ng-click="descuentoPanel(orden)"  href="#descuentos" class=" white-text text-darken-4 red darken-1 btn">Descuento</a></br><br>
-              </div>
-              <div class="col s6 right-align">
-                <a href="{{orden.finalizar}}" class=" white-text text-darken-4 red darken-1 btn" data-method="post">Finalizar</a></br><br>
-              </div>
+              <% unless current_user.tipo == 2%>
+                <div class="col s6 left-align">
+                  <a ng-click="descuentoPanel(orden)"  href="#descuentos" class=" white-text text-darken-4 red darken-1 btn">Descuento</a></br><br>
+                </div>
+                <div class="col s6 right-align">
+                  <a href="{{orden.finalizar}}" class=" white-text text-darken-4 red darken-1 btn" data-method="post">Finalizar</a></br><br>
+                </div>
+              <%end%>
               <div class="card-title center-align"><span>Folio:{{orden.id}}</span></div> <br>
               <div ng-if="orden.panel" class = "row">
                 <div class = "col s12">
@@ -41,7 +43,8 @@
                   <div class="collapsible-header" ng-click="getOrdenes()">
                     nombre: {{platillo.name}} precio: ${{platillo.price}} cantidad: {{platillo.quantity}}
                   </div>
-                  <div class="collapsible-body" >
+                  <% unless current_user.tipo == 2%>
+                    <div class="collapsible-body" >
                       Cantidad:
                       <select ng-model="platillo.quantity" ng-change="cambiarCantidad(platillo)" class="browser-default">
                         <option value="1"> 1 </option>
@@ -57,12 +60,14 @@
                       Descuento: {{platillo.discount}}</br>
                       notas: {{platillo.notas}}
                   </div>
+                  <%end%>
                 </li>
               </ul>
               subTotal: {{orden.total | currency}} <br>
               Descuento: {{orden.descuentoTotal | currency}} <br>
               IVA: {{orden.ivaTotal | currency}} <br>
               Total: {{orden.total - orden.descuentoTotal + orden.ivaTotal | currency}}</br>
+            <% unless current_user.tipo == 2%>
               pago con: <input id="payment" type="number" ng-model="orden.payment" ng-change="actulizarPago(orden.id,orden.payment)"></br>
               Cambio: $<lable >{{orden.payment-orden.total + orden.descuentoTotal - orden.ivaTotal| currency}}</lable>
               <br></br>
@@ -72,25 +77,35 @@
                 <label for="test5">Iva <%= Config.iva%>%</label>
               </p>
             </div>
-            <div class="card-action">
-                <a href="{{orden.ver}}" class="amber-text text-darken-4"> Ver</a>
-                <a href="{{orden.imprimir}}" class="amber-text text-darken-4" target = '_blank'>Imprimir</a>
-                Cambiar de mesa
-                  <select class="browser-default" ng-model= "orden.table_id" ng-change= "cambiarMesa(orden)">
-                    <option ng-repeat="mesa in mesas" value="{{mesa.id}}">{{mesa.name}}</option>
-                  </select>
-            </div>
+            
+              <div class="card-action">
+                  <a href="{{orden.ver}}" class="amber-text text-darken-4"> Ver</a>
+                  <a href="{{orden.imprimir}}" class="amber-text text-darken-4" target = '_blank'>Imprimir</a>
+                  Cambiar de mesa
+                    <select class="browser-default" ng-model= "orden.table_id" ng-change= "cambiarMesa(orden)">
+                      <option ng-repeat="mesa in mesas" value="{{mesa.id}}">{{mesa.name}}</option>
+                    </select>
+              </div>
+            <%else%>
+              </div>  
+            <%end%>
+            
           </div>
         </div>
+        
+        
+        
         <div class="col s12 m6">
           <div class="card z-depth-4" ng-repeat="orden in derecha">
             <div class="card-content">
-              <div class="col s6 left-align">
-                <a ng-click="descuentoPanel(orden)"  href="#descuentos" class=" white-text text-darken-4 red darken-1 btn">Descuento</a></br><br>
-              </div>
-              <div class="col s6 right-align">
-                <a href="{{orden.finalizar}}" class=" white-text text-darken-4 red darken-1 btn" data-method="post">Finalizar</a></br><br>
-              </div>
+              <% unless current_user.tipo == 2%>
+                <div class="col s6 left-align">
+                  <a ng-click="descuentoPanel(orden)"  href="#descuentos" class=" white-text text-darken-4 red darken-1 btn">Descuento</a></br><br>
+                </div>
+                <div class="col s6 right-align">
+                  <a href="{{orden.finalizar}}" class=" white-text text-darken-4 red darken-1 btn" data-method="post">Finalizar</a></br><br>
+                </div>
+              <%end%>
               <div class="card-title center-align"><span>Folio:{{orden.id}}</span></div> <br>
               <div ng-if="orden.panel" class = "row">
                 <div class = "col s12">
@@ -118,7 +133,8 @@
                   <div class="collapsible-header" ng-click="getOrdenes()">
                     nombre: {{platillo.name}} precio: ${{platillo.price}} cantidad: {{platillo.quantity}}
                   </div>
-                  <div class="collapsible-body" >
+                  <% unless current_user.tipo == 2%>
+                    <div class="collapsible-body" >
                       Cantidad:
                       <select ng-model="platillo.quantity" ng-change="cambiarCantidad(platillo)" class="browser-default">
                         <option value="1"> 1 </option>
@@ -134,29 +150,35 @@
                       Descuento: {{platillo.discount}}</br>
                       notas: {{platillo.notas}}
                   </div>
+                  <%end%>
                 </li>
               </ul>
               subTotal: {{orden.total | currency}} <br>
               Descuento: {{orden.descuentoTotal | currency}} <br>
               IVA: {{orden.ivaTotal | currency}} <br>
               Total: {{orden.total - orden.descuentoTotal + orden.ivaTotal | currency}}</br>
+            <% unless current_user.tipo == 2%>
               pago con: <input id="payment" type="number" ng-model="orden.payment" ng-change="actulizarPago(orden.id,orden.payment)"></br>
               Cambio: $<lable >{{orden.payment-orden.total + orden.descuentoTotal - orden.ivaTotal| currency}}</lable>
               <br></br>
               <p>
                 <input type="hidden" ng-model="orden.iva_valor" ng-init ="orden.iva_valor = <%= Config.iva%>" ></input>
-                <input type="checkbox" id="test6" ng-model="orden.iva_check" ng-change = "aplicarDescuentoGeneral(orden)"/>
-                <label for="test6">Iva <%= Config.iva%>%</label>
+                <input type="checkbox" id="test5" ng-model="orden.iva_check" ng-change = "aplicarDescuentoGeneral(orden)"/>
+                <label for="test5">Iva <%= Config.iva%>%</label>
               </p>
             </div>
-            <div class="card-action">
-                <a href="{{orden.ver}}" class="amber-text text-darken-4"> Ver</a>
-                <a href="{{orden.imprimir}}" class="amber-text text-darken-4" target = '_blank'>Imprimir</a>
-                Cambiar de mesa
-                  <select class="browser-default" ng-model= "orden.table_id" ng-change= "cambiarMesa(orden)">
-                    <option ng-repeat="mesa in mesas" value="{{mesa.id}}">{{mesa.name}}</option>
-                  </select>
-            </div>
+              <div class="card-action">
+                  <a href="{{orden.ver}}" class="amber-text text-darken-4"> Ver</a>
+                  <a href="{{orden.imprimir}}" class="amber-text text-darken-4" target = '_blank'>Imprimir</a>
+                  Cambiar de mesa
+                    <select class="browser-default" ng-model= "orden.table_id" ng-change= "cambiarMesa(orden)">
+                      <option ng-repeat="mesa in mesas" value="{{mesa.id}}">{{mesa.name}}</option>
+                    </select>
+              </div>
+            <%else%>
+              </div>
+            <%end%>
+            
           </div>
         </div>
         

@@ -3,6 +3,17 @@ class ReportesTicketController < ApplicationController
     def index 
         
     end
+    def imprimir_todo
+        
+       self.historialobj
+         respond_to do |format|
+          format.pdf do
+             pdf = Report5Pdf.new(@tickets)
+            send_data pdf.render, filename: 'report3.pdf', type: 'application/pdf', disposition: "inline"
+          end
+          format.json { render :json => hash }
+        end        
+    end
   #  def historial
   #    @orders = Order.all.where(status:2).order(updated_at: :desc).first(30)
   #  end
@@ -41,7 +52,7 @@ class ReportesTicketController < ApplicationController
     def set_order
       @order = Order.find(params[:id])
     end
-    def historial
+    def historialobj
         @tickets = [] 
         elementos = 0...4
         folio = 4932 + 522
@@ -77,6 +88,11 @@ class ReportesTicketController < ApplicationController
           @tickets << {:periodo => "#{inicio.strftime("%d/%m/%Y")} ... #{fin.strftime("%d/%m/%Y")}", :datos=> datos , :total => total,:iva => total*0.16 
           }
         end
+        
+    end
+    def historial
+        historialobj
+        
         render :json => @tickets.to_json
     end
     def tickets_linea 

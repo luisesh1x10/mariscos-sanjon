@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   get '/configs/', to:'config#update', as:'config'
   get 'avanzar/:id',to: 'bags#avanzar',as:'avanzar'
   resources :bags
+  get 'reportes_ticket/imprimir_todo', to:'reportes_ticket#imprimir_todo'
   get 'reportes_ticket/historial', to:'reportes_ticket#historial'
   get 'reportes_ticket/reporte3', to:'reportes_ticket#reporte3'
   get 'reportes_ticket/generador_ticket', to:'reportes_ticket#generador_ticket'

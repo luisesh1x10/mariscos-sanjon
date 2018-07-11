@@ -141,7 +141,7 @@ angular.module('sanjon').controller('verOrden',['$scope','$http', function($scop
           dataType: 'json',
           data: { pass:$scope.contra},
           success: function(data){
-              if(data && $scope.justificacion.length > 20 ){
+              if(data && $scope.justificacion.length >= 10 ){
                   $.ajax({
                       type:'DELETE',
                       url: '/saucer_orders/'+$scope.PlatilloActual.id+"?justificacion="+$scope.justificacion,
@@ -152,17 +152,17 @@ angular.module('sanjon').controller('verOrden',['$scope','$http', function($scop
                         location.reload();
                       },
                       error: function(data){
-                        Materialize.toast('Error al verificar contraseña!', 4000)
+                        Materialize.toast('Error al verificar contraseña!2', 4000)
                       }});
               }else{
                   if (!data)
                     Materialize.toast('Contraseña incorrecta', 4000);
-                  if ($scope.justificacion.length < 20)
+                  if ($scope.justificacion.length < 10)
                     Materialize.toast('Ingresa una justificacion mas larga', 4000);
               }
           },
           error: function(data){
-            Materialize.toast('Error al verificar contraseña!', 4000)
+            Materialize.toast('Error al verificar contraseña!1', 4000)
           }
       });
   }

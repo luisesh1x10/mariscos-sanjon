@@ -9,7 +9,7 @@ class GanaciasController < ApplicationController
     elementos = 0...19
     elementos.each do |i|
       fecha = Date.today 
-      fecha = fecha - ((elementos.size() *page)+i).months
+      fecha = fecha - ((elementos.size() *page)+i).days
       inicio = fecha.beginning_of_day+6.hours 
       fin = fecha.end_of_day+6.hours
       ingreso = @sauceOrders.where(:created_at => inicio..fin).sum('(price*quantity) - (price*quantity)*(discount/100)')

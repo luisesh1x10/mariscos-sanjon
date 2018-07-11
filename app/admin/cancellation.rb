@@ -19,7 +19,7 @@ filter :sucursal, collection: -> {
     Sucursal.all.map { |suc| [suc.nombre, suc.id] }
 }
 filter :user, collection: -> {
-    User.all.map { |suc| [suc.nombre, suc.id] }
+    User.all.map { |suc| [suc.name, suc.id] }
 }
 
 filter :justificacion

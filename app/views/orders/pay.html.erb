@@ -53,7 +53,8 @@
       <h4>Cantidad: {{PlatilloActual.cantidad}}</h4>
       <div class="input-field col s6">
           <input id="contra" type="password" autocomplete="off" ng-model= "contra">
-          <label for="contra">Contraseña</label>
+          
+          <label min="10" for="contra">Contraseña</label><small>10 caracteres minimo</small>
       </div>
       <div class="input-field col s12">
           <textarea id="justificacion" class="materialize-textarea" data-length="20" ng-model= "justificacion" ></textarea>

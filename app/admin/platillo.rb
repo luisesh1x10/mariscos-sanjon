@@ -14,21 +14,21 @@ ActiveAdmin.register Platillo do
 # end
 menu label: "Platillos"
 
-permit_params :name,:cover,:price, :category_id,:map,:map_file_name,:group_id,:is_child ,:descripcion,
+permit_params :name,:cover,:price, :category_id,:map,:map_file_name,:group_id,:is_child ,:descripcion,:actualizado,
 ingredients_attributes: [:id,:platillo_id,:name,:stock,:ingrediente_id,:_destroy, :_create, :_update]
 
-filter :name
+filter :name 
 filter :price
 filter :category
 filter :group
-
+filter :actualizado
 
 
 index do
   column :name, label: "Nombre"
-  column :price 
-  column :category
-  column :group
+  column :price, label: "Precio" 
+  column :category, label: "categoria"
+  column :group, label: "grupo"
   actions
 end
 
@@ -57,10 +57,30 @@ form do |f|
             s.input :stock 
         end
       end
-      f.inputs "Imagen" do
-          f.input :cover, :as => :file
+      
+      f.inputs "Marcar como actualizado si ya se agregaron los ingredientes conrrespondientes" do 
+        
+        f.input :actualizado
       end
+      #f.inputs "Imagen" do
+      #    f.input :cover, :as => :file
+      #end
     end
     f.actions
+end
+
+  show do
+    attributes_table do
+      row :name
+      row :price
+      row :category
+      row :group 
+      
+    end
+    
+    active_admin_comments
+  end
+  action_item :Siguente, only: :show do
+  link_to 'Platillo sin Actualizar ->', "/admin/platillos/#{Platillo.where(actualizado:false).first.id}/edit?locale=es"
 end
 end

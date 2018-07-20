@@ -176,7 +176,7 @@
       })
       .error(function(data){
           Materialize.toast('Error al cargar datos', 4000);
-      }).finally(() =>  $scope.atras_enable = true);
+      }).finally(function(){$scope.atras_enable = true});
     };
     $scope.getPlatillos = function(val){
       $http.get("/groups/"+val+".json")
@@ -186,7 +186,7 @@
       })
       .error(function(data){
           Materialize.toast('Error al cargar datos'+val, 4000);
-      }).finally(() =>  $scope.atras_enable = true);
+      }).finally(function(){$scope.atras_enable = true});
     };
     function add(){
       $scope.pedidos.push({

@@ -12,6 +12,13 @@ class CorteController < ApplicationController
     @ingresos =  @sucursal.saucer_orders.joins(:order).where(:created_at => @fecha.beginning_of_day+6.hours..@fecha.end_of_day+6.hours).where("orders.cajero_id = ?",current_user.id) #.sum('price*quantity')
     @egresos = @sucursal.expenses.where(:created_at => @fecha.beginning_of_day+6.hours..@fecha.end_of_day+6.hours).where(user_id:current_user.id) #.sum('amount')
     
+    ###############
+     @ingresosBrutos = @sucursal.ingresosBrutos(f1,f2,current_user.id)
+     @descuentoTotal = @sucursal.descuentoTotal(f1,f2,current_user.id)
+     @ivaTotal = @sucursal.ivaTotal(f1,f2,current_user.id)
+    
+    ################
+    
     @sumIngresos =  @sucursal.ingresosBrutos(f1,f2,current_user.id)
     @sumDescuento =  @sucursal.descuentoTotal(f1,f2,current_user.id)
     @sumIva =  @sucursal.ivaTotal(f1,f2,current_user.id)

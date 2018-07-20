@@ -149,7 +149,7 @@
       })
       .error(function(data){
           Materialize.toast('Error al cargar datos', 4000);
-      }).finally(() =>  $scope.atras_enable = true);
+      }).finally(function(){$scope.atras_enable = true});
     };
     $scope.getOrdenes = function(val){
          $http.get("/orders/query.json?table_id="+val)
@@ -166,7 +166,7 @@
       })
       .error(function(data){
           Materialize.toast('Error al cargar datos', 4000);
-      }).finally(() =>  $scope.atras_enable = true);
+      }).finally(function(){$scope.atras_enable = true});
     }
     $scope.getCategorias = function(){
       $http.get("/categories.json")

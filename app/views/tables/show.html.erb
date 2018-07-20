@@ -44,9 +44,9 @@
                     nombre: {{platillo.name}} precio: ${{platillo.price}} cantidad: {{platillo.quantity}}
                   </div>
                   <% unless current_user.tipo == 2%>
-                    <div class="collapsible-body" >
+                    <div class="collapsible-body">
                       Cantidad:
-                      <select ng-model="platillo.quantity" ng-change="cambiarCantidad(platillo)" class="browser-default">
+                      <select ng-model="platillo.quantity" ng-change="cambiarCantidad(platillo)" class="browser-default" ng-if = "orden.panel" >
                         <option value="1"> 1 </option>
                         <option value="2"> 2 </option>
                         <option value="3"> 3 </option>

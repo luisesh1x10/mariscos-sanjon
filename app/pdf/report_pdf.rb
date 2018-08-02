@@ -26,7 +26,7 @@ class ReportPdf < Prawn::Document
       text "BLV. FRANCISCO INDALECIO MADERO #1089 LAS VEGAS C.P.80090 CULIACÁN SINALOA MÉXICO",size:9, :align => :center
       text "TEL: 2752193",size:9, :align => :center
       text "REGIMÉN DE INCORPORACIÓN FISCAL",size:9, :align => :center
-      text "CORREO: organizacionmedina@hotmail.com",size:9, :align => :center
+      text "CORREO: hnossanjon@hotmail.com",size:9, :align => :center
       text "FECHA: #{Time.now.strftime("%m/%d/%Y")}", size: 9,:align => :center
       text "HORA: #{Time.now.strftime("%I:%M")}", size: 9,:align => :center
       text "FOLIO: #{@order.id}",size:9,:align => :center

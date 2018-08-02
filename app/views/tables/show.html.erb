@@ -45,14 +45,16 @@
                   </div>
                   <% unless current_user.tipo == 2%>
                     <div class="collapsible-body">
-                      Cantidad:
-                      <select ng-model="platillo.quantity" ng-change="cambiarCantidad(platillo)" class="browser-default" ng-if = "orden.panel" >
-                        <option value="1"> 1 </option>
-                        <option value="2"> 2 </option>
-                        <option value="3"> 3 </option>
-                        <option value="4"> 4 </option>
-                        <option value="5"> 5 </option>
-                      </select>
+                      <div ng-if = "orden.panel">
+                        Cantidad:
+                        <select ng-model="platillo.quantity" ng-change="cambiarCantidad(platillo)" class="browser-default" >
+                          <option value="1"> 1 </option>
+                          <option value="2"> 2 </option>
+                          <option value="3"> 3 </option>
+                          <option value="4"> 4 </option>
+                          <option value="5"> 5 </option>
+                        </select>
+                      </div>
                       Mover pedido:
                       <select ng-model="platillo.order_id" ng-change="cambiarOrden(platillo)" class="browser-default">
                           <option ng-repeat="folio in ordenes_disponiblles" value="{{folio.id}}"> mesa: {{folio.table_name}}, Folio: {{folio.id}} </option>
@@ -135,14 +137,16 @@
                   </div>
                   <% unless current_user.tipo == 2%>
                     <div class="collapsible-body" >
+                      <div ng-if = "orden.panel">
                       Cantidad:
-                      <select ng-model="platillo.quantity" ng-change="cambiarCantidad(platillo)" class="browser-default">
-                        <option value="1"> 1 </option>
-                        <option value="2"> 2 </option>
-                        <option value="3"> 3 </option>
-                        <option value="4"> 4 </option>
-                        <option value="5"> 5 </option>
-                      </select>
+                        <select ng-model="platillo.quantity" ng-change="cambiarCantidad(platillo)" class="browser-default" >
+                          <option value="1"> 1 </option>
+                          <option value="2"> 2 </option>
+                          <option value="3"> 3 </option>
+                          <option value="4"> 4 </option>
+                          <option value="5"> 5 </option>
+                        </select>
+                      </div>
                       Mover pedido:
                       <select ng-model="platillo.order_id" ng-change="cambiarOrden(platillo)" class="browser-default">
                           <option ng-repeat="folio in ordenes_disponiblles" value="{{folio.id}}"> mesa: {{folio.table_name}}, Folio: {{folio.id}} </option>

@@ -90,9 +90,9 @@
               </tr>
             </thead>
             <tbody>
-              <%ec = SaucerOrder.where(:created_at => Date.today.beginning_of_week..Date.today.end_of_week).sum(:price)%>
-              <%fc =  Order.joins(:saucerOrders).where(:created_at => Date.today.beginning_of_week..Date.today.end_of_week).uniq.count%>
-              <%User.all.each do |u|%>
+              <%ec = sucursal.saucer_orders.where(:created_at => Date.today.beginning_of_week..Date.today.end_of_week).sum(:price)%>
+              <%fc =  sucursal.orders.joins(:saucerOrders).where(:created_at => Date.today.beginning_of_week..Date.today.end_of_week).uniq.count%>
+              <%sucursal.users.all.each do |u|%>
                 <%efectivo = u.saucer_orders.where(:created_at => Date.today.beginning_of_week..Date.today.end_of_week).sum(:price)%>
                 <%folios =  Order.joins(:saucerOrders).where("saucer_orders.user_id = ?",u.id).where(:created_at => Date.today.beginning_of_week..Date.today.end_of_week).uniq.count%>
                 <tr class="odd" id="user">
@@ -129,9 +129,9 @@
               </tr>
             </thead>
             <tbody>
-              <%ec = SaucerOrder.where(:created_at => Date.today.beginning_of_month..Date.today.end_of_month).sum(:price)%>
-              <%fc =  Order.joins(:saucerOrders).where(:created_at => Date.today.beginning_of_month..Date.today.end_of_month).uniq.count%>
-              <%User.all.each do |u|%>
+              <%ec = sucursal.saucer_orders.where(:created_at => Date.today.beginning_of_month..Date.today.end_of_month).sum(:price)%>
+              <%fc =  sucursal.orders.joins(:saucerOrders).where(:created_at => Date.today.beginning_of_month..Date.today.end_of_month).uniq.count%>
+              <%sucursal.users.all.each do |u|%>
                 <%efectivo = u.saucer_orders.where(:created_at => Date.today.beginning_of_month..Date.today.end_of_month).sum(:price)%>
                 <%folios =  Order.joins(:saucerOrders).where("saucer_orders.user_id = ?",u.id).where(:created_at => Date.today.beginning_of_month..Date.today.end_of_month).uniq.count%>
                 <tr class="odd" id="user">

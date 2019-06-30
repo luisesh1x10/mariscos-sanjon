@@ -1,0 +1,42 @@
+<p id="notice"><%= notice %></p>
+<div>
+  <div class="card-panel white center-align">
+      <h1>Solicitudes Terminadas</h1>
+  </div>
+  <div class = 'container'>
+    <table class="striped">
+      <thead>
+        <tr>
+          <th>Fecha de solicitud</th>
+          <th>Sucursal</th>
+          <th>Ingredientes solicitados</th>
+          <th>Anotaciones</th>
+          <th>Estatus</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+    
+      <tbody>
+        <% @requets.each do |requet| %>
+          <tr>
+            <td><%= requet.created_at.strftime("%d/%m/%Y %I:%M%p") %></td>
+            <td><%= requet.sucursal.nombre %></td>
+            <td><%= requet.listaDeIngredientes.map { |n| n.nombre }.join(', ') %></td>
+            <td><%= requet.anotaciones %></td>
+            <td><%= Dinero.statusRequets(requet.status) %></td>
+            <% if (requet.status === 0)%>
+            <td><%= link_to "Iniciar", requets_avanzar_path(requet), method: :put%></td>
+            <% end %>
+            <% if (requet.status === 1)%>
+            <td><%= link_to "Terminar", requets_avanzar_path(requet), method: :put%></td>
+            <% end %>
+            <td><%= link_to 'Ver', requet%></td>
+            <td><%= link_to 'Imprimir',  ''%></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>  
+  <br>
+</div>  
+

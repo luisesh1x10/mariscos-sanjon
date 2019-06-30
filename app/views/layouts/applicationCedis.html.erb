@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html ng-app="sanjon">
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"> </script>
+   
+  <script> 
+    angular.module('sanjon',[]);
+  </script>
+  <title>MariscosSanJon</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <meta name="viewport"content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta name="HandheldFriendly" content="true" />
+ 
+</head>
+<body>
+  <nav>
+    <div class="nav-wrapper light-blue accent-3">
+      <a href="<%=root_path%>" class="brand-logo">Mariscos Sanjon</a>
+      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+      <ul class="right hide-on-med-and-down">
+        <%=render 'partials/menuCedis'%>
+      </ul>
+      <ul class="side-nav" id="mobile-demo">
+        <%=render 'partials/menuCedis'%>
+      </ul>
+    </div>
+  </nav>
+  <div id="barra_coneccion" class="card-panel" style="background-color:red;display: none;">
+    <h5 class="center-align">Se encontraron fallas en su coneccion de internet, Por favor verifique el estado de su router</h5>
+  </div>
+  <%unless notice.nil?%>
+    <div class="card">
+      <script>
+        Materialize.toast('<%= notice %>', 4000);
+      </script>
+    </div>
+  <%end%>
+  <%unless alert.nil?%>
+      <script>
+        Materialize.toast('<%= alert %>', 4000);
+      </script>
+  <%end%>
+<%= yield %>
+
+</body>
+</html>

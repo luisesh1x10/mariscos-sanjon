@@ -4,6 +4,10 @@ class CorteController < ApplicationController
       @sucursal = User.find(current_user.id).sucursal
   end
   def index
+    if @sucursal.orders.where(status:1).count > 0
+      redirect_to "/corte/denegado"
+      return
+    end
     @fecha = params[:fecha]
     @fecha  =  Time.now if @fecha.nil? or @fecha == "" 
     @fecha = @fecha.to_date

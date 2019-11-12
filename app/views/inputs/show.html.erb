@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Resource:</strong>
+  <%= @input.resource %>
+</p>
+
+<p>
+  <strong>Cantidad:</strong>
+  <%= @input.cantidad %>
+</p>
+
+<p>
+  <strong>Precio:</strong>
+  <%= @input.precio %>
+</p>
+
+<%= link_to 'Edit', edit_input_path(@input) %> |
+<%= link_to 'Back', inputs_path %>

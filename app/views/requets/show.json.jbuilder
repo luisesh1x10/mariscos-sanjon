@@ -1,0 +1,1 @@
+json.partial! "requets/requet", requet: @requet

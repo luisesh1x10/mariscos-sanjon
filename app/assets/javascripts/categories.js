@@ -1,6 +1,8 @@
 angular.module("sanjon")
 .controller("categorias",["$scope","$http","$location",function($scope,$http,$location){
-   $scope.url = window.location.href.split("?")[0]+".json";
+   $scope.url = window.location.href.split("?")[0] + ".json";
+   $scope.historialURL = window.location.href.split("?")[0] + '/historial';
+   $scope.originUrl = window.location.href.split("/historial")[0];
    $scope.activos = 0;
    $scope.bolsas = [];
    $scope.estados=[];

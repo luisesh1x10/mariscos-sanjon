@@ -1,7 +1,14 @@
 Rails.application.routes.draw do
+  resources :inputs
+  resources :requets
+  put 'requets_avanzar/:id',to: 'requets#avanzar',as:'requets_avanzar'
+  get 'requets_close',to: 'requets#terminadas', as:'requets_terminadas'
+  
+  
   post 'passwords/verificar'
 
   get 'corte/index'
+  get 'corte/denegado'
 
   get 'ganacias/dia'
   
@@ -43,7 +50,7 @@ Rails.application.routes.draw do
   resources :measurement_units
   resources :groups
   resources :categories
-  
+  get 'categories/:id/historial' , to:'categories#historial', as:'category_historial'
   resources :saucer_orders 
   
   resources :tables do

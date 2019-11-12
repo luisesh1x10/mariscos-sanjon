@@ -3,6 +3,7 @@ class Ingrediente < ActiveRecord::Base
   has_many :inventarios
   has_many :ingredients
   has_many :expenses
+  has_many :requets_lines
   after_create :agregar_a_inventarios
   
   def agregar_a_inventarios

@@ -36,4 +36,15 @@ class Dinero
         end
         return cad
     end
+    def self.statusRequets (val)
+        case val
+        when 0
+            cad = "pendiente"
+        when 1
+            cad = "en proceso"
+        when 2
+            cad = "surtido"
+        end
+        return cad
+    end
 end

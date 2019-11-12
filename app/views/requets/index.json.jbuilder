@@ -1,0 +1,1 @@
+json.array! @requets, partial: 'requets/requet', as: :requet

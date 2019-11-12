@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180719162111) do
+ActiveRecord::Schema.define(version: 20190629235305) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,6 +76,12 @@ ActiveRecord::Schema.define(version: 20180719162111) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean  "is_instant"
+  end
+
+  create_table "cedis", force: :cascade do |t|
+    t.string   "nombre"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "configs", force: :cascade do |t|
@@ -146,6 +152,16 @@ ActiveRecord::Schema.define(version: 20180719162111) do
   add_index "ingredients", ["ingrediente_id"], name: "index_ingredients_on_ingrediente_id", using: :btree
   add_index "ingredients", ["measurement_unit_id"], name: "index_ingredients_on_measurement_unit_id", using: :btree
   add_index "ingredients", ["platillo_id"], name: "index_ingredients_on_platillo_id", using: :btree
+
+  create_table "inputs", force: :cascade do |t|
+    t.integer  "resource_id"
+    t.float    "cantidad"
+    t.float    "precio"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "inputs", ["resource_id"], name: "index_inputs_on_resource_id", using: :btree
 
   create_table "inventarios", force: :cascade do |t|
     t.integer  "sucursal_id"
@@ -250,6 +266,42 @@ ActiveRecord::Schema.define(version: 20180719162111) do
   add_index "platillos", ["category_id"], name: "index_platillos_on_category_id", using: :btree
   add_index "platillos", ["group_id"], name: "index_platillos_on_group_id", using: :btree
 
+  create_table "requets", force: :cascade do |t|
+    t.integer  "sucursal_id"
+    t.integer  "status"
+    t.string   "anotaciones"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "requets", ["sucursal_id"], name: "index_requets_on_sucursal_id", using: :btree
+
+  create_table "requets_lines", force: :cascade do |t|
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "ingrediente_id"
+    t.integer  "requet_id"
+    t.float    "cantidad"
+    t.string   "anotaciones"
+  end
+
+  add_index "requets_lines", ["ingrediente_id"], name: "index_requets_lines_on_ingrediente_id", using: :btree
+  add_index "requets_lines", ["requet_id"], name: "index_requets_lines_on_requet_id", using: :btree
+
+  create_table "resources", force: :cascade do |t|
+    t.string   "nombre"
+    t.integer  "measurement_unit_id"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
+  add_index "resources", ["measurement_unit_id"], name: "index_resources_on_measurement_unit_id", using: :btree
+
+  create_table "resurces", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "saucer_orders", force: :cascade do |t|
     t.integer  "platillo_id"
     t.integer  "order_id"
@@ -305,8 +357,10 @@ ActiveRecord::Schema.define(version: 20180719162111) do
     t.integer  "tipo"
     t.string   "name"
     t.integer  "sucursal_id"
+    t.integer  "cedi_id"
   end
 
+  add_index "users", ["cedi_id"], name: "index_users_on_cedi_id", using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["sucursal_id"], name: "index_users_on_sucursal_id", using: :btree
@@ -321,6 +375,7 @@ ActiveRecord::Schema.define(version: 20180719162111) do
   add_foreign_key "ingredients", "ingredientes"
   add_foreign_key "ingredients", "measurement_units"
   add_foreign_key "ingredients", "platillos"
+  add_foreign_key "inputs", "resources"
   add_foreign_key "inventarios", "ingredientes"
   add_foreign_key "inventarios", "sucursals"
   add_foreign_key "movements", "users"
@@ -333,11 +388,16 @@ ActiveRecord::Schema.define(version: 20180719162111) do
   add_foreign_key "platillo_ingredients", "platillos"
   add_foreign_key "platillos", "categories"
   add_foreign_key "platillos", "groups"
+  add_foreign_key "requets", "sucursals"
+  add_foreign_key "requets_lines", "ingredientes"
+  add_foreign_key "requets_lines", "requets"
+  add_foreign_key "resources", "measurement_units"
   add_foreign_key "saucer_orders", "bags"
   add_foreign_key "saucer_orders", "orders"
   add_foreign_key "saucer_orders", "platillos"
   add_foreign_key "saucer_orders", "sucursals"
   add_foreign_key "saucer_orders", "users"
   add_foreign_key "tables", "sucursals"
+  add_foreign_key "users", "cedis"
   add_foreign_key "users", "sucursals"
 end

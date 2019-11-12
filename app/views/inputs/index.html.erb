@@ -1,0 +1,40 @@
+<div ng-controller = "inputs">
+  <div class="container">
+    <div class = "row card-panel">
+      <div class = "col s12 m6 l4">
+        <h1>Entrada de insumos</h1>
+        
+        <div class="input-field col s6">
+            <select class="browser-default" ng-model="nuevo.ingrediente_id">
+                <option value="" disabled selected>Elige un insumo</option>
+                <% Resource.all.each do |ing|%>
+                  <option value=<%=ing.id%>><%=ing.nombre%> (<%=ing.measurement_unit.name%>) </option>
+                <% end %>
+              </select>
+        </div>
+        <div class="input-field col s6">
+          <input value=0 id="cantidad" type="number" class="validate" ng-model="nuevo.cantidad">
+          <label class="active" for="cantidad">Cantidad</label>
+        </div>
+        <div class="input-field col s12">
+          <textarea id="descripcion" class="materialize-textarea" ng-model="nuevo.descricion"></textarea>
+          <label class="active" for="descripcion">Precio</label>
+        </div>
+        <a class="waves-effect waves-light btn" ng-click= "crear_gasto()">Agregar</a>
+      </div>
+      <div class="col s12 m6 l8">
+        <table>
+          <th>categoria</th>
+          <th>monto</th>
+          <th>descripcion</th>
+          <tr ng-repeat="gasto  in  gastos" >
+            <td>{{gasto.category}}</td>
+            <td>{{gasto.amount}}</td>
+            <td>{{gasto.description}}</td>
+          </tr>
+        </table>
+        
+      </div>
+    </div>
+  </div>
+</div>

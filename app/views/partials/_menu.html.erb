@@ -28,5 +28,14 @@
         <li><%= link_to category.name,category%></li>
         <%end%>
     <%end%>
+    <%if current_user.tipo==4%>
+        <li><%= link_to 'Solicitudes Pendientes', requets_path%></li>
+        <li><%= link_to 'Solicitudes Terminadas', requets_terminadas_path%></li>
+        <li><%= link_to 'Mermas', '/'%></li>
+        <li><%= link_to 'Entradas', inputs_path%></li>
+        <li><%= link_to 'Produccion','/'%></li>
+        <li><%= link_to 'Inventario de cedis','/'%></li>
+        <li><%= link_to 'Reportes','/'%></li>
+    <%end%>
     <li><%= link_to "Cerrar Sesión", destroy_user_session_path, :method => :delete %></li> 
 <%end%>

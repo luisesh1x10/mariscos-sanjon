@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  resource_id: 
+  cantidad: 1.5
+  precio: 1.5
+
+two:
+  resource_id: 
+  cantidad: 1.5
+  precio: 1.5

@@ -1,0 +1,29 @@
+<%= form_for(@requet) do |f| %>
+  <% if @requet.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@requet.errors.count, "error") %> prohibited this requet from being saved:</h2>
+
+      <ul>
+      <% @requet.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :sucursal_id %><br>
+    <%= f.text_field :sucursal_id %>
+  </div>
+  <div class="field">
+    <%= f.label :status %><br>
+    <%= f.number_field :status %>
+  </div>
+  <div class="field">
+    <%= f.label :anotaciones %><br>
+    <%= f.text_field :anotaciones %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

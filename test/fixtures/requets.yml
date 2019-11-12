@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  sucursal_id: 
+  status: 1
+  anotaciones: MyString
+
+two:
+  sucursal_id: 
+  status: 1
+  anotaciones: MyString

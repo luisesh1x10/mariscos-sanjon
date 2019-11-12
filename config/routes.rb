@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :inputs
+  resources :requets
+  put 'requets_avanzar/:id',to: 'requets#avanzar',as:'requets_avanzar'
+  get 'requets_close',to: 'requets#terminadas', as:'requets_terminadas'
+  
+  
   post 'passwords/verificar'
 
   get 'corte/index'

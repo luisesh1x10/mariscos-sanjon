@@ -1,5 +1,5 @@
 <div ng-controller= "categorias">
-  <a class="waves-effect waves-light btn-large" href='{{historialURL}}'> Historial </a>
+  <a class="waves-effect waves-light btn-large" href='{{originUrl}}'> Regresar a Barra </a>
 <h1 class="center-align card-panel z-depth-3 ">{{bolsas[0].nombre_categoria}}</h1>
  <div id="ListaPedidos">
   <h4>Pedidos activos:<strong> {{activos}}</strong></h4>
@@ -48,9 +48,6 @@
                     <h3>
                       {{bolsa.platillos[0].takeaway?"Si":" No"}}
                     </h3>
-                  </td>
-                  <td>
-                    <a class="waves-effect waves-light btn-large"  ng-click="avanzar(bolsa)" >{{bolsa.status==1? "Iniciar":bolsa.status==1?"Terminado":"Entregar"}}</a>
                   </td>
                 </tr>
           </tbody>

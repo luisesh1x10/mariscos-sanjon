@@ -11,7 +11,7 @@ class CategoriesController < ApplicationController
   end
 
   def historial
-    getPedidosHistorial(3)
+    getPedidosHistorial(@category.id)
   end
 
   # GET /categories/1

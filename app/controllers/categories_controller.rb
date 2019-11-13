@@ -21,8 +21,8 @@ class CategoriesController < ApplicationController
   end
   def getPedidos(id, num)
     @id=id
-    @bags= @sucursal.bags.joins(:saucer_orders=>[:platillo=>:category]).where("categories.id = ?",id).where.not(:status=>num.to_s).where.not(:status=>4.to_s).uniq.order(:created_at).first(30)
-    @pedidos= @sucursal.saucer_orders.joins(:bag, :platillo=>:category).where("categories.id = ?",id).where.not("bags.status = ?",num.to_s).where.not("bags.status = ?",4.to_s).order(:created_at)
+    @bags= @sucursal.bags.joins(:saucer_orders=>[:platillo=>:category]).where("categories.id = ?",id).where.not(:status=>num.to_s).where.not(:status=>4.to_s).uniq.order("created_at DESC").first(30)
+    @pedidos= @sucursal.saucer_orders.joins(:bag, :platillo=>:category).where("categories.id = ?",id).where.not("bags.status = ?",num.to_s).where.not("bags.status = ?",4.to_s).order("created_at DESC")
      #@pedidos= SaucerOrder.joins(:platillo=>:category).where("categories.id = ? and status is not ? and status is not ?",id,3,4).order(:created_at)
     respond_to do |format|
           format.html {}

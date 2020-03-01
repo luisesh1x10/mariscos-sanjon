@@ -45,7 +45,7 @@
                   </div>
                   <% unless current_user.tipo == 2%>
                     <div class="collapsible-body">
-                      <div ng-if = "orden.panel">
+                      <div ng-if = "orden.descuentoFlag">
                         Cantidad:
                         <select ng-model="platillo.quantity" ng-change="cambiarCantidad(platillo)" class="browser-default" >
                           <option value="1"> 1 </option>
@@ -67,17 +67,19 @@
               </ul>
               subTotal: {{orden.total | currency}} <br>
               Descuento: {{orden.descuentoTotal | currency}} <br>
-              IVA: {{orden.ivaTotal | currency}} <br>
+              <!-- IVA: {{orden.ivaTotal | currency}} <br> -->
               Total: {{orden.total - orden.descuentoTotal + orden.ivaTotal | currency}}</br>
             <% unless current_user.tipo == 2%>
               pago con: <input id="payment" type="number" ng-model="orden.payment" ng-change="actulizarPago(orden.id,orden.payment)"></br>
-              Cambio: $<lable >{{orden.payment-orden.total + orden.descuentoTotal - orden.ivaTotal| currency}}</lable>
-              <br></br>
-              <p>
-                <input type="hidden" ng-model="orden.iva_valor" ng-init ="orden.iva_valor = <%= Config.iva%>" ></input>
-                <input type="checkbox" id="test5" ng-model="orden.iva_check" ng-change = "aplicarDescuentoGeneral(orden)"/>
-                <label for="test5">Iva <%= Config.iva%>%</label>
-              </p>
+              Cambio: <lable >{{orden.payment-orden.total + orden.descuentoTotal - orden.ivaTotal| currency}}</lable>
+              <!--
+                <br></br>
+                <p>
+                  <input type="hidden" ng-model="orden.iva_valor" ng-init ="orden.iva_valor = <%= Config.iva%>" ></input>
+                  <input type="checkbox" id="test5" ng-model="orden.iva_check" ng-change = "aplicarDescuentoGeneral(orden)"/>
+                  <label for="test5">Iva <%= Config.iva%>%</label>
+                </p>
+              -->
             </div>
             
               <div class="card-action">
@@ -137,7 +139,7 @@
                   </div>
                   <% unless current_user.tipo == 2%>
                     <div class="collapsible-body" >
-                      <div ng-if = "orden.panel">
+                      <div ng-if = "orden.descuentoFlag">
                       Cantidad:
                         <select ng-model="platillo.quantity" ng-change="cambiarCantidad(platillo)" class="browser-default" >
                           <option value="1"> 1 </option>
@@ -159,17 +161,19 @@
               </ul>
               subTotal: {{orden.total | currency}} <br>
               Descuento: {{orden.descuentoTotal | currency}} <br>
-              IVA: {{orden.ivaTotal | currency}} <br>
+              <!-- IVA: {{orden.ivaTotal | currency}} <br> -->
               Total: {{orden.total - orden.descuentoTotal + orden.ivaTotal | currency}}</br>
             <% unless current_user.tipo == 2%>
               pago con: <input id="payment" type="number" ng-model="orden.payment" ng-change="actulizarPago(orden.id,orden.payment)"></br>
               Cambio: $<lable >{{orden.payment-orden.total + orden.descuentoTotal - orden.ivaTotal| currency}}</lable>
-              <br></br>
-              <p>
-                <input type="hidden" ng-model="orden.iva_valor" ng-init ="orden.iva_valor = <%= Config.iva%>" ></input>
-                <input type="checkbox" id="test5" ng-model="orden.iva_check" ng-change = "aplicarDescuentoGeneral(orden)"/>
-                <label for="test5">Iva <%= Config.iva%>%</label>
-              </p>
+              <!--
+                <br></br>
+                <p>
+                  <input type="hidden" ng-model="orden.iva_valor" ng-init ="orden.iva_valor = <%= Config.iva%>" ></input>
+                  <input type="checkbox" id="test5" ng-model="orden.iva_check" ng-change = "aplicarDescuentoGeneral(orden)"/>
+                  <label for="test5">Iva <%= Config.iva%>%</label>
+                </p>
+              -->
             </div>
               <div class="card-action">
                   <a href="{{orden.ver}}" class="amber-text text-darken-4"> Ver</a>

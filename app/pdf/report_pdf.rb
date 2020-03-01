@@ -53,20 +53,21 @@ class ReportPdf < Prawn::Document
       row(0).font_style = :bold
       self.header = true
     end
-     text "Sub Total: #{Dinero.to_money @order.total}", size: 15, style: :bold
+     text "Sub Total: #{Dinero.to_money @order.total - (@order.total * 0.16)}", size: 15, style: :bold
      text "Descuento: #{Dinero.to_money @order.descuentoTotal}", size: 15, style: :bold if @order.descuentoTotal > 0
-     text "IVA: #{Dinero.to_money @order.ivaTotal}", size: 15, style: :bold 
+     #text "IVA: #{Dinero.to_money @order.ivaTotal}", size: 15, style: :bold 
+     text "IVA: #{Dinero.to_money @order.total * 0.16}", size: 15, style: :bold 
      text "Total: #{Dinero.to_money @order.totalConDescuentoYIva}", size: 15, style: :bold
      unless @order.payment.nil?
       text "PAGÓ CON: #{Dinero.to_money @order.payment}", size: 12, style: :bold
-      text "SU CAMBIO: #{Dinero.to_money(@order.payment-@order.totalConDescuentoYIva)}", size: 15, style: :bold
+      text "SU CAMBIO: #{Dinero.to_money(@order.payment - @order.totalConDescuentoYIva)}", size: 15, style: :bold
      end
   end
 
   def product_rows
     [['PLATILLO','#','PRECIO','IVA']] +
     @order.saucerOrders.map do |so|
-      [so.platillo.name,so.quantity,Dinero.to_money(so.valorTotal),Dinero.to_money(so.valorTotal*(so.iva.to_f/100))]
+      [so.platillo.name, so.quantity, Dinero.to_money(so.valorTotal), Dinero.to_money(so.valorTotal * (Config.last.iva.to_f / 100))]
     end
   end
 end

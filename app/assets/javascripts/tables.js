@@ -168,7 +168,7 @@ angular.module('sanjon')
           data: { saucer_order: {discount:val.discount,iva:val.iva}},
           success: function(data){
             console.log(data);
-            Materialize.toast(val.discount+'% de descuento en '+val.name + ' mas iva: ' + val.iva+'%', 4000)
+            Materialize.toast(val.discount+'% de descuento en '+val.name, 4000)
                      },
           error: function(data){
             $scope.cargarOrdenes();

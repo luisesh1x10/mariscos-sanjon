@@ -1,182 +1,192 @@
+<%if current_user.tipo!=1%>
+    <div ng-controller="pedidos_mesero">
+        <div class="row">
+            <br>
+            <div class="center-align">
+                <div class="center-align waves-effect amber darken-4 btn" ng-if = "atras_enable" ng-click="atras()" id="atras">atras</div>
+            </div>
+        </div>
+    <div class = "row card">
+        <h1 class="center-align">Pedidos</h1>
+    </div>
 
-<div ng-controller="pedidos_mesero">
-    <div class="row">
-        <br>
-        <div class="center-align">
-            <div class="center-align waves-effect amber darken-4 btn" ng-if = "atras_enable" ng-click="atras()" id="atras">atras</div>
+        <div class="row" >
+            <div id="contenido">
+                <div ng-repeat = "mesa in mesas" class="col s4 m3 l2" id="r{{mesa.id}}" >
+                    <button class="col s12 card" ng-click="siguiente(mesa)" >
+                        <p class="flow-text">{{mesa.name}}</p>
+                        <p>{{mesa.description}}</p>
+                    </button>
+                </div>
+                <div ng-repeat = "orden in ordenes" class="col s4 m3 l2" id="r{{orden.id}}" >
+                    <button class="col s12 card {{orden.color}}" ng-click="siguiente(orden)" >
+                        <p class="flow-text">Folio: {{orden.id}}</p>
+                        <p>Pedidos activos:{{orden.pedidos}}</p>
+                    </button>
+                </div>
+                <div ng-repeat =  "categoria in categorias" class="col s4 m3 l2" id="r{{categoria.id}}" >
+                    <button class="col s12 card" ng-click="siguiente(categoria)" >
+                        <p class="flow-text">{{categoria.name}}</p>
+                        <p>{{categoria.description}}</p>
+                    </button>
+                </div>
+                <div ng-repeat =  "grupo in grupos" class="col s4 m3 l2" id="r{{grupo.id}}" >
+                    <button class="col s12 card" ng-click="siguiente(grupo.id)" >
+                        <p class="flow-text">{{grupo.name}}</p>
+                        <p>{{grupo.description}}</p>
+                    </button>
+                </div>
+                <div ng-repeat =  "platillo in platillos" class="col s4 m3 l2" id="r{{platillo.id}}" >
+                    <button class="col s12 card" ng-click="siguiente(platillo)" >
+                        <p class="flow-text">{{platillo.name}}</p>
+                        <p>{{platillo.description}}</p>
+                    </button>
+                </div>
+                <div ng-repeat =  "numero in cantidad" class="col s4 m3 l2" id="r{{numero.id}}" >
+                    <button class="col s12 card" ng-click="siguiente(numero.id)" >
+                        <p class="flow-text">{{numero.name}}</p>
+                        <p>{{numero.description}}</p>
+                    </button>
+                </div>
+            </div>  
         </div>
-    </div>
-<div class = "row card">
-    <h1 class="center-align">Pedidos</h1>
-</div>
-
-    <div class="row" >
-        <div id="contenido">
-            <div ng-repeat = "mesa in mesas" class="col s4 m3 l2" id="r{{mesa.id}}" >
-                <button class="col s12 card" ng-click="siguiente(mesa)" >
-                    <p class="flow-text">{{mesa.name}}</p>
-                    <p>{{mesa.description}}</p>
-                </button>
-            </div>
-            <div ng-repeat = "orden in ordenes" class="col s4 m3 l2" id="r{{orden.id}}" >
-                <button class="col s12 card {{orden.color}}" ng-click="siguiente(orden)" >
-                    <p class="flow-text">Folio: {{orden.id}}</p>
-                    <p>Pedidos activos:{{orden.pedidos}}</p>
-                </button>
-            </div>
-            <div ng-repeat =  "categoria in categorias" class="col s4 m3 l2" id="r{{categoria.id}}" >
-                <button class="col s12 card" ng-click="siguiente(categoria)" >
-                    <p class="flow-text">{{categoria.name}}</p>
-                    <p>{{categoria.description}}</p>
-                </button>
-            </div>
-            <div ng-repeat =  "grupo in grupos" class="col s4 m3 l2" id="r{{grupo.id}}" >
-                <button class="col s12 card" ng-click="siguiente(grupo.id)" >
-                    <p class="flow-text">{{grupo.name}}</p>
-                    <p>{{grupo.description}}</p>
-                </button>
-            </div>
-            <div ng-repeat =  "platillo in platillos" class="col s4 m3 l2" id="r{{platillo.id}}" >
-                <button class="col s12 card" ng-click="siguiente(platillo)" >
-                    <p class="flow-text">{{platillo.name}}</p>
-                    <p>{{platillo.description}}</p>
-                </button>
-            </div>
-            <div ng-repeat =  "numero in cantidad" class="col s4 m3 l2" id="r{{numero.id}}" >
-                <button class="col s12 card" ng-click="siguiente(numero.id)" >
-                    <p class="flow-text">{{numero.name}}</p>
-                    <p>{{numero.description}}</p>
-                </button>
-            </div>
-        </div>  
-    </div>
-    <div>
-        <div class="waves-effect amber darken-4 btn" ng-click="createOrden(pedido_actual.table.id)" id="abrir_orden">Abrir Orden</div>
-    </div>
-    <div style="display: none;" ng-click="" id="recargar">Recargar</div><!--Sirve para recargar cuado se genera una oreden automatica por que por alguna razon no serefresca solo -->
-    <div class="row">
-        <div class="col s12 card">
+        <div>
+            <div class="waves-effect amber darken-4 btn" ng-click="createOrden(pedido_actual.table.id)" id="abrir_orden">Abrir Orden</div>
         </div>
-    </div>
-    
-    <div class="row">
-        <div class="col s12 card">
+        <div style="display: none;" ng-click="" id="recargar">Recargar</div><!--Sirve para recargar cuado se genera una oreden automatica por que por alguna razon no serefresca solo -->
+        <div class="row">
+            <div class="col s12 card">
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div id="domicilio">
-          <div class="col s12 m12 l6 ">
-            <div class="row card">
-                <h4 class="card-panel">Servicio  a domicilio  orden:{{pedido_actual.order_id}}</h4>
-                <div class="input-field col s12">
-                    <label for="nombre">Nombre</label><br>
-                    <input id="nombre" type="text" class="validate" ng-model="domicilio.nombre" ng-change="updateOrden(pedido_actual.order_id)">
-                </div>
-                <div class="input-field col s12">
-                    <label for="telefono">Telefono</label><br>
-                    <input id="telefono" type="text" class="validate" ng-model="domicilio.telefono" ng-change="updateOrden(pedido_actual.order_id)">
-                </div>
-                <div class="input-field col s12">
-                    <label for="calle">Calle</label><br>
-                    <input id="calle" type="text" class="validate" ng-model="domicilio.calle" ng-change="updateOrden(pedido_actual.order_id)">
-                </div>
-                <div class="input-field col s12">
-                    <label for="colonia">Colonia</label><br>
-                    <input id="colonia" type="text" class="validate" ng-model="domicilio.colonia" ng-change="updateOrden(pedido_actual.order_id)">
-                </div>
-                <div class="input-field col s12">
-                    <label for="numero_exterior">Numero exterior</label><br>
-                    <input id="numero_exterior" type="text" class="validate" ng-model="domicilio.numero_exterior" ng-change="updateOrden(pedido_actual.order_id)">
-                </div>
-                <div class="input-field col s12">
-                    <label for="numero_interior">Numero interior</label><br>
-                    <input id="numero_interior" type="text" class="validate" ng-model="domicilio.numero_interior" ng-change="updateOrden(pedido_actual.order_id)">
-                </div>
-                <div class="input-field col s12">
-                    <label for="notas">Notas</label><br>
-                    <input id="notas" type="text" class="validate" ng-model="domicilio.notas" ng-change="updateOrden(pedido_actual.order_id)">
+        
+        <div class="row">
+            <div class="col s12 card">
+            </div>
+        </div>
+        <div class="row">
+            <div id="domicilio">
+            <div class="col s12 m12 l6 ">
+                <div class="row card">
+                    <h4 class="card-panel">Servicio  a domicilio  orden:{{pedido_actual.order_id}}</h4>
+                    <div class="input-field col s12">
+                        <label for="nombre">Nombre</label><br>
+                        <input id="nombre" type="text" class="validate" ng-model="domicilio.nombre" ng-change="updateOrden(pedido_actual.order_id)">
+                    </div>
+                    <div class="input-field col s12">
+                        <label for="telefono">Telefono</label><br>
+                        <input id="telefono" type="text" class="validate" ng-model="domicilio.telefono" ng-change="updateOrden(pedido_actual.order_id)">
+                    </div>
+                    <div class="input-field col s12">
+                        <label for="calle">Calle</label><br>
+                        <input id="calle" type="text" class="validate" ng-model="domicilio.calle" ng-change="updateOrden(pedido_actual.order_id)">
+                    </div>
+                    <div class="input-field col s12">
+                        <label for="colonia">Colonia</label><br>
+                        <input id="colonia" type="text" class="validate" ng-model="domicilio.colonia" ng-change="updateOrden(pedido_actual.order_id)">
+                    </div>
+                    <div class="input-field col s12">
+                        <label for="numero_exterior">Numero exterior</label><br>
+                        <input id="numero_exterior" type="text" class="validate" ng-model="domicilio.numero_exterior" ng-change="updateOrden(pedido_actual.order_id)">
+                    </div>
+                    <div class="input-field col s12">
+                        <label for="numero_interior">Numero interior</label><br>
+                        <input id="numero_interior" type="text" class="validate" ng-model="domicilio.numero_interior" ng-change="updateOrden(pedido_actual.order_id)">
+                    </div>
+                    <div class="input-field col s12">
+                        <label for="notas">Notas</label><br>
+                        <input id="notas" type="text" class="validate" ng-model="domicilio.notas" ng-change="updateOrden(pedido_actual.order_id)">
+                    </div>
                 </div>
             </div>
-          </div>
-        </div>
-        <div id="tabla_pedidos">
-              <div  class="col s12 m12 l6">
-                    <div class="row card">
-                        <table class="striped">
-                            <thead>
-                              <tr>
-                                  <th data-field="select">Seleccion</th>
-                                  <th data-field="id">Platillo</th>
-                                  <th data-field="name">Cantidad</th>
-                                  <th data-field="price">Precio</th>
-                                  <th data-field="price">Nota</th>
-                              </tr>
-                            </thead>
-                            <tbody ng-repeat="pedido in pedidos">
-                              <tr>
-                                <td>
-                                    <p>
-                                      <a id="casilla_solo{{$index}}" class="{{pedido.select==true?'waves-effect waves-light btn':'waves-effect amber darken-4 btn'}}" ng-model="pedido.select" ng-click="marcar(pedido)"> {{pedido.select==true?pedido.cap:'Suelto'}} </a>
-                                    </p>
-                                </td>
-                                <td>{{pedido.name}}</td>
-                                <td>{{pedido.quantity}}</td>
-                                <td>${{pedido.price}}</td>
-                                <td><input ng-model="pedido.notes"></td>
-                                <td><a class="waves-effect waves-light btn" ng-click="removePedido($index)">Borrar</a></td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
-                </div>
             </div>
             <div id="tabla_pedidos">
-              <div class="col s12 m12 l6">
-                  <div class="row card">
-                    <h4 class="card-panel">Agrupados</h4>
-                    <table class="striped">
-                        <tbody ng-repeat="bolsa in bolsas">
-                          <tr>
-                            <td>
-                                <span ng-repeat="pedido in bolsa" ng-click="desagrupar()">{{pedido.name}}</br></span>
-                                </td>
-                            <td>
-                                <span ng-repeat="pedido in bolsa">{{pedido.quantity}}</br>
-                                </span>
-                                </td>
-                            <td>
-                                <span ng-repeat="pedido in bolsa">${{pedido.price}}</br>
-                                </span>
-                                </td>
-                            <td>
-                                <span ng-repeat="pedido in bolsa"><input ng-model="pedido.notes">
-                                </span>
-                            </td>
-                            <td>
-                                <a class="waves-effect waves-light btn" ng-click="desagrupar($index)">Separar</a>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
+                <div  class="col s12 m12 l6">
+                        <div class="row card">
+                            <table class="striped">
+                                <thead>
+                                <tr>
+                                    <th data-field="select">Seleccion</th>
+                                    <th data-field="id">Platillo</th>
+                                    <th data-field="name">Cantidad</th>
+                                    <th data-field="price">Precio</th>
+                                    <th data-field="price">Nota</th>
+                                </tr>
+                                </thead>
+                                <tbody ng-repeat="pedido in pedidos">
+                                <tr>
+                                    <td>
+                                        <p>
+                                        <a id="casilla_solo{{$index}}" class="{{pedido.select==true?'waves-effect waves-light btn':'waves-effect amber darken-4 btn'}}" ng-model="pedido.select" ng-click="marcar(pedido)"> {{pedido.select==true?pedido.cap:'Suelto'}} </a>
+                                        </p>
+                                    </td>
+                                    <td>{{pedido.name}}</td>
+                                    <td>{{pedido.quantity}}</td>
+                                    <td>${{pedido.price}}</td>
+                                    <td><input ng-model="pedido.notes"></td>
+                                    <td><a class="waves-effect waves-light btn" ng-click="removePedido($index)">Borrar</a></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            </div>
                     </div>
-                  </div>
+                </div>
+                <div id="tabla_pedidos">
+                <div class="col s12 m12 l6">
+                    <div class="row card">
+                        <h4 class="card-panel">Agrupados</h4>
+                        <table class="striped">
+                            <tbody ng-repeat="bolsa in bolsas">
+                            <tr>
+                                <td>
+                                    <span ng-repeat="pedido in bolsa" ng-click="desagrupar()">{{pedido.name}}</br></span>
+                                    </td>
+                                <td>
+                                    <span ng-repeat="pedido in bolsa">{{pedido.quantity}}</br>
+                                    </span>
+                                    </td>
+                                <td>
+                                    <span ng-repeat="pedido in bolsa">${{pedido.price}}</br>
+                                    </span>
+                                    </td>
+                                <td>
+                                    <span ng-repeat="pedido in bolsa"><input ng-model="pedido.notes">
+                                    </span>
+                                </td>
+                                <td>
+                                    <a class="waves-effect waves-light btn" ng-click="desagrupar($index)">Separar</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            <div class="row">
+                <div class="col s12 m12 l6 card">
+                    <div class="col s12 waves-effect amber darken-4 btn center-align"  ng-click="agrupar()" id="agrupar">
+                        Agrupar    
+                    </div>
                 </div>
             </div>
-        <div class="row">
-            <div class="col s12 m12 l6 card">
-                <div class="col s12 waves-effect amber darken-4 btn center-align"  ng-click="agrupar()" id="agrupar">
-                    Agrupar    
+            <div class="row">
+                <div class="col s12 m12 l6 card">
+                    <div class="col l4 m5 s6 waves-effect amber darken-4 btn"  ng-click="postPedidos()" id="enviar">
+                        Enviar    
+                    </div>
+                    <div class="col l4 m5 s6 offset-m2 offset-l4 waves-effect red darken-4 btn">
+                        <%=link_to 'Cancelar',pedido_path,style:"font-color:white;"%>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col s12 m12 l6 card">
-                <div class="col l4 m5 s6 waves-effect amber darken-4 btn"  ng-click="postPedidos()" id="enviar">
-                    Enviar    
-                </div>
-                <div class="col l4 m5 s6 offset-m2 offset-l4 waves-effect red darken-4 btn">
-                    <%=link_to 'Cancelar',pedido_path,style:"font-color:white;"%>
-                </div>
-            </div>
+<%end%>
+<%if current_user.tipo==1%>
+    <div class="row">
+        <div class="col s12 card">
+            <p style="font-size:larger;"  class="center-align">
+                BIENVENIDO.
+            </p>
         </div>
     </div>
+<%end%>

@@ -1,13 +1,19 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: [:show, :edit, :update, :destroy, :historial]
-  before_action :set_sucursal, only: [:show, :historial]
+  before_action :set_sucursal, only: [:show, :historial, :index]
+  
+  # Sucursal.all.each do |sucursal| 
+  #   Category.all.each do |category|
+  #     CategorySucursal.create(category_id: category.id, sucursal_id: sucursal.id)
+  #   end
+  # end
   def set_sucursal
       @sucursal = User.find(current_user.id).sucursal
   end
   # GET /categories
   # GET /categories.json
   def index
-    @categories = Category.all
+    @categories = @sucursal.categories
   end
 
   def historial

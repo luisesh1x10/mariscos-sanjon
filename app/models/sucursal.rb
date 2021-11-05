@@ -4,9 +4,14 @@ class Sucursal < ActiveRecord::Base
     has_many :bags
     has_many :orders
     has_many :tables
+    has_many :platillosSucursals
+    has_many :platillos, through: :platillosSucursals
+    has_many :categorySucursals
+    has_many :categories, through: :categorySucursals
     has_many :saucer_orders
     has_many :invetarios
     after_create :inicializar_inventario
+    accepts_nested_attributes_for :platillos, allow_destroy: true
     def self.init_sucursal(id)
         #este metodo se uso para que todos los elementos que habia se acoplaran a una sucursal NO USAR!!!
         puts "inicio"

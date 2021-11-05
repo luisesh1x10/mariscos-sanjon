@@ -4,16 +4,20 @@ class Platillo < ActiveRecord::Base
   
   belongs_to :category
   belongs_to :group
+  has_many :platillosSucursals
+  has_many :sucursals, through: :platillosSucursals
   has_many :saucer_orders
   has_many :orders, through: :saucerOrders
   validates :price, numericality: { greater_than_or_equal_to: 0 }
   validates_presence_of :category
   validates_presence_of :group
+  validates_presence_of :sucursals
   validates :price,:name,
   presence:true
   has_many :ingredients
   has_many :platillo_ingredient, :through => :ingredients
   accepts_nested_attributes_for :ingredients, allow_destroy: true
+  accepts_nested_attributes_for :sucursals, allow_destroy: true
   
   validates :is_child,
     :inclusion => { :in => [true, false] }

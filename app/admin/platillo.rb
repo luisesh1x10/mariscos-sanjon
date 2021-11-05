@@ -14,8 +14,9 @@ ActiveAdmin.register Platillo do
 # end
 menu label: "Platillos"
 
-permit_params :name,:cover,:price, :category_id,:map,:map_file_name,:group_id,:is_child ,:descripcion,:actualizado,
-ingredients_attributes: [:id,:platillo_id,:name,:stock,:ingrediente_id,:_destroy, :_create, :_update]
+permit_params :name,:cover,:price, :category_id,:map,:map_file_name,:group_id,:is_child ,:descripcion,:actualizado, sucursal_ids:[],
+ingredients_attributes: [:id,:platillo_id,:name,:stock, :ingrediente_id,  :_destroy, :_create, :_update]
+# platillosSucursals_attributes: [:id, :platillo_id, :sucursal_id, :nombre, :_destroy, :_create, :_update]
 
 filter :name 
 filter :price
@@ -51,13 +52,21 @@ form do |f|
       f.inputs "Descripcion del platillo" do
         f.input :descripcion 
       end
+      f.inputs "Sucursales" do
+        f.input :sucursal_ids, label: 'Sucursales*', as: :check_boxes, :collection => Sucursal.all.map{ |car| [car.nombre, car.id] }
+      end
       f.inputs "Ingredientes" do
         f.has_many :ingredients, heading: 'Ingrediente',new_record: true, allow_destroy: true do |s|
             s.input :ingrediente, :collection => Ingrediente.all.map{ |car| [car.nombre, car.id] }
             s.input :stock 
         end
       end
-      
+
+      # f.inputs "Sucursales" do
+      #   f.has_many :platillosSucursals, heading: 'Sucursal',new_record: true, allow_destroy: true do |s|
+      #       s.input :sucursal, :collection => Sucursal.all.map{ |car| [car.nombre, car.id] }
+      #   end
+      # end
       f.inputs "Marcar como actualizado si ya se agregaron los ingredientes conrrespondientes" do 
         
         f.input :actualizado

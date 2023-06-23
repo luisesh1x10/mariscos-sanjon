@@ -10,8 +10,8 @@ class GanaciasController < ApplicationController
     elementos.each do |i|
       fecha = Date.today 
       fecha = fecha - ((elementos.size() *page)+i).days
-      inicio = fecha.beginning_of_day+6.hours 
-      fin = fecha.end_of_day+6.hours
+      inicio = fecha.beginning_of_day+8.hours 
+      fin = fecha.end_of_day+8.hours
       ingreso = @sauceOrders.where(:created_at => inicio..fin).sum('(price*quantity) - (price*quantity)*(discount/100)')
       egreso = @expenses.where(:created_at => inicio..fin).sum('amount') 
       @dias << {:inicio => inicio, :fin => fin, :ingreso => ingreso, :egreso =>egreso }
@@ -26,8 +26,8 @@ class GanaciasController < ApplicationController
     elementos.each do |i|
       fecha = Date.today 
       fecha = fecha - ((elementos.size() *page)+i).months
-      inicio = fecha.beginning_of_month+6.hours 
-      fin = fecha.end_of_month+6.hours
+      inicio = fecha.beginning_of_month+8.hours 
+      fin = fecha.end_of_month+8.hours
       ingreso = @sauceOrders.where(:created_at => inicio..fin).sum('(price*quantity) - (price*quantity)*(discount/100)')
       egreso = @expenses.where(:created_at => inicio..fin).sum('amount') 
       @meses << {:inicio => inicio, :fin => fin, :ingreso => ingreso, :egreso =>egreso }
@@ -42,8 +42,8 @@ class GanaciasController < ApplicationController
     elementos.each do |i|
       fecha = Date.today 
       fecha = fecha - ((elementos.size() *page)+i).weeks
-      inicio = fecha.beginning_of_week+6.hours 
-      fin = fecha.end_of_week+6.hours
+      inicio = fecha.beginning_of_week+8.hours 
+      fin = fecha.end_of_week+8.hours
       ingreso = @sauceOrders.where(:created_at => inicio..fin).sum('(price*quantity) - (price*quantity)*(discount/100)')
       egreso = @expenses.where(:created_at => inicio..fin).sum('amount') 
       @semanas << {:inicio => inicio, :fin => fin, :ingreso => ingreso, :egreso =>egreso }
@@ -57,8 +57,8 @@ class GanaciasController < ApplicationController
     elementos.each do |i|
       fecha = Date.today 
       fecha = fecha - ((elementos.size() *page)+i).years
-      inicio = fecha.beginning_of_year+6.hours 
-      fin = fecha.end_of_year+6.hours
+      inicio = fecha.beginning_of_year+8.hours 
+      fin = fecha.end_of_year+8.hours
       ingreso = @sauceOrders.where(:created_at => inicio..fin).sum('(price*quantity) - (price*quantity)*(discount/100)')
       egreso = @expenses.where(:created_at => inicio..fin).sum('amount') 
       @anos << {:inicio => inicio, :fin => fin, :ingreso => ingreso, :egreso =>egreso }

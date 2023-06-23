@@ -9,8 +9,8 @@ class ExpensesController < ApplicationController
   # GET /expenses
   # GET /expenses.json
   def index
-    #@expenses = @sucursal.expenses.where(:created_at => Date.today.beginning_of_day+6.hours..Date.today.end_of_day+6.hours)
-    @expenses = Expense.where(:created_at => Date.today.beginning_of_day+6.hours..Date.today.end_of_day+6.hours)
+    #@expenses = @sucursal.expenses.where(:created_at => Date.today.beginning_of_day+8.hours..Date.today.end_of_day+8.hours)
+    @expenses = Expense.where(:created_at => Date.today.beginning_of_day+8.hours..Date.today.end_of_day+8.hours)
   end
 
   # GET /expenses/1
@@ -91,7 +91,7 @@ class ExpensesController < ApplicationController
   # GET /expenses
   # GET /expenses.json
   def index
-    @expenses = @sucursal.expenses.where(:created_at => Date.today.beginning_of_day+6.hours..Date.today.end_of_day+6.hours)
+    @expenses = @sucursal.expenses.where(:created_at => Date.today.beginning_of_day+8.hours..Date.today.end_of_day+8.hours)
   end
 
   # GET /expenses/1

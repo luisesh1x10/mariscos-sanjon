@@ -26,24 +26,24 @@ class Sucursal < ActiveRecord::Base
     
     def ingresosBrutos(f1,f2, user_id = nil)
         if(user_id.nil?)
-            self.saucer_orders.where(:created_at => f1.beginning_of_day+6.hours..f2.end_of_day+6.hours).sum('price*quantity')  
+            self.saucer_orders.where(:created_at => f1.beginning_of_day+8.hours..f2.end_of_day+8.hours).sum('price*quantity')  
         else
-            self.saucer_orders.joins(:order).where(:created_at => f1.beginning_of_day+6.hours..f2.end_of_day+6.hours).where("orders.cajero_id = ?",user_id).sum('saucer_orders.price*saucer_orders.quantity')  
+            self.saucer_orders.joins(:order).where(:created_at => f1.beginning_of_day+8.hours..f2.end_of_day+8.hours).where("orders.cajero_id = ?",user_id).sum('saucer_orders.price*saucer_orders.quantity')  
         end
     end
     def descuentoTotal(f1,f2 , user_id = nil)
         if(user_id.nil?)
-            self.saucer_orders.where(:created_at => f1.beginning_of_day+6.hours..f2.end_of_day+6.hours).sum('(price*quantity)*(discount/100)') 
+            self.saucer_orders.where(:created_at => f1.beginning_of_day+8.hours..f2.end_of_day+8.hours).sum('(price*quantity)*(discount/100)') 
         else
-            self.saucer_orders.joins(:order).where(:created_at => f1.beginning_of_day+6.hours..f2.end_of_day+6.hours).where("orders.cajero_id = ?",user_id).sum('(price*quantity)*(discount/100)') 
+            self.saucer_orders.joins(:order).where(:created_at => f1.beginning_of_day+8.hours..f2.end_of_day+8.hours).where("orders.cajero_id = ?",user_id).sum('(price*quantity)*(discount/100)') 
         end
         
     end
     def ivaTotal(f1,f2, user_id = nil)
          if(user_id.nil?)
-            tuplas = self.saucer_orders.where(:created_at => f1.beginning_of_day+6.hours..f2.end_of_day+6.hours)
+            tuplas = self.saucer_orders.where(:created_at => f1.beginning_of_day+8.hours..f2.end_of_day+8.hours)
         else
-            tuplas = self.saucer_orders.joins(:order).where(:created_at => f1.beginning_of_day+6.hours..f2.end_of_day+6.hours).where("orders.cajero_id = ?",user_id)
+            tuplas = self.saucer_orders.joins(:order).where(:created_at => f1.beginning_of_day+8.hours..f2.end_of_day+8.hours).where("orders.cajero_id = ?",user_id)
         end
         
         if (tuplas.count > 0 )

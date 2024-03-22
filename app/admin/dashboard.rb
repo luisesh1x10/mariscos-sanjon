@@ -53,11 +53,11 @@ ActiveAdmin.register_page "Dashboard" do
          end
          
          panel "Egresos de hoy" do
-           para "Total gastado #{Dinero.to_money Expense.where(:created_at => Date.today.beginning_of_day+8.hours..Date.today.end_of_day+8.hours).sum('amount')}"
+           para "Total gastado #{Dinero.to_money Expense.where(:created_at => Date.today.beginning_of_day+6.hours..Date.today.end_of_day+6.hours).sum('amount')}"
          end
          
          panel "Ganancias de hoy" do
-           para "Total ganacias #{Dinero.to_money SaucerOrder.ingresosTotal(Date.today.beginning_of_day,Date.today.end_of_day) - Expense.where(:created_at => Date.today.beginning_of_day+8.hours..Date.today.end_of_day+8.hours).sum('amount')}"
+           para "Total ganacias #{Dinero.to_money SaucerOrder.ingresosTotal(Date.today.beginning_of_day,Date.today.end_of_day) - Expense.where(:created_at => Date.today.beginning_of_day+6.hours..Date.today.end_of_day+6.hours).sum('amount')}"
          end
        end
        

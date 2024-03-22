@@ -25,15 +25,15 @@ class SaucerOrder < ActiveRecord::Base
     :presence => { :if => 'takeaway.nil?' }
 
   def self.ingresosBrutos(f1,f2)
-    SaucerOrder.where(:created_at => f1.beginning_of_day+8.hours..f2.end_of_day+8.hours).sum('price*quantity')  
+    SaucerOrder.where(:created_at => f1.beginning_of_day+6.hours..f2.end_of_day+6.hours).sum('price*quantity')  
   end
   def self.descuentoTotal(f1,f2)
-    SaucerOrder.where(:created_at => f1.beginning_of_day+8.hours..f2.end_of_day+8.hours).sum('(price*quantity)*(discount/100)')  
+    SaucerOrder.where(:created_at => f1.beginning_of_day+6.hours..f2.end_of_day+6.hours).sum('(price*quantity)*(discount/100)')  
   end
   def self.ivaTotal(f1,f2)
-    tuplas = SaucerOrder.where(:created_at => f1.beginning_of_day+8.hours..f2.end_of_day+8.hours)
+    tuplas = SaucerOrder.where(:created_at => f1.beginning_of_day+6.hours..f2.end_of_day+6.hours)
     if (tuplas.count > 0 )
-      tuplas = SaucerOrder.where(:created_at => f1.beginning_of_day+8.hours..f2.end_of_day+8.hours)
+      tuplas = SaucerOrder.where(:created_at => f1.beginning_of_day+6.hours..f2.end_of_day+6.hours)
       tuplas.sum('((price*quantity) - (price*quantity)*(discount/100)) * (iva/100.0)') #* (tuplas.first.iva.to_f / 100.to_f)
     else
       0

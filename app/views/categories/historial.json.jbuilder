@@ -2,7 +2,7 @@ json.array!(@bags) do |bag|
       json.extract! bag, :id,:status
       json.nombre_categoria @category.name
       json.is_instant @category.is_instant
-      json.hora (bag.created_at+8.hours).strftime('%H:%M')
+      json.hora (bag.created_at+6.hours).strftime('%H:%M')
       json.avanzar avanzar_path(bag)
       json.mesero bag.saucer_orders.first.user.name
       json.platillos(bag.saucer_orders) do |pedido|

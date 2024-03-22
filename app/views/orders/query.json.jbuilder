@@ -24,8 +24,8 @@ json.array!(@orders) do |order|
   json.finalizar paynow_path(order)
   json.imprimir order_path(order,:format => :pdf)
   json.mesero order.mesero unless order.mesero.nil?
-  json.fecha (Order.last.created_at+8.hours).strftime("%d/%m/%Y")
-  json.hora (Order.last.created_at+8.hours).strftime("%H:%M")
+  json.fecha (Order.last.created_at+6.hours).strftime("%d/%m/%Y")
+  json.hora (Order.last.created_at+6.hours).strftime("%H:%M")
   json.cliente order.nombre if order.takeaway
   unless order.saucerOrders.first.nil?
     json.descuentoGeneral  order.saucerOrders.first.discount 

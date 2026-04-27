@@ -16,3 +16,12 @@
 !/log/.keep
 /tmp
 /config/database.yml
+
+# Docker local state
+.docker/
+docker-data/
+.dockerignore
+Dockerfile
+docker-compose*.yml
+docker/
+*.zip

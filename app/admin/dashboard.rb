@@ -3,6 +3,12 @@ ActiveAdmin.register_page "Dashboard" do
   menu priority: 1, label: proc{ I18n.t("active_admin.dashboard") }
 
   content title: proc{ I18n.t("active_admin.dashboard") } do
+    ahora = Time.zone.now
+    fecha_corte = ahora.hour < 6 ? ahora.to_date - 1.day : ahora.to_date
+    inicio_corte = fecha_corte.beginning_of_day + 6.hours
+    fin_corte = fecha_corte.end_of_day + 6.hours
+    ingresos_hoy = SaucerOrder.ingresosTotal(fecha_corte, fecha_corte)
+    egresos_hoy = Expense.where(:created_at => inicio_corte..fin_corte).sum('amount')
 
     # Here is an example of a simple dashboard with columns and panels.
     #
@@ -49,15 +55,15 @@ ActiveAdmin.register_page "Dashboard" do
        column do
          
          panel "Ingresos de hoy" do
-           para "Total vendido #{Dinero.to_money  SaucerOrder.ingresosTotal(Date.today.beginning_of_day,Date.today.end_of_day)}"
+           para "Total vendido #{Dinero.to_money ingresos_hoy}"
          end
          
          panel "Egresos de hoy" do
-           para "Total gastado #{Dinero.to_money Expense.where(:created_at => Date.today.beginning_of_day+6.hours..Date.today.end_of_day+6.hours).sum('amount')}"
+           para "Total gastado #{Dinero.to_money egresos_hoy}"
          end
          
          panel "Ganancias de hoy" do
-           para "Total ganacias #{Dinero.to_money SaucerOrder.ingresosTotal(Date.today.beginning_of_day,Date.today.end_of_day) - Expense.where(:created_at => Date.today.beginning_of_day+6.hours..Date.today.end_of_day+6.hours).sum('amount')}"
+           para "Total ganacias #{Dinero.to_money ingresos_hoy - egresos_hoy}"
          end
        end
        

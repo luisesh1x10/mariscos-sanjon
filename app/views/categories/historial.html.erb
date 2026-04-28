@@ -2,7 +2,7 @@
   <a class="waves-effect waves-light btn-large" href='{{originUrl}}'> Regresar a Barra </a>
 <h1 class="center-align card-panel z-depth-3 ">{{bolsas[0].nombre_categoria}}</h1>
  <div id="ListaPedidos">
-  <h4>Pedidos activos:<strong> {{activos}}</strong></h4>
+  <h4>Pedidos activos:<strong> {{activos}}</strong> <small ng-if="activos > mostrados">(mostrando {{mostrados}})</small></h4>
       <table class="responsive-table centered striped">
           <thead>
             <tr>
@@ -52,5 +52,10 @@
                 </tr>
           </tbody>
         </table>
+        <div class="center-align" ng-if="puedeCargarMas">
+          <a class="waves-effect waves-light btn-large" ng-click="cargar_mas()" ng-disabled="cargando">
+            {{cargando ? "Cargando..." : "Cargar mas"}}
+          </a>
+        </div>
 </div>
 </div>

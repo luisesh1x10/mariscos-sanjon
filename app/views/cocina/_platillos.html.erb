@@ -9,6 +9,7 @@
                 <th data-field="id">Platillo</th>
                 <th data-field="name">Personalizado</th>
                 <th data-field="status">Estado</th>
+                <th data-field="tiempo">Tiempo</th>
                 <th></th>
             </tr>
            </thead>
@@ -26,6 +27,12 @@
           <td><p><%=p.platillo.name%></p></td>
           <td><p><%=p.notes%></p></td>
           <td><p><%="listo"%></p></td>
+          <td>
+            <div class="cronometro-cocina" data-inicio="<%= p.created_at.iso8601 %>">
+              <span class="cronometro-texto">00:00</span>
+              <div class="cronometro-barra"><div class="cronometro-progreso"></div></div>
+            </div>
+          </td>
           <%text="Platillo entregado"%>
           <td><%=link_to  text, saucer_order_path(p,:saucer_order=>{status:p.status+1}), :method=> :put,:remote => true,class:"waves-effect waves-light btn" %></td>
         </tr>

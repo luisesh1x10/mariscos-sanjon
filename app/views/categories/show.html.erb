@@ -2,7 +2,7 @@
   <a class="waves-effect waves-light btn-large" href='{{historialURL}}'> Historial </a>
 <h1 class="center-align card-panel z-depth-3 ">{{bolsas[0].nombre_categoria}}</h1>
  <div id="ListaPedidos">
-  <h4>Pedidos activos:<strong> {{activos}}</strong></h4>
+  <h4>Pedidos activos:<strong> {{activos}}</strong> <small ng-if="activos > mostrados">(mostrando {{mostrados}})</small></h4>
       <table class="responsive-table centered striped">
           <thead>
             <tr>
@@ -51,9 +51,18 @@
                   </td>
                   <td>
                     <a class="waves-effect waves-light btn-large"  ng-click="avanzar(bolsa)" >{{bolsa.status==1? "Iniciar":bolsa.status==1?"Terminado":"Entregar"}}</a>
+                    <div class="cronometro-cocina" ng-attr-data-inicio="{{bolsa.inicio}}">
+                      <span class="cronometro-texto">00:00</span>
+                      <div class="cronometro-barra"><div class="cronometro-progreso"></div></div>
+                    </div>
                   </td>
                 </tr>
           </tbody>
         </table>
+        <div class="center-align" ng-if="puedeCargarMas">
+          <a class="waves-effect waves-light btn-large" ng-click="cargar_mas()" ng-disabled="cargando">
+            {{cargando ? "Cargando..." : "Cargar mas"}}
+          </a>
+        </div>
 </div>
 </div>
